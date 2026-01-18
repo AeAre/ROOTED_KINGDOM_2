@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://c383wxvj0hh7q"]
 
 [ext_resource type="Texture2D" uid="uid://uidjcdf62vif" path="res://Asset/charlotte-removebg-preview.png" id="1_4y0t7"]
-[ext_resource type="PackedScene" uid="uid://bplpwpncwxjh4" path="res://CardUI.tscn" id="1_fxwnf"]
-[ext_resource type="Script" uid="uid://1mh1lv3r2q5c" path="res://BattleManager.gd" id="1_vsh2u"]
+[ext_resource type="PackedScene" uid="uid://bplpwpncwxjh4" path="res://Scene/CardUI.tscn" id="1_fxwnf"]
+[ext_resource type="Script" uid="uid://1mh1lv3r2q5c" path="res://Script/BattleManager.gd" id="1_vsh2u"]
 [ext_resource type="Texture2D" uid="uid://cmpprcr84ive7" path="res://Asset/1.png" id="2_fxwnf"]
 [ext_resource type="Texture2D" uid="uid://ccclxldrmru4w" path="res://Asset/background 1.jpg" id="3_tkjg1"]
-[ext_resource type="Script" uid="uid://bwy2biobw6kaq" path="res://Character.gd" id="4_y8d5v"]
+[ext_resource type="Script" uid="uid://bwy2biobw6kaq" path="res://Script/Character.gd" id="4_y8d5v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vsh2u"]
 size = Vector2(311.5, 317.5)
@@ -127,6 +127,13 @@ offset_top = 511.0
 offset_right = 1126.0
 offset_bottom = 542.0
 text = "End Turn"
+
+[node name="CardSlots" type="HBoxContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 413.0
+offset_bottom = 164.0
 
 [node name="EnemyTeam" type="Node2D" parent="."]
 
