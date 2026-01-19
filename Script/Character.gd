@@ -3,7 +3,6 @@ class_name BattleCharacter
 # This script lives on every character (Beatrix, Charlotte, Enemy)
 
 @export var char_name: String = ""
-@export var base_speed: int = 10
 @export var is_enemy: bool = false
 
 var current_health: int = 100
@@ -27,14 +26,43 @@ func _ready():
 	shield_label.text = "Shield: 0"
 
 func take_damage(amount: int):
-	var damage_to_health = amount - current_shield
-	current_shield = max(0, current_shield - amount)
+	# 1. Determine how much damage hits the health after the shield absorbs what it can
 	
-	if damage_to_health > 0:
-		current_health -= damage_to_health
+	var damage_to_hp = amount
 	
+	if current_shield > 0:
+		if current_shield >= amount:
+			# Shield absorbs everything
+			current_shield -= amount
+			damage_to_hp = 0
+		else:
+			# Shield breaks; some damage still goes to HP
+			damage_to_hp = amount - current_shield
+			current_shield = 0
+	
+	# 2. Apply remaining damage to health
+	current_health -= damage_to_hp
+	# 3. Trigger visual feedback and UI updates
 	update_ui()
+	
+	# 4. Check for death
+	if current_health <= 0:
+		current_health = 0
+		die()
 
 func update_ui():
 	hp_bar.value = current_health
 	shield_label.text = "Shield: " + str(current_shield)
+
+func die():
+	print(char_name + " has been defeated!")
+	
+	# 1. Disable any buttons or interaction
+	# If this is a hero, you might want to stop them from being targeted
+	
+	# 2. Visual Feedback: Fade out using a Tween
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 0, 0.5) # Fades opacity to 0 over 0.5 seconds
+	
+	# 3. Remove from the game tree once the fade is done
+	tween.tween_callback(queue_free)

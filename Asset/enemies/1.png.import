@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uidjcdf62vif"
-path="res://.godot/imported/charlotte-removebg-preview.png-4c1bfb8de90afbe041f2cab10db45c8c.ctex"
+uid="uid://cmpprcr84ive7"
+path="res://.godot/imported/1.png-8dd284caf7e46641db037016f56def77.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/charlotte-removebg-preview.png"
-dest_files=["res://.godot/imported/charlotte-removebg-preview.png-4c1bfb8de90afbe041f2cab10db45c8c.ctex"]
+source_file="res://Asset/enemies/1.png"
+dest_files=["res://.godot/imported/1.png-8dd284caf7e46641db037016f56def77.ctex"]
 
 [params]
 

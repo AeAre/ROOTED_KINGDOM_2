@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bplpwpncwxjh4"]
 
 [ext_resource type="Script" uid="uid://dpm51wtebqca4" path="res://Script/CardUI.gd" id="1_kwle2"]
-[ext_resource type="Texture2D" uid="uid://dux2bf8i4324q" path="res://Asset/card 1.jpg" id="2_qh7ip"]
+[ext_resource type="Texture2D" uid="uid://dux2bf8i4324q" path="res://Asset/Characters/Charlotte/Charlotte 4 cards/card 1.jpg" id="2_qh7ip"]
 
 [node name="CardUI" type="PanelContainer"]
 custom_minimum_size = Vector2(120, 170)

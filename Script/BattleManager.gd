@@ -15,9 +15,9 @@ var active_character: BattleCharacter = null
 var is_battle_paused: bool = false
 
 # Preload your Card Resources
-var attack30 = preload("res://Resources/Attack30.tres")
-var attack50 = preload("res://Resources/Attack50.tres")
-var shield25 = preload("res://Resources/Shield25.tres")
+var charlotte_slash = preload("res://Resources/Charlotte cards/slash.tres")
+var charlotte_heal = preload("res://Resources/Charlotte cards/HealSpell.tres")
+var charlotte_slash_aoe = preload("res://Resources/Charlotte cards/slash_aoe.tres")
 
 # The Deck System
 var deck: Array = []
@@ -41,9 +41,9 @@ var current_phase_index: int = 0
 
 func _ready():
 	# 1. Build Deck
-	for i in range(4): deck.append(attack30)
-	for i in range(3): deck.append(attack50)
-	for i in range(3): deck.append(shield25)
+	for i in range(4): deck.append(charlotte_slash)
+	for i in range(3): deck.append(charlotte_heal)
+	for i in range(3): deck.append(charlotte_slash_aoe)
 	deck.shuffle()
 
 	# 2. Start the game at the Player Phase
@@ -88,16 +88,21 @@ func start_current_phase():
 		execute_enemy_ai()
 
 func execute_enemy_ai():
-	var targets = player_team.get_children()
-	if targets.size() > 0:
-		var target = targets.pick_random()
-		target.take_damage(randi_range(15, 25))
-		print("Enemy attacked " + target.char_name)
-	
-	# We MUST wait and then call end_current_turn 
-	# or the Enemy will stay at 100% forever!
-	await get_tree().create_timer(1.0).timeout
+	var heroes = player_team.get_children()
+
+	for enemy in get_alive_enemies():
+		if heroes.is_empty():
+			break
+
+		var target = heroes.pick_random()
+		var damage_to_deal = enemy.base_damage
+		target.take_damage(damage_to_deal)
+
+		print(enemy.char_name + " dealt " + str(damage_to_deal) + " damage to " + target.char_name)
+		await get_tree().create_timer(0.8).timeout
+
 	end_current_phase()
+
 
 # --- 3. THE 5-CARD DRAW SYSTEM ---
 func spawn_cards():
@@ -116,9 +121,6 @@ func spawn_cards():
 		if not deck.is_empty():
 			create_card_instance(deck.pop_front())
 	
-	# --- FIX 2: REMOVE THE ENERGY REFILL LINE HERE ---
-	# We deleted 'current_energy = max_energy' from here 
-	# so Charlotte doesn't get a "free" refill!
 	update_energy_ui()
 
 func create_card_instance(data: CardData):
@@ -217,25 +219,59 @@ func advance_round():
 	print("Round " + str(round_number) + "! Max Energy: " + str(max_energy))
 
 func execute_slotted_actions():
-	var enemy = enemy_team.get_child(0)
-	
 	for data in slotted_cards:
-		# LATER: You can check data.hero_owner to see if Beatrix or Charlotte animates
-		if data.damage > 0: 
-			enemy.take_damage(data.damage)
-		if data.heal_amount > 0: 
-			# Heal the hero with the lowest health
+
+		if data.damage > 0:
+			var enemies = get_alive_enemies()
+			if enemies.is_empty():
+				return
+			# AOE DAMAGE
+			if data.is_aoe == true :
+				var hits = min(data.aoe_targets, enemies.size())
+				for i in range(hits):
+					enemies[i].take_damage(data.damage)
+			else:
+				# Single target
+				enemies[0].take_damage(data.damage)
+
+		# Shield cards: give shield to the lowest-health hero
+		if data.shield > 0:
 			var targets = player_team.get_children()
-			targets.sort_custom(func(a, b): return a.current_health < b.current_health)
-			targets[0].heal(data.heal_amount)
-			
+			targets.sort_custom(func(a, b):
+				return a.current_health < b.current_health
+			)
+
+			var receiver = targets[0]
+			receiver.current_shield += data.shield
+			receiver.update_ui()
+			print("Granted " + str(data.shield) + " shield to " + receiver.char_name)
+
+		# Heal cards
+		if data.heal_amount > 0:
+			var targets2 = player_team.get_children()
+			targets2.sort_custom(func(a, b):
+				return a.current_health < b.current_health
+			)
+			targets2[0].heal(data.heal_amount)
+
 		discard_pile.append(data)
 		await get_tree().create_timer(0.5).timeout
-	
+
 	# Clear slots
 	for child in slot_container.get_children():
 		child.queue_free()
+
 	slotted_cards.clear()
+
+
 
 func _on_restart_button_pressed():
 	get_tree().reload_current_scene()
+
+
+func get_alive_enemies() -> Array:
+	var alive = []
+	for enemy in enemy_team.get_children():
+		if is_instance_valid(enemy) and enemy.current_health > 0:
+			alive.append(enemy)
+	return alive

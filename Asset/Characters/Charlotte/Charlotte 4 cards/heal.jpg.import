@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cv1dj0hbdda2n"
-path="res://.godot/imported/shield.jpg-6cd888a58fa2fd960dc7f52751b4a563.ctex"
+uid="uid://brd67txyotrds"
+path="res://.godot/imported/heal.jpg-e9325884cbe631bbe1249c76dc02ddb2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/shield.jpg"
-dest_files=["res://.godot/imported/shield.jpg-6cd888a58fa2fd960dc7f52751b4a563.ctex"]
+source_file="res://Asset/Characters/Charlotte/Charlotte 4 cards/heal.jpg"
+dest_files=["res://.godot/imported/heal.jpg-e9325884cbe631bbe1249c76dc02ddb2.ctex"]
 
 [params]
 

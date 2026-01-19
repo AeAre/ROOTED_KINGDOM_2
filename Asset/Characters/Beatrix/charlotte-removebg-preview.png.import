@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmpprcr84ive7"
-path="res://.godot/imported/1.png-ce9520f4ef69d713d335cc9b7244c0b3.ctex"
+uid="uid://uidjcdf62vif"
+path="res://.godot/imported/charlotte-removebg-preview.png-05a05ef600f4346a22d293c0c238fe7c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/1.png"
-dest_files=["res://.godot/imported/1.png-ce9520f4ef69d713d335cc9b7244c0b3.ctex"]
+source_file="res://Asset/Characters/Beatrix/charlotte-removebg-preview.png"
+dest_files=["res://.godot/imported/charlotte-removebg-preview.png-05a05ef600f4346a22d293c0c238fe7c.ctex"]
 
 [params]
 

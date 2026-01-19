@@ -10,3 +10,5 @@ class_name CardData
 @export var stuns_enemy: bool = false 
 @export var energy_cost: int = 1
 @export var description: String = ""
+@export var is_aoe: bool = false
+@export var aoe_targets: int = 0

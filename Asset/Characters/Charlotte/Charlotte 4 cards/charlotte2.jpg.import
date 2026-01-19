@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmbdt7krb1i4f"
-path="res://.godot/imported/stun.jpg-a662c83718f916d48314ef04c8a18e0f.ctex"
+uid="uid://7gb6tfj8w6vm"
+path="res://.godot/imported/charlotte2.jpg-8afb0d67c56dd3dbe2ced9fbd532cdaf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/stun.jpg"
-dest_files=["res://.godot/imported/stun.jpg-a662c83718f916d48314ef04c8a18e0f.ctex"]
+source_file="res://Asset/Characters/Charlotte/Charlotte 4 cards/charlotte2.jpg"
+dest_files=["res://.godot/imported/charlotte2.jpg-8afb0d67c56dd3dbe2ced9fbd532cdaf.ctex"]
 
 [params]
 

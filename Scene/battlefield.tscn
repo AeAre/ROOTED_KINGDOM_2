@@ -1,11 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://c383wxvj0hh7q"]
+[gd_scene load_steps=11 format=3 uid="uid://c383wxvj0hh7q"]
 
-[ext_resource type="Texture2D" uid="uid://uidjcdf62vif" path="res://Asset/charlotte-removebg-preview.png" id="1_4y0t7"]
+[ext_resource type="Texture2D" uid="uid://uidjcdf62vif" path="res://Asset/Characters/Beatrix/charlotte-removebg-preview.png" id="1_4y0t7"]
 [ext_resource type="PackedScene" uid="uid://bplpwpncwxjh4" path="res://Scene/CardUI.tscn" id="1_fxwnf"]
 [ext_resource type="Script" uid="uid://1mh1lv3r2q5c" path="res://Script/BattleManager.gd" id="1_vsh2u"]
-[ext_resource type="Texture2D" uid="uid://cmpprcr84ive7" path="res://Asset/1.png" id="2_fxwnf"]
-[ext_resource type="Texture2D" uid="uid://ccclxldrmru4w" path="res://Asset/background 1.jpg" id="3_tkjg1"]
+[ext_resource type="Texture2D" uid="uid://cmpprcr84ive7" path="res://Asset/enemies/1.png" id="2_fxwnf"]
+[ext_resource type="Texture2D" uid="uid://ccclxldrmru4w" path="res://Asset/Backgrounds/background 1.jpg" id="3_tkjg1"]
 [ext_resource type="Script" uid="uid://bwy2biobw6kaq" path="res://Script/Character.gd" id="4_y8d5v"]
+[ext_resource type="Script" uid="uid://dafxw2p825bmt" path="res://Script/Enemy.gd" id="6_f2o1h"]
+[ext_resource type="Texture2D" uid="uid://de3vu6immvp4r" path="res://Asset/enemies/2.png" id="8_ehisa"]
+[ext_resource type="Texture2D" uid="uid://h8k4v6mepfq8" path="res://Asset/enemies/3.png" id="9_36gl3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vsh2u"]
 size = Vector2(311.5, 317.5)
@@ -25,7 +28,7 @@ position = Vector2(0, 1)
 
 [node name="Beatrix" type="Node2D" parent="PlayerTeam"]
 script = ExtResource("4_y8d5v")
-base_speed = 12
+char_name = "Beatrix"
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerTeam/Beatrix"]
 position = Vector2(255, 314)
@@ -57,7 +60,7 @@ shape = SubResource("RectangleShape2D_vsh2u")
 
 [node name="Charlotte" type="Node2D" parent="PlayerTeam"]
 script = ExtResource("4_y8d5v")
-base_speed = 8
+char_name = "Charlotte"
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerTeam/Charlotte"]
 position = Vector2(359, 421)
@@ -139,12 +142,14 @@ offset_bottom = 164.0
 
 [node name="Enemy" type="Node2D" parent="EnemyTeam"]
 position = Vector2(799, -6)
-script = ExtResource("4_y8d5v")
+script = ExtResource("6_f2o1h")
+base_damage = 10
+char_name = "Enemy1"
 is_enemy = true
 
 [node name="Sprite2D" type="Sprite2D" parent="EnemyTeam/Enemy"]
-position = Vector2(54.99997, 384)
-scale = Vector2(-0.694, 0.6)
+position = Vector2(1.9999733, 357)
+scale = Vector2(-0.5, 0.445)
 texture = ExtResource("2_fxwnf")
 
 [node name="HealthBar" type="ProgressBar" parent="EnemyTeam/Enemy"]
@@ -152,23 +157,105 @@ offset_left = -62.0
 offset_top = 252.0
 offset_right = 32.0
 offset_bottom = 279.0
+scale = Vector2(0.8952639, 0.9224108)
 theme_override_colors/font_color = Color(0.79573834, 0, 0.21928853, 1)
 theme_override_colors/font_outline_color = Color(0.8838147, 0.33180755, 1.92523e-07, 1)
 step = 1.0
 value = 100.0
 
 [node name="ShieldLabel" type="Label" parent="EnemyTeam/Enemy"]
-visible = false
-offset_left = 117.534546
-offset_top = 204.0
-offset_right = 178.53455
-offset_bottom = 227.0
+modulate = Color(0.87343633, 0.635546, 0.15843686, 1)
+offset_left = -129.0
+offset_top = 293.0
+offset_right = -68.0
+offset_bottom = 316.0
 text = "Shield:0"
 
 [node name="Area2D" type="Area2D" parent="EnemyTeam/Enemy"]
 position = Vector2(-21.465454, 120)
+scale = Vector2(0.8952639, 0.9224108)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyTeam/Enemy/Area2D"]
+visible = false
+position = Vector2(170.25, 209.25)
+shape = SubResource("RectangleShape2D_vsh2u")
+
+[node name="Enemy2" type="Node2D" parent="EnemyTeam"]
+position = Vector2(799, -6)
+script = ExtResource("6_f2o1h")
+base_damage = 10
+base_shield = 0
+char_name = "Enemy2"
+is_enemy = true
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemyTeam/Enemy2"]
+position = Vector2(55.74997, 459)
+scale = Vector2(-0.5, 0.445)
+texture = ExtResource("8_ehisa")
+
+[node name="HealthBar" type="ProgressBar" parent="EnemyTeam/Enemy2"]
+offset_left = 8.999991
+offset_top = 351.0
+offset_right = 102.99999
+offset_bottom = 378.0
+scale = Vector2(0.8952639, 0.9224108)
+theme_override_colors/font_color = Color(0.79573834, 0, 0.21928853, 1)
+theme_override_colors/font_outline_color = Color(0.8838147, 0.33180755, 1.92523e-07, 1)
+step = 1.0
+value = 100.0
+
+[node name="ShieldLabel" type="Label" parent="EnemyTeam/Enemy2"]
+offset_left = -38.0
+offset_top = 396.0
+offset_right = 23.0
+offset_bottom = 419.0
+text = "Shield:0"
+
+[node name="Area2D" type="Area2D" parent="EnemyTeam/Enemy2"]
+position = Vector2(32.28454, 222)
+scale = Vector2(0.8952639, 0.9224108)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyTeam/Enemy2/Area2D"]
+visible = false
+position = Vector2(170.25, 209.25)
+shape = SubResource("RectangleShape2D_vsh2u")
+
+[node name="Enemy3" type="Node2D" parent="EnemyTeam"]
+position = Vector2(1598, -12)
+script = ExtResource("6_f2o1h")
+base_damage = 10
+base_shield = 0
+char_name = "Enemy3"
+is_enemy = true
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemyTeam/Enemy3"]
+position = Vector2(-628.24994, 391)
+scale = Vector2(-0.5, 0.445)
+texture = ExtResource("9_36gl3")
+
+[node name="HealthBar" type="ProgressBar" parent="EnemyTeam/Enemy3"]
+offset_left = -692.24994
+offset_top = 286.0
+offset_right = -598.24994
+offset_bottom = 313.0
+scale = Vector2(0.8952639, 0.9224108)
+theme_override_colors/font_color = Color(0.79573834, 0, 0.21928853, 1)
+theme_override_colors/font_outline_color = Color(0.8838147, 0.33180755, 1.92523e-07, 1)
+step = 1.0
+value = 100.0
+
+[node name="ShieldLabel" type="Label" parent="EnemyTeam/Enemy3"]
+offset_left = -736.0
+offset_top = 323.0
+offset_right = -675.0
+offset_bottom = 346.0
+text = "Shield:0"
+
+[node name="Area2D" type="Area2D" parent="EnemyTeam/Enemy3"]
+position = Vector2(-651.7154, 154)
+scale = Vector2(0.8952639, 0.9224108)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyTeam/Enemy3/Area2D"]
 visible = false
 position = Vector2(170.25, 209.25)
 shape = SubResource("RectangleShape2D_vsh2u")

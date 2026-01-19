@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dux2bf8i4324q"
-path="res://.godot/imported/card 1.jpg-bf5b560340596cefc6ffe5871acfbbbc.ctex"
+uid="uid://y6xke5sg8tx1"
+path="res://.godot/imported/Beatrix card 1.jpg-3f8dbfe83b0e93e093553ee2bafc901c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/card 1.jpg"
-dest_files=["res://.godot/imported/card 1.jpg-bf5b560340596cefc6ffe5871acfbbbc.ctex"]
+source_file="res://Asset/Characters/Beatrix/Beatrix 4 cards/Beatrix card 1.jpg"
+dest_files=["res://.godot/imported/Beatrix card 1.jpg-3f8dbfe83b0e93e093553ee2bafc901c.ctex"]
 
 [params]
 
