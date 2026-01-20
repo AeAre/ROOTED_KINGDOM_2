@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://bflqlm8xlfkx1"]
+
+[ext_resource type="Texture2D" uid="uid://by282evl3dxef" path="res://Asset/Characters/Beatrix/Beatrix 4 cards/Beatrix card  2.jpg" id="1_73j08"]
+
+[node name="Button" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Illustration" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_73j08")
+
+[node name="SelectionOverlay" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

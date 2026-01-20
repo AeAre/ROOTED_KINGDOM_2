@@ -3,12 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://uidjcdf62vif" path="res://Asset/Characters/Beatrix/charlotte-removebg-preview.png" id="1_4y0t7"]
 [ext_resource type="PackedScene" uid="uid://bplpwpncwxjh4" path="res://Scene/CardUI.tscn" id="1_fxwnf"]
 [ext_resource type="Script" uid="uid://1mh1lv3r2q5c" path="res://Script/BattleManager.gd" id="1_vsh2u"]
-[ext_resource type="Texture2D" uid="uid://cmpprcr84ive7" path="res://Asset/enemies/1.png" id="2_fxwnf"]
+[ext_resource type="Texture2D" uid="uid://cmpprcr84ive7" path="res://Asset/Characters/enemies/1.png" id="2_fxwnf"]
 [ext_resource type="Texture2D" uid="uid://ccclxldrmru4w" path="res://Asset/Backgrounds/background 1.jpg" id="3_tkjg1"]
 [ext_resource type="Script" uid="uid://bwy2biobw6kaq" path="res://Script/Character.gd" id="4_y8d5v"]
 [ext_resource type="Script" uid="uid://dafxw2p825bmt" path="res://Script/Enemy.gd" id="6_f2o1h"]
-[ext_resource type="Texture2D" uid="uid://de3vu6immvp4r" path="res://Asset/enemies/2.png" id="8_ehisa"]
-[ext_resource type="Texture2D" uid="uid://h8k4v6mepfq8" path="res://Asset/enemies/3.png" id="9_36gl3"]
+[ext_resource type="Texture2D" uid="uid://de3vu6immvp4r" path="res://Asset/Characters/enemies/2.png" id="8_ehisa"]
+[ext_resource type="Texture2D" uid="uid://h8k4v6mepfq8" path="res://Asset/Characters/enemies/3.png" id="9_36gl3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vsh2u"]
 size = Vector2(311.5, 317.5)

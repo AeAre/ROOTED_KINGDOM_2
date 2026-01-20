@@ -7,7 +7,7 @@
 script = ExtResource("1_s7i86")
 card_name = "Aoe slash"
 card_image = ExtResource("1_b67n7")
-damage = 8
+damage = 99
 description = "Deals 8 damage to all enemies"
 is_aoe = true
 aoe_targets = 3

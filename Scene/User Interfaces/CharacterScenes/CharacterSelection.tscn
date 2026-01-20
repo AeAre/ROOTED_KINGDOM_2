@@ -1,21 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://bksl2a7ppswlg"]
+[gd_scene load_steps=3 format=3 uid="uid://cy6a1v8pg016g"]
 
-[ext_resource type="Script" uid="uid://idrjdgnxmgon" path="res://Scene/User Interfaces/characters.gd" id="1_abjc7"]
-[ext_resource type="Script" uid="uid://dpofwsfae5sxx" path="res://Scene/User Interfaces/button_manager_characters.gd" id="1_v3w5k"]
+[ext_resource type="Script" uid="uid://idrjdgnxmgon" path="res://Scene/User Interfaces/characters.gd" id="1_omqtn"]
+[ext_resource type="Script" uid="uid://dpofwsfae5sxx" path="res://Scene/User Interfaces/button_manager_characters.gd" id="2_vsams"]
 
-[node name="Control" type="Control"]
+[node name="CharacterSelection" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("1_abjc7")
-available_heroes = null
+script = ExtResource("1_omqtn")
 
 [node name="Button Manager" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_v3w5k")
+script = ExtResource("2_vsams")
 
 [node name="Back" type="Button" parent="Button Manager"]
 layout_mode = 0
@@ -27,32 +24,41 @@ text = "Back
 "
 
 [node name="Background" type="TextureRect" parent="."]
+visible = false
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1152.0
+offset_bottom = 560.0
 
 [node name="RosterLabel" type="Label" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 343.0
+offset_top = 47.0
+offset_right = 383.0
+offset_bottom = 70.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 31.0
+offset_top = 304.0
+offset_right = 207.0
+offset_bottom = 505.0
 
 [node name="HeroGrid" type="HBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
 
 [node name="TeamPanel" type="Panel" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 740.0
+offset_top = 40.0
+offset_right = 1073.0
+offset_bottom = 418.0
 
 [node name="SlotContainer" type="HBoxContainer" parent="TeamPanel"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 333.0
+offset_top = 112.0
+offset_right = 437.0
+offset_bottom = 256.0
 
 [node name="ConfirmButton" type="Button" parent="."]
 layout_mode = 0

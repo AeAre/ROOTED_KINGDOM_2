@@ -14,6 +14,10 @@ config/name="2"
 run/main_scene="uid://qde0e5mwnany"
 config/features=PackedStringArray("4.5", "Forward Plus")
 
+[autoload]
+
+Global="*res://Script/Global.gd"
+
 [display]
 
 window/stretch/mode="canvas_items"

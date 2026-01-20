@@ -4,6 +4,8 @@
 
 [resource]
 script = ExtResource("1_g7i65")
-damage = 20
+damage = 100
 shield = 5
+is_aoe = true
+aoe_targets = 2
 metadata/_custom_type_script = "uid://olc2cw5uohq6"
