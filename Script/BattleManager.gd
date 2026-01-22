@@ -1,26 +1,18 @@
 extends Node2D
 
 # --- 1. NODE LINKS ---
-# We use % for unique names or standard paths. 
-# Make sure these match your Scene Tree exactly!
 @onready var slot_container = %CardSlots
 @onready var player_team = $PlayerTeam
 @onready var enemy_team = $EnemyTeam
 @onready var hand_container = %Hand
 @onready var energy_label = $CanvasLayer/EnergyLabel
+	
+var card_scene = preload("res://Scene/CardUI.tscn")
 
 var turn_order: Array = []
 var current_turn_index: int = 0
 var active_character: BattleCharacter = null
 var is_battle_paused: bool = false
-
-# Preload your Card Resources
-var charlotte_slash = preload("res://Resources/Common cards resources/slash.tres")
-var charlotte_heal = preload("res://Resources/Common cards resources/Warm Touch.tres")
-var charlotte_slash_aoe = preload("res://Resources/Signature cards/charlotte_ultimate.tres")
-
-var beatrix_fireball_aoe = preload("res://Resources/Common cards resources/Magic Blast.tres")
-var beatrix_shield = preload("res://Resources/Common cards resources/Shield.tres")
 
 # The Deck System
 var deck: Array = []
@@ -36,32 +28,51 @@ var current_energy: int = 6
 var slotted_cards: Array = [] # Tracks CardData in slots
 var max_slots: int = 3
 
-# Preload your assets for later
-var card_scene = preload("res://Scene/CardUI.tscn")
 
 var phases: Array = ["player", "enemy"]
 var current_phase_index: int = 0
 
 func _ready():
-	# 1. Build Deck
-	# Charlotte cards
-	for i in range(4): deck.append(charlotte_slash)
-	for i in range(3): deck.append(charlotte_heal)
-	for i in range(3): deck.append(charlotte_slash_aoe)
-	# Beatrix cards
-	for i in range(1): deck.append(beatrix_fireball_aoe)
-	for i in range(2): deck.append(beatrix_shield)
-	deck.shuffle()
-
-	# 2. Start the game at the Player Phase
-	current_phase_index = 0
-	start_current_phase()
+	# This connects the Global data to your Dummy nodes
+	setup_player_team()
 	
-	# 3. Energy Mechanics: Start at 6
-	max_energy = 6
+	# 2. Build the deck (Ensure this uses Global.selected_team)
+	build_deck_from_team()
+	
+	# 3. Setup the enemies
+	setup_tower_enemies()
+	
+	# 4. Start the game
 	current_energy = max_energy
 	update_energy_ui()
+	start_current_phase()
 	
+func setup_player_team():
+	var heroes_in_scene = player_team.get_children() # Dummy1, Dummy2, Dummy3
+	
+	for i in range(heroes_in_scene.size()):
+		var character_node = heroes_in_scene[i]
+		
+		# If we have a selected hero for this slot index
+		if i < Global.selected_team.size():
+			var data = Global.selected_team[i]
+			character_node.setup_character(data)
+		else:
+			# If you selected only 1 or 2 heroes, hide the extra dummies
+			character_node.queue_free()
+			
+# --- NEW FUNCTION: DYNAMIC DECK ---
+func build_deck_from_team():
+	deck.clear()
+	# Change 'Global.player_team' to 'Global.selected_team'
+	for data in Global.selected_team:
+		if data.unique_card:
+			deck.append(data.unique_card)
+		
+		for card in data.common_cards:
+			deck.append(card)
+	
+	deck.shuffle()
 	
 # --- 3. THE CORE LOOP ---
 func _process(_delta: float):
@@ -282,3 +293,22 @@ func get_alive_enemies() -> Array:
 		if is_instance_valid(enemy) and enemy.current_health > 0:
 			alive.append(enemy)
 	return alive
+
+func setup_tower_enemies():
+
+	var enemy1 = $EnemyTeam/Enemy
+	var enemy2 = $EnemyTeam/Enemy2
+	var enemy3 = $EnemyTeam/Enemy3
+	
+	# Hide everything first
+	enemy1.hide()
+	enemy2.hide()
+	enemy3.hide()
+	
+	# Show enemies based on the floor selected
+	if Global.current_tower_floor >= 1:
+		enemy1.show()
+	if Global.current_tower_floor >= 2:
+		enemy2.show()
+	if Global.current_tower_floor >= 3:
+		enemy3.show()

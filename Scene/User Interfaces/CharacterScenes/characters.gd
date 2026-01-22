@@ -18,6 +18,7 @@ func _ready():
 	Global.clear_team()
 	update_confirm_button()
 	display_roster()
+	$ConfirmButton.pressed.connect(_on_confirm_battle_pressed)
 	
 func display_roster():
 	for data in available_heroes:
@@ -38,8 +39,6 @@ func _on_hero_selection(data: CharacterData, card_node: Button):
 		card_node.get_node("SelectionOverlay").show()
 		print("Added " + data.name + " to team.")
 		
-
-	
 	update_details(data)	
 	update_confirm_button()
 	update_team_ui()
@@ -49,9 +48,12 @@ func update_confirm_button():
 	# Only let the player continue if they have exactly 3 heroes selected
 	confirm_button.disabled = Global.selected_team.size() != 3
 	
-func _on_confirm_button_pressed():
-	# Go to the Mode Selection or Battle
-	get_tree().change_scene_to_file("res://Scene/battlefield.tscn")
+func _on_confirm_battle_pressed():
+	# Only start if at least one character is selected
+	if Global.selected_team.size() > 0:
+		get_tree().change_scene_to_file("res://Scene/battlefield.tscn")
+	else:
+		print("You must select at least one character!")
 
 func update_team_ui():
 	# 1. Clear the old icons in the bottom slots

@@ -28,7 +28,8 @@ position = Vector2(0, 1)
 
 [node name="Dummy1" type="Node2D" parent="PlayerTeam"]
 script = ExtResource("4_y8d5v")
-target_height = 210.0
+char_name = "Beatrix"
+is_enemy = null
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerTeam/Dummy1"]
 position = Vector2(255, 314)
@@ -60,7 +61,8 @@ shape = SubResource("RectangleShape2D_vsh2u")
 
 [node name="Dummy2" type="Node2D" parent="PlayerTeam"]
 script = ExtResource("4_y8d5v")
-target_height = 210.0
+char_name = "Charlotte"
+is_enemy = null
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerTeam/Dummy2"]
 position = Vector2(359, 421)
@@ -92,30 +94,31 @@ shape = SubResource("RectangleShape2D_vsh2u")
 
 [node name="Dummy3" type="Node2D" parent="PlayerTeam"]
 script = ExtResource("4_y8d5v")
-target_height = 210.0
+char_name = "Beatrix"
+is_enemy = null
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerTeam/Dummy3"]
-position = Vector2(127.00001, 397)
+position = Vector2(255, 314)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("1_4y0t7")
 
 [node name="HealthBar" type="ProgressBar" parent="PlayerTeam/Dummy3"]
-offset_left = 77.0
-offset_top = 269.0
-offset_right = 171.0
-offset_bottom = 296.0
+offset_left = 205.0
+offset_top = 186.0
+offset_right = 299.0
+offset_bottom = 213.0
 value = 100.0
 
 [node name="ShieldLabel" type="Label" parent="PlayerTeam/Dummy3"]
-offset_left = 145.0
-offset_top = 299.0
-offset_right = 206.0
-offset_bottom = 322.0
+offset_left = 273.0
+offset_top = 216.0
+offset_right = 334.0
+offset_bottom = 239.0
 theme_override_colors/font_color = Color(0.007843138, 0, 1, 1)
 text = "Shield:0"
 
 [node name="Area2D" type="Area2D" parent="PlayerTeam/Dummy3"]
-position = Vector2(-40, 216)
+position = Vector2(88, 133)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerTeam/Dummy3/Area2D"]
 visible = false
@@ -175,6 +178,7 @@ offset_bottom = 164.0
 [node name="Enemy" type="Node2D" parent="EnemyTeam"]
 position = Vector2(799, -6)
 script = ExtResource("6_f2o1h")
+base_shield = null
 char_name = "Enemy1"
 is_enemy = true
 

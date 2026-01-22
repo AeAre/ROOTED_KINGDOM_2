@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnjv8y2vfxphv"]
+
+[ext_resource type="Script" uid="uid://cl30yucb15jeq" path="res://Scene/TowerSelection.gd" id="1_p0bcw"]
+
+[node name="TowerSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_p0bcw")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 647.0
+offset_top = 118.0
+offset_right = 965.66364
+offset_bottom = 366.3437
+scale = Vector2(0.891222, 0.98250943)
+horizontal_scroll_mode = 0
+
+[node name="VBox" type="VBoxContainer" parent="ScrollContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+
+[node name="Floor1" type="Button" parent="ScrollContainer/VBox"]
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+text = "Floor 1"
+
+[node name="Floor2" type="Button" parent="ScrollContainer/VBox"]
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+text = "Floor 2"
+
+[node name="Floor3" type="Button" parent="ScrollContainer/VBox"]
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+text = "Floor 3
+"
+
+[node name="DescriptionPanel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 587.0
+offset_top = 467.0
+offset_right = 1151.0
+offset_bottom = 645.0
+
+[node name="Label" type="Label" parent="DescriptionPanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="StartBattleButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 436.0
+offset_top = 312.0
+offset_right = 622.0
+offset_bottom = 360.0
+text = "Start battle"

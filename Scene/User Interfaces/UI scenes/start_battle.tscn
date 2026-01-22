@@ -37,4 +37,5 @@ offset_bottom = 102.0
 text = "Back
 "
 
+[connection signal="pressed" from="ButtonManager/Tower Mode" to="ButtonManager" method="_on_tower_mode_pressed"]
 [connection signal="pressed" from="ButtonManager/Back" to="ButtonManager" method="_on_back_pressed"]

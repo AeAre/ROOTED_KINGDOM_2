@@ -1,7 +1,6 @@
 # Enemy.gd
 extends BattleCharacter
 
-@export var base_damage: int = 15
 @export var base_shield: int = 10  # renamed to be clear
 
 func _ready():

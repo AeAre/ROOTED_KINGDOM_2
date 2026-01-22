@@ -8,7 +8,7 @@ class_name CharacterData
 @export_group("Stats")
 @export var max_health: int = 100
 @export var base_shield: int = 0
-
+@export var base_damage: int = 10
 @export_group("Deck")
 @export var unique_card: CardData
 @export var common_cards: Array[CardData]
