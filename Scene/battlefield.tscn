@@ -149,13 +149,13 @@ theme_override_constants/separation = 15
 [node name="CardUi" parent="CanvasLayer/Hand" instance=ExtResource("1_fxwnf")]
 layout_mode = 2
 
-[node name="RestartButton" type="Button" parent="CanvasLayer"]
+[node name="MenuButton" type="Button" parent="CanvasLayer"]
 unique_name_in_owner = true
 offset_left = 1050.0
 offset_top = 18.0
 offset_right = 1153.0
 offset_bottom = 63.0
-text = "Restart"
+text = "Menu"
 
 [node name="EnergyLabel" type="Label" parent="CanvasLayer"]
 offset_left = 1023.0
@@ -299,5 +299,5 @@ visible = false
 position = Vector2(170.25, 209.25)
 shape = SubResource("RectangleShape2D_vsh2u")
 
-[connection signal="pressed" from="CanvasLayer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuButton" to="." method="_on_menu_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndTurnButton" to="." method="_on_end_turn_button_pressed"]

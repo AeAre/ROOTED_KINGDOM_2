@@ -154,6 +154,7 @@ func create_card_instance(data: CardData):
 	new_card.get_node("VBoxContainer/PlayButton").pressed.connect(_on_card_played.bind(data, new_card))
 
 func end_current_phase():
+	check_battle_status()
 	current_phase_index += 1
 	
 	# If the enemy just finished, go back to player and increase max energy
@@ -284,7 +285,7 @@ func execute_slotted_actions():
 		child.queue_free()
 
 	slotted_cards.clear()
-
+	check_battle_status()
 
 
 func _on_restart_button_pressed():
@@ -317,3 +318,33 @@ func setup_tower_enemies():
 		if i < enemy_nodes.size():
 			var enemy_resource = selected_floor_data[i]
 			enemy_nodes[i].setup_enemy(enemy_resource)
+	
+	for node in enemy_nodes:
+		node.hide()
+		node.current_health = 0 # Ensure hidden ones are "dead" for the logic
+
+	for i in range(selected_floor_data.size()):
+		if i < enemy_nodes.size():
+			enemy_nodes[i].setup_enemy(selected_floor_data[i])
+			# setup_enemy will set health to max, making them "alive"
+
+
+# Inside BattleManager.gd (or your new script for floors 6-10)
+
+# BattleManager.gd
+
+func check_battle_status():
+	# get_alive_enemies() already filters out dead/invalid units
+	var alive_enemies = get_alive_enemies()
+	
+	# Only trigger victory if there are NO alive enemies left
+	if alive_enemies.is_empty():
+		# This ensures we don't trigger it if the floor hasn't spawned yet
+		if Global.current_tower_floor > 0:
+			print("Victory! All enemies defeated.")
+			Global.mark_floor_cleared(Global.current_tower_floor) #
+			GlobalMenu.show_victory_menu() # Calls the Autoload you just set up
+	
+
+func _on_menu_button_pressed() -> void:
+	GlobalMenu.show_pause_menu()
