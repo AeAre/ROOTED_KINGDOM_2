@@ -29,3 +29,7 @@ func _on_tutorial_pressed() -> void:
 
 func _on_settings_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scene/User Interfaces/UI scenes/settings.tscn")
+
+
+func _on_quit_pressed() -> void:
+	get_tree().quit()
