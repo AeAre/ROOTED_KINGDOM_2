@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://cqmjjngvfv0m6"]
+
+[ext_resource type="Script" uid="uid://de4ufxbti7lif" path="res://Script/EnemyData.gd" id="1_cbvff"]
+[ext_resource type="Texture2D" uid="uid://cd6556rnnwmxb" path="res://Asset/Characters/enemies/Boss.png" id="1_q4icm"]
+
+[resource]
+script = ExtResource("1_cbvff")
+name = "Nah'rgot"
+enemy_sprite = ExtResource("1_q4icm")
+base_damage = 33
+metadata/_custom_type_script = "uid://de4ufxbti7lif"

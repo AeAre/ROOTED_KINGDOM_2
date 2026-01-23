@@ -9,10 +9,10 @@ script = ExtResource("1_p0bcw")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 0
-offset_left = 647.0
-offset_top = 118.0
-offset_right = 965.66364
-offset_bottom = 366.3437
+offset_left = 661.0
+offset_top = 34.999996
+offset_right = 979.66364
+offset_bottom = 412.60452
 scale = Vector2(0.891222, 0.98250943)
 horizontal_scroll_mode = 0
 
@@ -20,10 +20,12 @@ horizontal_scroll_mode = 0
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
+theme_override_constants/separation = 25
 
 [node name="Floor1" type="Button" parent="ScrollContainer/VBox"]
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 2
+theme_override_constants/h_separation = 2
 text = "Floor 1"
 
 [node name="Floor2" type="Button" parent="ScrollContainer/VBox"]
@@ -35,6 +37,18 @@ text = "Floor 2"
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 2
 text = "Floor 3
+"
+
+[node name="Floor4" type="Button" parent="ScrollContainer/VBox"]
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+text = "Floor 4
+"
+
+[node name="Floor5" type="Button" parent="ScrollContainer/VBox"]
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+text = "Floor 5
 "
 
 [node name="DescriptionPanel" type="Panel" parent="."]

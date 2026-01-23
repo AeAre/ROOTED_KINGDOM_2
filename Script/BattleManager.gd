@@ -3,7 +3,8 @@ extends Node2D
 @export var floor_1_enemies: Array[EnemyData] = []
 @export var floor_2_enemies: Array[EnemyData] = []
 @export var floor_3_enemies: Array[EnemyData] = []
-
+@export var floor_4_enemies: Array[EnemyData] = []
+@export var floor_5_enemies: Array[EnemyData] = []
 # --- 1. NODE LINKS ---
 @onready var slot_container = %CardSlots
 @onready var player_team = $PlayerTeam
@@ -13,6 +14,7 @@ extends Node2D
 	
 var card_scene = preload("res://Scene/CardUI.tscn")
 
+var is_processing_turn: bool = false
 var turn_order: Array = []
 var current_turn_index: int = 0
 var active_character: BattleCharacter = null
@@ -110,20 +112,21 @@ func start_current_phase():
 		execute_enemy_ai()
 
 func execute_enemy_ai():
-	var heroes = player_team.get_children()
-
 	for enemy in get_alive_enemies():
-		if heroes.is_empty():
+		var alive_heroes = get_alive_players()
+		if alive_heroes.is_empty():
 			break
 
-		var target = heroes.pick_random()
+		var target = alive_heroes.pick_random()
 		var damage_to_deal = enemy.base_damage
 		target.take_damage(damage_to_deal)
 
 		print(enemy.char_name + " dealt " + str(damage_to_deal) + " damage to " + target.char_name)
 		await get_tree().create_timer(0.8).timeout
-
-	end_current_phase()
+	
+	check_battle_status()
+	if not get_alive_players().is_empty():
+		end_current_phase()
 
 
 # --- 3. THE 5-CARD DRAW SYSTEM ---
@@ -186,14 +189,24 @@ func _on_card_played(data: CardData, card_node: Node):
 		
 # --- 2. THE TURN PROGRESSION ---
 func _on_end_turn_button_pressed():
-	# Only allow if it's the player's phase
+	# 1. SAFETY GATES
+	if is_processing_turn: return # Stop spamming!
 	if phases[current_phase_index] != "player": return
 	
-	# Play the cards in the slots
+	is_processing_turn = true # Lock the turn
+	
+	# Disable the button visually if you have a reference to it
+	# $CanvasLayer/EndTurnButton.disabled = true 
+
+	# 2. Play the cards
 	await execute_slotted_actions()
 	
-	# Move to Enemy Phase
+	# 3. Move to Enemy Phase
 	end_current_phase()
+	
+	# 4. Unlock after the whole sequence (including enemy AI) is done
+	is_processing_turn = false
+	# $CanvasLayer/EndTurnButton.disabled = false
 
 func update_energy_ui():
 	if energy_label:
@@ -301,42 +314,37 @@ func get_alive_enemies() -> Array:
 
 func setup_tower_enemies():
 	var enemy_nodes = enemy_team.get_children()
-	
-	# Determine which resource list to use based on Global floor
 	var selected_floor_data: Array[EnemyData] = []
+	
 	match Global.current_tower_floor:
 		1: selected_floor_data = floor_1_enemies
 		2: selected_floor_data = floor_2_enemies
 		3: selected_floor_data = floor_3_enemies
-
-	# Hide all dummies first
-	for node in enemy_nodes:
-		node.hide()
-
-	# Match the resources to the dummy nodes
-	for i in range(selected_floor_data.size()):
-		if i < enemy_nodes.size():
-			var enemy_resource = selected_floor_data[i]
-			enemy_nodes[i].setup_enemy(enemy_resource)
-	
+		4: selected_floor_data = floor_4_enemies
+		5: selected_floor_data = floor_5_enemies
+		
 	for node in enemy_nodes:
 		node.hide()
 		node.current_health = 0 # Ensure hidden ones are "dead" for the logic
 
 	for i in range(selected_floor_data.size()):
 		if i < enemy_nodes.size():
-			enemy_nodes[i].setup_enemy(selected_floor_data[i])
-			# setup_enemy will set health to max, making them "alive"
-
-
-# Inside BattleManager.gd (or your new script for floors 6-10)
-
-# BattleManager.gd
+			var enemy_resource = selected_floor_data[i]
+			enemy_nodes[i].setup_enemy(enemy_resource)
+			enemy_nodes[i].show() # Explicitly show the 4th dummy
 
 func check_battle_status():
 	# get_alive_enemies() already filters out dead/invalid units
 	var alive_enemies = get_alive_enemies()
+	var alive_players = get_alive_players()
 	
+	# 1. Check if Player Lost (All heroes dead)
+	if alive_players.is_empty():
+		print("Defeat! All heroes have fallen.")
+		await get_tree().create_timer(1.0).timeout
+		GlobalMenu.show_loss_menu() # Trigger the loss UI
+		return
+		
 	# Only trigger victory if there are NO alive enemies left
 	if alive_enemies.is_empty():
 		# This ensures we don't trigger it if the floor hasn't spawned yet
@@ -345,6 +353,13 @@ func check_battle_status():
 			Global.mark_floor_cleared(Global.current_tower_floor) #
 			GlobalMenu.show_victory_menu() # Calls the Autoload you just set up
 	
-
+func get_alive_players() -> Array:
+	var alive = []
+	for hero in player_team.get_children():
+		# Check if the hero node exists and has health > 0
+		if is_instance_valid(hero) and hero.current_health > 0:
+			alive.append(hero)
+	return alive
+	
 func _on_menu_button_pressed() -> void:
 	GlobalMenu.show_pause_menu()

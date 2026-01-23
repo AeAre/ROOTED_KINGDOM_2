@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c383wxvj0hh7q"]
+[gd_scene load_steps=18 format=3 uid="uid://c383wxvj0hh7q"]
 
 [ext_resource type="Texture2D" uid="uid://uidjcdf62vif" path="res://Asset/Characters/Beatrix/charlotte-removebg-preview.png" id="1_4y0t7"]
 [ext_resource type="PackedScene" uid="uid://bplpwpncwxjh4" path="res://Scene/CardUI.tscn" id="1_fxwnf"]
@@ -9,10 +9,13 @@
 [ext_resource type="Texture2D" uid="uid://ccclxldrmru4w" path="res://Asset/Backgrounds/background 1.jpg" id="3_tkjg1"]
 [ext_resource type="Resource" uid="uid://dhgj4dae4hy2x" path="res://Resources/Enemies resources/Gornot2.tres" id="4_jxk86"]
 [ext_resource type="Script" uid="uid://bwy2biobw6kaq" path="res://Script/BattleCharacter.gd" id="4_y8d5v"]
-[ext_resource type="Resource" uid="uid://bv3ypd5hxbalt" path="res://Resources/Enemies resources/Gotnot3.tres" id="5_3314g"]
+[ext_resource type="Resource" uid="uid://bv3ypd5hxbalt" path="res://Resources/Enemies resources/Gornot3.tres" id="5_3314g"]
 [ext_resource type="Script" uid="uid://dafxw2p825bmt" path="res://Script/Enemy.gd" id="6_f2o1h"]
+[ext_resource type="Resource" uid="uid://cst0ty6jx3wqd" path="res://Resources/Enemies resources/Gornot4.tres" id="6_jxk86"]
+[ext_resource type="Resource" uid="uid://cqmjjngvfv0m6" path="res://Resources/Enemies resources/Floor5Boss.tres" id="7_3314g"]
 [ext_resource type="Texture2D" uid="uid://de3vu6immvp4r" path="res://Asset/Characters/enemies/2.png" id="8_ehisa"]
 [ext_resource type="Texture2D" uid="uid://h8k4v6mepfq8" path="res://Asset/Characters/enemies/3.png" id="9_36gl3"]
+[ext_resource type="Texture2D" uid="uid://dybx2o1ibqdpd" path="res://Asset/Characters/enemies/4.png" id="14_4l1qv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vsh2u"]
 size = Vector2(311.5, 317.5)
@@ -22,6 +25,8 @@ script = ExtResource("1_vsh2u")
 floor_1_enemies = Array[ExtResource("2_nqr2r")]([ExtResource("3_4l1qv")])
 floor_2_enemies = Array[ExtResource("2_nqr2r")]([ExtResource("4_jxk86"), ExtResource("3_4l1qv")])
 floor_3_enemies = Array[ExtResource("2_nqr2r")]([ExtResource("5_3314g"), ExtResource("4_jxk86"), ExtResource("3_4l1qv")])
+floor_4_enemies = Array[ExtResource("2_nqr2r")]([ExtResource("4_jxk86"), ExtResource("6_jxk86"), ExtResource("5_3314g"), ExtResource("3_4l1qv")])
+floor_5_enemies = Array[ExtResource("2_nqr2r")]([ExtResource("7_3314g")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(579.25, 325)
@@ -199,6 +204,7 @@ offset_bottom = 279.0
 scale = Vector2(0.8952639, 0.9224108)
 theme_override_colors/font_color = Color(0.79573834, 0, 0.21928853, 1)
 theme_override_colors/font_outline_color = Color(0.8838147, 0.33180755, 1.92523e-07, 1)
+max_value = 500.0
 step = 1.0
 value = 100.0
 
@@ -295,6 +301,46 @@ position = Vector2(-651.7154, 154)
 scale = Vector2(0.8952639, 0.9224108)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyTeam/Enemy3/Area2D"]
+visible = false
+position = Vector2(170.25, 209.25)
+shape = SubResource("RectangleShape2D_vsh2u")
+
+[node name="Enemy4" type="Node2D" parent="EnemyTeam"]
+position = Vector2(1598, -12)
+script = ExtResource("6_f2o1h")
+char_name = "Enemy3"
+is_enemy = true
+target_height = 250.0
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemyTeam/Enemy4"]
+position = Vector2(-875.94, 467.46875)
+scale = Vector2(-0.42941666, 0.37955877)
+texture = ExtResource("14_4l1qv")
+
+[node name="HealthBar" type="ProgressBar" parent="EnemyTeam/Enemy4"]
+offset_left = -923.0
+offset_top = 343.0
+offset_right = -829.0
+offset_bottom = 370.0
+scale = Vector2(0.8952639, 0.9224108)
+theme_override_colors/font_color = Color(0.79573834, 0, 0.21928853, 1)
+theme_override_colors/font_outline_color = Color(0.8838147, 0.33180755, 1.92523e-07, 1)
+step = 1.0
+value = 100.0
+
+[node name="ShieldLabel" type="Label" parent="EnemyTeam/Enemy4"]
+offset_left = -966.75006
+offset_top = 380.0
+offset_right = -905.75006
+offset_bottom = 403.0
+theme_override_colors/font_color = Color(0.1882353, 0.18039216, 1, 1)
+text = "Shield:0"
+
+[node name="Area2D" type="Area2D" parent="EnemyTeam/Enemy4"]
+position = Vector2(-882.46545, 211)
+scale = Vector2(0.8952639, 0.9224108)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyTeam/Enemy4/Area2D"]
 visible = false
 position = Vector2(170.25, 209.25)
 shape = SubResource("RectangleShape2D_vsh2u")
