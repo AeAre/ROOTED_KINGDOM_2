@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://bv3ypd5hxbalt"]
+
+[ext_resource type="Texture2D" uid="uid://h8k4v6mepfq8" path="res://Asset/Characters/enemies/3.png" id="1_pgo4e"]
+[ext_resource type="Script" uid="uid://de4ufxbti7lif" path="res://Script/EnemyData.gd" id="1_tljba"]
+
+[resource]
+script = ExtResource("1_tljba")
+name = "Enemy3"
+enemy_sprite = ExtResource("1_pgo4e")
+base_damage = 50
+metadata/_custom_type_script = "uid://de4ufxbti7lif"

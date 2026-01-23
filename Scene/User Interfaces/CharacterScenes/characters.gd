@@ -16,7 +16,6 @@ var card_ui_scene = preload("res://Scene/CardUI.tscn")
 
 func _ready():
 	Global.clear_team()
-	update_confirm_button()
 	display_roster()
 	$ConfirmButton.pressed.connect(_on_confirm_battle_pressed)
 	
@@ -40,13 +39,9 @@ func _on_hero_selection(data: CharacterData, card_node: Button):
 		print("Added " + data.name + " to team.")
 		
 	update_details(data)	
-	update_confirm_button()
 	update_team_ui()
 	
-	
-func update_confirm_button():
-	# Only let the player continue if they have exactly 3 heroes selected
-	confirm_button.disabled = Global.selected_team.size() != 3
+
 	
 func _on_confirm_battle_pressed():
 	# Only start if at least one character is selected

@@ -1,11 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://c383wxvj0hh7q"]
+[gd_scene load_steps=15 format=3 uid="uid://c383wxvj0hh7q"]
 
 [ext_resource type="Texture2D" uid="uid://uidjcdf62vif" path="res://Asset/Characters/Beatrix/charlotte-removebg-preview.png" id="1_4y0t7"]
 [ext_resource type="PackedScene" uid="uid://bplpwpncwxjh4" path="res://Scene/CardUI.tscn" id="1_fxwnf"]
 [ext_resource type="Script" uid="uid://1mh1lv3r2q5c" path="res://Script/BattleManager.gd" id="1_vsh2u"]
 [ext_resource type="Texture2D" uid="uid://cmpprcr84ive7" path="res://Asset/Characters/enemies/1.png" id="2_fxwnf"]
+[ext_resource type="Script" uid="uid://de4ufxbti7lif" path="res://Script/EnemyData.gd" id="2_nqr2r"]
+[ext_resource type="Resource" uid="uid://dqqua2af16pfl" path="res://Resources/Enemies resources/Gornot1.tres" id="3_4l1qv"]
 [ext_resource type="Texture2D" uid="uid://ccclxldrmru4w" path="res://Asset/Backgrounds/background 1.jpg" id="3_tkjg1"]
+[ext_resource type="Resource" uid="uid://dhgj4dae4hy2x" path="res://Resources/Enemies resources/Gornot2.tres" id="4_jxk86"]
 [ext_resource type="Script" uid="uid://bwy2biobw6kaq" path="res://Script/BattleCharacter.gd" id="4_y8d5v"]
+[ext_resource type="Resource" uid="uid://bv3ypd5hxbalt" path="res://Resources/Enemies resources/Gotnot3.tres" id="5_3314g"]
 [ext_resource type="Script" uid="uid://dafxw2p825bmt" path="res://Script/Enemy.gd" id="6_f2o1h"]
 [ext_resource type="Texture2D" uid="uid://de3vu6immvp4r" path="res://Asset/Characters/enemies/2.png" id="8_ehisa"]
 [ext_resource type="Texture2D" uid="uid://h8k4v6mepfq8" path="res://Asset/Characters/enemies/3.png" id="9_36gl3"]
@@ -15,6 +19,9 @@ size = Vector2(311.5, 317.5)
 
 [node name="Battlefield" type="Node2D"]
 script = ExtResource("1_vsh2u")
+floor_1_enemies = Array[ExtResource("2_nqr2r")]([ExtResource("3_4l1qv")])
+floor_2_enemies = Array[ExtResource("2_nqr2r")]([ExtResource("4_jxk86"), ExtResource("3_4l1qv")])
+floor_3_enemies = Array[ExtResource("2_nqr2r")]([ExtResource("5_3314g"), ExtResource("4_jxk86"), ExtResource("3_4l1qv")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(579.25, 325)
@@ -177,6 +184,7 @@ position = Vector2(799, -6)
 script = ExtResource("6_f2o1h")
 char_name = "Enemy1"
 is_enemy = true
+target_height = 250.0
 
 [node name="Sprite2D" type="Sprite2D" parent="EnemyTeam/Enemy"]
 position = Vector2(1.9999733, 357)
@@ -214,9 +222,9 @@ shape = SubResource("RectangleShape2D_vsh2u")
 [node name="Enemy2" type="Node2D" parent="EnemyTeam"]
 position = Vector2(799, -6)
 script = ExtResource("6_f2o1h")
-base_shield = 5
 char_name = "Enemy2"
 is_enemy = true
+target_height = 250.0
 
 [node name="Sprite2D" type="Sprite2D" parent="EnemyTeam/Enemy2"]
 position = Vector2(55.74997, 459)
@@ -254,9 +262,9 @@ shape = SubResource("RectangleShape2D_vsh2u")
 [node name="Enemy3" type="Node2D" parent="EnemyTeam"]
 position = Vector2(1598, -12)
 script = ExtResource("6_f2o1h")
-base_shield = 5
 char_name = "Enemy3"
 is_enemy = true
+target_height = 250.0
 
 [node name="Sprite2D" type="Sprite2D" parent="EnemyTeam/Enemy3"]
 position = Vector2(-628.24994, 391)

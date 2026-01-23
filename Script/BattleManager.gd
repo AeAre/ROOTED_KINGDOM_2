@@ -1,5 +1,9 @@
 extends Node2D
 
+@export var floor_1_enemies: Array[EnemyData] = []
+@export var floor_2_enemies: Array[EnemyData] = []
+@export var floor_3_enemies: Array[EnemyData] = []
+
 # --- 1. NODE LINKS ---
 @onready var slot_container = %CardSlots
 @onready var player_team = $PlayerTeam
@@ -295,20 +299,21 @@ func get_alive_enemies() -> Array:
 	return alive
 
 func setup_tower_enemies():
+	var enemy_nodes = enemy_team.get_children()
+	
+	# Determine which resource list to use based on Global floor
+	var selected_floor_data: Array[EnemyData] = []
+	match Global.current_tower_floor:
+		1: selected_floor_data = floor_1_enemies
+		2: selected_floor_data = floor_2_enemies
+		3: selected_floor_data = floor_3_enemies
 
-	var enemy1 = $EnemyTeam/Enemy
-	var enemy2 = $EnemyTeam/Enemy2
-	var enemy3 = $EnemyTeam/Enemy3
-	
-	# Hide everything first
-	enemy1.hide()
-	enemy2.hide()
-	enemy3.hide()
-	
-	# Show enemies based on the floor selected
-	if Global.current_tower_floor >= 1:
-		enemy1.show()
-	if Global.current_tower_floor >= 2:
-		enemy2.show()
-	if Global.current_tower_floor >= 3:
-		enemy3.show()
+	# Hide all dummies first
+	for node in enemy_nodes:
+		node.hide()
+
+	# Match the resources to the dummy nodes
+	for i in range(selected_floor_data.size()):
+		if i < enemy_nodes.size():
+			var enemy_resource = selected_floor_data[i]
+			enemy_nodes[i].setup_enemy(enemy_resource)
