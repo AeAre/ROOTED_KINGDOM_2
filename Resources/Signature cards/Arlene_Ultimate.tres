@@ -9,6 +9,7 @@ card_name = "Glaciation of Plains"
 card_image = ExtResource("1_ejm6m")
 damage = 23
 shield = 10
+heal_amount = 10
 energy_cost = 4
 description = "Deals 35 damage to all enemies and all allies gain 10 shields"
 is_aoe = true

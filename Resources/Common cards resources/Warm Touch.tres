@@ -7,6 +7,7 @@
 script = ExtResource("2_1cttj")
 card_name = "Warm Touch"
 card_image = ExtResource("1_ync2v")
+shield = 5
 heal_amount = 30
 energy_cost = 3
 description = "Heals all allies by 30"

@@ -10,7 +10,7 @@ extends Node2D
 @onready var player_team = $PlayerTeam
 @onready var enemy_team = $EnemyTeam
 @onready var hand_container = %Hand
-@onready var energy_label = $CanvasLayer/EnergyLabel
+@onready var mana_label = $CanvasLayer/EnergyLabel
 	
 var card_scene = preload("res://Scene/CardUI.tscn")
 
@@ -23,15 +23,16 @@ var is_battle_paused: bool = false
 # The Deck System
 var deck: Array = []
 var discard_pile: Array = []
-var hand_size: int = 5
+var hand_size: int = 6
 var round_number: int = 1
 
-# Energy System
-var max_energy: int = 6 # Starting at 6 as requested
-var current_energy: int = 6
+# --- MANA SYSTEM UPDATES ---
+var max_mana: int = 20     # Hard Cap
+var current_mana: int = 4  # Starting Mana
+var mana_regen: int = 4
 
 # Card Slots
-var slotted_cards: Array = [] # Tracks CardData in slots
+var slotted_cards: Array = [] 
 var max_slots: int = 3
 
 
@@ -39,18 +40,19 @@ var phases: Array = ["player", "enemy"]
 var current_phase_index: int = 0
 
 func _ready():
-	# This connects the Global data to your Dummy nodes
+	# --- NEW: Clear editor placeholders ---
+	for child in hand_container.get_children():
+		child.queue_free()
+	
+	# Wait a tiny bit for the engine to remove them from the count
+	await get_tree().process_frame 
+	
+	# --- Existing Setup ---
 	setup_player_team()
-	
-	# 2. Build the deck (Ensure this uses Global.selected_team)
 	build_deck_from_team()
-	
-	# 3. Setup the enemies
 	setup_tower_enemies()
 	
-	# 4. Start the game
-	current_energy = max_energy
-	update_energy_ui()
+	update_mana_ui()
 	start_current_phase()
 	
 func setup_player_team():
@@ -92,19 +94,21 @@ func start_current_phase():
 	var phase = phases[current_phase_index]
 	
 	if phase == "player":
-		# 1. Start of Player Phase: Refill Energy & Reset Max
+		# 1. Player Phase: Regen Mana (Cap at 20)
 		if current_phase_index == 0:
-			current_energy = max_energy
+			# Logic: Add 4, but don't go over 20
+			current_mana = min(current_mana + mana_regen, max_mana)
+			print("Player Turn! Mana: " + str(current_mana))
 		
-		# 2. Highlight all heroes to show it's their collective turn
+		# Highlight heroes
 		for hero in player_team.get_children():
 			hero.modulate = Color(1.2, 1.2, 1.2)
 			
-		update_energy_ui()
-		spawn_cards() # Draw 5 cards for the whole team
+		spawn_cards() 
+		update_mana_ui()
 		
 	elif phase == "enemy":
-		# 3. Dim heroes, highlight enemy
+		# Dim heroes
 		for hero in player_team.get_children():
 			hero.modulate = Color(0.5, 0.5, 0.5)
 		
@@ -155,22 +159,33 @@ func execute_enemy_ai():
 
 # --- 3. THE 5-CARD DRAW SYSTEM ---
 func spawn_cards():
-	# 1. Discard unplayed cards first
-	for child in hand_container.get_children():
-		if child.get("card_data") != null:
-			discard_pile.append(child.card_data)
-		child.queue_free()
+	# 1. Count how many cards are currently in the hand
+	var current_cards_in_hand = hand_container.get_child_count()
 	
-	await get_tree().process_frame
+	# 2. Calculate how many we need to draw to reach the limit (6)
+	var cards_to_draw = hand_size - current_cards_in_hand
 	
-	# 2. Draw exactly 5 cards
-	for i in range(5):
+	print("Hand has " + str(current_cards_in_hand) + " cards. Drawing " + str(cards_to_draw) + " new cards.")
+	
+	# If hand is already full (or overfilled), stop here
+	if cards_to_draw <= 0:
+		update_mana_ui()
+		return
+
+	# 3. Draw exactly the needed amount
+	for i in range(cards_to_draw):
+		# If deck is empty, try to reshuffle
 		if deck.is_empty():
 			reshuffle_discard_into_deck()
+		
+		# If we have cards (either naturally or after reshuffle), draw one
 		if not deck.is_empty():
 			create_card_instance(deck.pop_front())
+			# Optional: Add a tiny delay between draws for a cool visual effect
+			await get_tree().create_timer(0.1).timeout
 	
-	update_energy_ui()
+	# 4. Refresh UI to ensure new cards have correct mana dimming
+	update_mana_ui()
 
 func create_card_instance(data: CardData):
 	var new_card = card_scene.instantiate()
@@ -192,24 +207,66 @@ func end_current_phase():
 	start_current_phase()
 
 func _on_card_played(data: CardData, card_node: Node):
-	# SAFETY GATES (Updated for Phase system)
+	# Safety Checks
 	if phases[current_phase_index] != "player": return
 	if slotted_cards.size() >= max_slots: return 
-	if current_energy < data.energy_cost: return
+	if current_mana < data.energy_cost: return
 
-	# 1. Deduct energy
-	current_energy -= data.energy_cost
+	# 1. Deduct Mana
+	current_mana -= data.energy_cost
 	
-	# 2. Move card logic
+	# 2. Add to Slot Logic
 	slotted_cards.append(data)
+	
+	# 3. Move Visuals to Slot
 	card_node.get_parent().remove_child(card_node)
 	slot_container.add_child(card_node)
 	
-	# --- THE FIX: RESET VISUALS ---
-	card_node.modulate = Color(1, 1, 1) # Force the card to be bright in the slot
-	card_node.get_node("VBoxContainer/PlayButton").disabled = true # Keep button off
+	# 4. SWAP SIGNAL: Change button from "Play" to "Return"
+	var btn = card_node.get_node("VBoxContainer/PlayButton")
 	
-	update_energy_ui() # Refresh the hand to dim other cards you can no longer afford
+	# Disconnect the "Play" function
+	if btn.pressed.is_connected(_on_card_played):
+		btn.pressed.disconnect(_on_card_played)
+	
+	# Connect the "Return" function
+	btn.pressed.connect(return_card_to_hand.bind(data, card_node))
+	
+	# Visual updates for slotted card
+	btn.text = "Return" # Optional: Change text to show it can be removed
+	btn.disabled = false # Ensure it's clickable!
+	card_node.modulate = Color(1, 1, 1) # Keep it bright
+	
+	update_mana_ui()
+	
+func return_card_to_hand(data: CardData, card_node: Node):
+	# Safety: Don't allow undo if we are already fighting
+	if is_processing_turn: return
+	
+	# 1. Refund Mana
+	current_mana += data.energy_cost
+	# (Optional: Cap it again if needed, but usually refund allows overflow or exact return)
+	current_mana = min(current_mana, max_mana)
+
+	# 2. Remove from Slot Logic
+	slotted_cards.erase(data)
+	
+	# 3. Move Visuals back to Hand
+	card_node.get_parent().remove_child(card_node)
+	hand_container.add_child(card_node)
+	
+	# 4. SWAP SIGNAL: Change button from "Return" to "Play"
+	var btn = card_node.get_node("VBoxContainer/PlayButton")
+	
+	if btn.pressed.is_connected(return_card_to_hand):
+		btn.pressed.disconnect(return_card_to_hand)
+		
+	btn.pressed.connect(_on_card_played.bind(data, card_node))
+	
+	# Visual Reset
+	btn.text = "Play"
+	
+	update_mana_ui()
 		
 # --- 2. THE TURN PROGRESSION ---
 func _on_end_turn_button_pressed():
@@ -232,26 +289,30 @@ func _on_end_turn_button_pressed():
 	is_processing_turn = false
 	# $CanvasLayer/EndTurnButton.disabled = false
 
-func update_energy_ui():
-	if energy_label:
-		energy_label.text = "Energy: " + str(current_energy) + "/" + str(max_energy)
+func update_mana_ui():
+	if mana_label:
+		mana_label.text = "Mana: " + str(current_mana) + "/" + str(max_mana)
 	
-	# Check if it's currently the player's phase
 	var is_player_phase = phases[current_phase_index] == "player"
 
+	# Update Hand Cards (Dim if too expensive)
 	for card in hand_container.get_children():
-		# Safety check to ensure the child is a CardUI and has data
 		if "card_data" in card and card.card_data != null:
 			var cost = card.card_data.energy_cost
 			var btn = card.get_node("VBoxContainer/PlayButton")
 			
-			# Logic: Dim if it's NOT our turn OR if we can't afford it
-			if not is_player_phase or cost > current_energy:
+			if not is_player_phase or cost > current_mana:
 				btn.disabled = true
-				card.modulate = Color(0.4, 0.4, 0.4) # Slightly darker dim
+				card.modulate = Color(0.4, 0.4, 0.4) 
 			else:
 				btn.disabled = false
-				card.modulate = Color(1, 1, 1) # Full brightness
+				card.modulate = Color(1, 1, 1)
+
+	# Update Slotted Cards (Always bright and clickable for Undo)
+	for card in slot_container.get_children():
+		card.modulate = Color(1, 1, 1)
+		var btn = card.get_node("VBoxContainer/PlayButton")
+		btn.disabled = false
 
 
 func reshuffle_discard_into_deck():
@@ -276,7 +337,6 @@ func highlight_active_character():
 func advance_round():
 	round_number += 1
 	# Cap max energy at 10 so the game stays challenging
-	print("Round " + str(round_number) + "! Max Energy: " + str(max_energy))
 
 func execute_slotted_actions():
 	for data in slotted_cards:

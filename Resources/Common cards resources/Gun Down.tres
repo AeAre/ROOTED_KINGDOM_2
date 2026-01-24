@@ -7,7 +7,7 @@
 script = ExtResource("1_utgqj")
 card_name = "Gun Down"
 card_image = ExtResource("1_l5lvx")
-damage = 18
+damage = 15
 description = "deals 18 damage to single enemy"
 aoe_targets = 1
 metadata/_custom_type_script = "uid://olc2cw5uohq6"
