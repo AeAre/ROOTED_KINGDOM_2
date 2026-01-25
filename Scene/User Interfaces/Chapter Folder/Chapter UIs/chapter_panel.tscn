@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://bg08wns7ql4g4"]
+
+[ext_resource type="Script" uid="uid://subjv0e7ekgs" path="res://Scene/User Interfaces/Chapter Folder/Chapter UIs/chapter_panel.gd" id="1_o2ucw"]
+[ext_resource type="FontFile" uid="uid://d0sq1luf5fm1p" path="res://Asset/Fonts/Humanistic.ttf" id="2_e6xpw"]
+[ext_resource type="FontFile" uid="uid://dtdw2k1jvjn37" path="res://Asset/Fonts/times.ttf" id="3_blh7p"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_v6cie"]
+line_spacing = 0.0
+font = ExtResource("2_e6xpw")
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_8k6cl"]
+line_spacing = 0.0
+font = ExtResource("3_blh7p")
+font_size = 32
+
+[node name="Chapter Panel" type="Button"]
+offset_left = 333.0
+offset_top = 93.0
+offset_right = 721.0
+offset_bottom = 552.0
+script = ExtResource("1_o2ucw")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 22.0
+offset_top = 21.0
+offset_right = 366.0
+offset_bottom = 289.0
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Chapter Number" type="Label" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 370.0
+offset_right = 388.0
+offset_bottom = 458.0
+theme_override_font_sizes/font_size = 48
+text = "Chapter"
+label_settings = SubResource("LabelSettings_v6cie")
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 316.0
+offset_right = 391.0
+offset_bottom = 370.0
+theme_override_font_sizes/font_size = 48
+text = "Title"
+label_settings = SubResource("LabelSettings_8k6cl")
+horizontal_alignment = 1

@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi4fmeelgp436"]
+
+[ext_resource type="Script" uid="uid://bm2un4qtoc7da" path="res://Scenes/Chapter Folder/Stage UIs/stage_slot.gd" id="1_f8eut"]
+
+[node name="Stage Slot" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 317.0
+offset_bottom = 274.0
+script = ExtResource("1_f8eut")
+Stage_number = null
+Scene_type = null
+Objective = null
+
+[node name="Stage Slot bg" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 4.0
+offset_right = 314.0
+offset_bottom = 270.0
+
+[node name="Stage Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 2.0
+offset_right = 318.0
+offset_bottom = 267.0
+theme_override_font_sizes/font_size = 64
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="Stage Button" to="." method="_on_stage_button_pressed"]

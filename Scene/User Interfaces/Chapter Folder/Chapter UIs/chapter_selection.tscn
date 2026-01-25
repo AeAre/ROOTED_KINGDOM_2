@@ -1,0 +1,65 @@
+[gd_scene load_steps=12 format=3 uid="uid://bexapit2rvibf"]
+
+[ext_resource type="Script" uid="uid://cj7r22qevj0dg" path="res://Scene/User Interfaces/Chapter Folder/Chapter UIs/chapter_selection.gd" id="1_7gx8n"]
+[ext_resource type="FontFile" uid="uid://dtdw2k1jvjn37" path="res://Asset/Fonts/times.ttf" id="2_kcj5n"]
+[ext_resource type="FontFile" uid="uid://d0sq1luf5fm1p" path="res://Asset/Fonts/Humanistic.ttf" id="3_78ck1"]
+[ext_resource type="Texture2D" uid="uid://cdfpkjhi1gi77" path="res://Asset/User Interface/button_ui.png" id="3_g6080"]
+[ext_resource type="PackedScene" uid="uid://bg08wns7ql4g4" path="res://Scene/User Interfaces/Chapter Folder/Chapter UIs/chapter_panel.tscn" id="4_ntk75"]
+[ext_resource type="Script" uid="uid://bo0elohhqpbmv" path="res://Scene/User Interfaces/Chapter Folder/Chapter UIs/chapter_manager.gd" id="4_oj4gm"]
+[ext_resource type="Texture2D" uid="uid://cao4jwwshsvv3" path="res://Asset/images.png" id="5_3ywgb"]
+[ext_resource type="PackedScene" uid="uid://c7jklw6ydj26y" path="res://Scene/User Interfaces/Chapter Folder/Chapters/Chapter 1/Chapter files/Chapter_1.tscn" id="6_oj4gm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_78ck1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ipfjq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ipfjq"]
+font = ExtResource("3_78ck1")
+font_size = 64
+
+[node name="Chapter_Selection" type="Node2D"]
+script = ExtResource("1_7gx8n")
+
+[node name="Back" type="Button" parent="."]
+offset_left = 908.0
+offset_top = 21.0
+offset_right = 1103.0
+offset_bottom = 101.0
+theme_override_fonts/font = ExtResource("2_kcj5n")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_78ck1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ipfjq")
+text = "Back
+"
+icon = ExtResource("3_g6080")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = 53.0
+offset_top = 26.0
+offset_right = 289.0
+offset_bottom = 91.0
+text = "Chapters"
+label_settings = SubResource("LabelSettings_ipfjq")
+
+[node name="Chapter Manager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_oj4gm")
+
+[node name="Chapter 1" parent="Chapter Manager" instance=ExtResource("4_ntk75")]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 132.0
+offset_right = 455.0
+offset_bottom = 587.0
+chp_title = "The World of Magic"
+chp_number = 1
+chp_img = ExtResource("5_3ywgb")
+chp_scene = ExtResource("6_oj4gm")
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Chapter Manager/Chapter 1" to="Chapter Manager" method="_on_chapter_panel_pressed"]

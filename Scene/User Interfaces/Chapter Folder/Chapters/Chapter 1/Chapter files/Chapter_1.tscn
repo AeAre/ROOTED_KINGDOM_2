@@ -1,0 +1,114 @@
+[gd_scene load_steps=12 format=3 uid="uid://c7jklw6ydj26y"]
+
+[ext_resource type="Script" uid="uid://cv20pydghwwqy" path="res://Scene/User Interfaces/Chapter Folder/Chapters/Chapter 1/Chapter files/chapter_scene_1.gd" id="1_m0qpd"]
+[ext_resource type="Script" uid="uid://b1ifmqw0neycm" path="res://Scene/User Interfaces/Chapter Folder/Stage UIs/stage_manager.gd" id="2_eebky"]
+[ext_resource type="Texture2D" uid="uid://cdfpkjhi1gi77" path="res://Asset/User Interface/button_ui.png" id="3_m0qpd"]
+[ext_resource type="PackedScene" uid="uid://bi4fmeelgp436" path="res://Scene/User Interfaces/Chapter Folder/Stage UIs/stage_slot.tscn" id="3_v1ojb"]
+[ext_resource type="PackedScene" uid="uid://rmdg2sxyff1i" path="res://Scene/User Interfaces/Chapter Folder/Stage UIs/Stage Confirmation/stage_confimation.tscn" id="4_nyspv"]
+[ext_resource type="PackedScene" uid="uid://ds0x8k3bwi2qm" path="res://Scene/User Interfaces/Chapter Folder/Chapters/Chapter 1/Stages/stage_1_1.tscn" id="5_4eeoq"]
+[ext_resource type="Texture2D" uid="uid://cao4jwwshsvv3" path="res://Asset/images.png" id="6_asr4g"]
+[ext_resource type="FontFile" uid="uid://dtdw2k1jvjn37" path="res://Asset/Fonts/times.ttf" id="7_m0qpd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1625k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uugnn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_486k3"]
+font = ExtResource("7_m0qpd")
+font_size = 48
+
+[node name="Stage Selection (Chapter)" type="Node2D"]
+scale = Vector2(0.7269034, 0.8863958)
+script = ExtResource("1_m0qpd")
+chp_number = 1
+chp_title = "The World of Magic"
+
+[node name="Back" type="Button" parent="."]
+offset_left = 1278.0239
+offset_top = 37.229416
+offset_right = 1473.0239
+offset_bottom = 117.229416
+theme_override_fonts/font = ExtResource("7_m0qpd")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1625k")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_uugnn")
+text = "Back
+"
+icon = ExtResource("3_m0qpd")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Stage Manager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_eebky")
+
+[node name="Stage 1" parent="Stage Manager" instance=ExtResource("3_v1ojb")]
+layout_mode = 0
+offset_left = 77.03912
+offset_top = 335.06476
+offset_right = 393.4497
+offset_bottom = 604.69604
+scale = Vector2(0.9808304, 0.97056293)
+Stage = ExtResource("5_4eeoq")
+Stage_number = "1-1"
+Stage_img = ExtResource("6_asr4g")
+Scene_type = "Story"
+Objective = ""
+
+[node name="Stage 2" parent="Stage Manager" instance=ExtResource("3_v1ojb")]
+layout_mode = 0
+offset_left = 407.20682
+offset_top = 332.80844
+offset_right = 724.2068
+offset_bottom = 606.8085
+scale = Vector2(0.99292314, 0.9660217)
+Stage = ExtResource("5_4eeoq")
+Stage_number = "1-2"
+Scene_type = "Story"
+Objective = ""
+
+[node name="UI Manager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title Banner" type="TextureRect" parent="UI Manager"]
+layout_mode = 0
+offset_left = 419.5881
+offset_top = 47.382896
+offset_right = 1049.3286
+offset_bottom = 241.3829
+scale = Vector2(1.011446, 1)
+texture = ExtResource("6_asr4g")
+
+[node name="Chapter Number" type="Label" parent="UI Manager"]
+layout_mode = 0
+offset_left = 425.09088
+offset_top = 74.45884
+offset_right = 1052.4094
+offset_bottom = 128.61072
+text = "Empty Text"
+label_settings = SubResource("LabelSettings_486k3")
+horizontal_alignment = 1
+
+[node name="Chapter Title" type="Label" parent="UI Manager"]
+layout_mode = 0
+offset_left = 420.9638
+offset_top = 168.09647
+offset_right = 1060.6636
+offset_bottom = 222.09647
+text = "Empty Text"
+label_settings = SubResource("LabelSettings_486k3")
+horizontal_alignment = 1
+
+[node name="Stage Confimation" parent="." instance=ExtResource("4_nyspv")]
+visible = false
+scale = Vector2(1.3990585, 1.137176)
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+
+[editable path="Stage Confimation"]
