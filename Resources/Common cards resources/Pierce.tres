@@ -7,9 +7,10 @@
 script = ExtResource("1_q2jd0")
 card_name = "Pierce"
 card_image = ExtResource("1_4my0g")
-damage = 14
 description = "deals 14 damage to two enemies"
+damage = 14
 is_aoe = true
 aoe_targets = 2
 critical_chance = 30
+damage_growth = 2
 metadata/_custom_type_script = "uid://olc2cw5uohq6"

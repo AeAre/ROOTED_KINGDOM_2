@@ -345,14 +345,20 @@ func advance_round():
 
 func execute_slotted_actions():
 	for data in slotted_cards:
-		# --- 1. DAMAGE LOGIC (Already working) ---
+
+		# --- 1. DAMAGE LOGIC ---
 		if data.damage > 0:
 			var enemies = get_alive_enemies()
 			if not enemies.is_empty():
-				var final_damage = data.damage
+				
+				# CHANGE: Get dynamic damage from Global
+				var final_damage = Global.get_card_damage(data)
+				
+				# Calculate Crit
 				var is_crit = randi() % 100 < data.critical_chance
 				if is_crit: final_damage = int(final_damage * 1.5)
 				
+				# Apply Damage
 				if data.is_aoe:
 					var hits = min(data.aoe_targets, enemies.size())
 					for i in range(hits):
@@ -360,38 +366,42 @@ func execute_slotted_actions():
 				else:
 					enemies[0].take_damage(final_damage, is_crit)
 
-		# --- 2. SHIELD LOGIC (Fixed for AOE) ---
+		# --- 2. SHIELD LOGIC ---
 		if data.shield > 0:
 			var targets = get_alive_players()
 			if not targets.is_empty():
+				
+				# CHANGE: Get dynamic shield from Global
+				var final_shield = Global.get_card_shield(data)
+				
 				if data.is_aoe:
-					# Apply shield to everyone (up to Aoe Target limit)
 					var hits = min(data.aoe_targets, targets.size())
 					for i in range(hits):
-						targets[i].add_shield(data.shield)
+						targets[i].add_shield(final_shield)
 				else:
-					# Single target: prioritize lowest health
 					targets.sort_custom(func(a, b): return a.current_health < b.current_health)
-					targets[0].add_shield(data.shield)
+					targets[0].add_shield(final_shield)
 
-		# --- 3. HEAL LOGIC (Fixed for AOE) ---
+		# --- 3. HEAL LOGIC ---
 		if data.heal_amount > 0:
 			var targets = get_alive_players()
 			if not targets.is_empty():
+				
+				# CHANGE: Get dynamic heal from Global
+				var final_heal = Global.get_card_heal(data)
+				
 				if data.is_aoe:
-					# Apply heal to everyone (Warm Touch fix)
 					var hits = min(data.aoe_targets, targets.size())
 					for i in range(hits):
-						targets[i].heal(data.heal_amount)
+						targets[i].heal(final_heal)
 				else:
-					# Single target: prioritize lowest health
 					targets.sort_custom(func(a, b): return a.current_health < b.current_health)
-					targets[0].heal(data.heal_amount)
+					targets[0].heal(final_heal)
 
 		discard_pile.append(data)
 		await get_tree().create_timer(0.5).timeout
 
-	# Cleanup slots
+	# Cleanup
 	for child in slot_container.get_children():
 		child.queue_free()
 	slotted_cards.clear()

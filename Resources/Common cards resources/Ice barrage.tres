@@ -7,9 +7,10 @@
 script = ExtResource("1_qym0v")
 card_name = "Ice barrage"
 card_image = ExtResource("1_23vd8")
+description = "Deals 5 damage and stuns all enemies on the field for 1 round"
 damage = 8
 stuns_enemy = true
-description = "Deals 5 damage and stuns all enemies on the field for 1 round"
 is_aoe = true
 aoe_targets = 4
+damage_growth = 2
 metadata/_custom_type_script = "uid://olc2cw5uohq6"

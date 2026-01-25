@@ -11,4 +11,5 @@ damage = 15
 energy_cost = 2
 aoe_targets = 1
 critical_chance = 30
+damage_growth = 3
 metadata/_custom_type_script = "uid://olc2cw5uohq6"

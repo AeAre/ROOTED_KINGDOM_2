@@ -1,0 +1,137 @@
+[gd_scene load_steps=14 format=3 uid="uid://bjr25em7jm6c"]
+
+[ext_resource type="Script" uid="uid://dl4duh8ewrkbh" path="res://Scene/CardUpgradeUI.gd" id="1_qwuky"]
+[ext_resource type="Script" uid="uid://olc2cw5uohq6" path="res://Script/CardData.gd" id="2_o6gij"]
+[ext_resource type="Resource" uid="uid://c55c341gbenxw" path="res://Resources/Common cards resources/Gun Down.tres" id="3_0dhn2"]
+[ext_resource type="Resource" uid="uid://dhh82yst46iew" path="res://Resources/Common cards resources/Ice barrage.tres" id="4_6kr27"]
+[ext_resource type="Resource" uid="uid://bvhpgffxipn01" path="res://Resources/Common cards resources/Magic Blast.tres" id="5_5yfo5"]
+[ext_resource type="Resource" uid="uid://bf2bciwkcq40g" path="res://Resources/Common cards resources/Parry.tres" id="6_pmh16"]
+[ext_resource type="Resource" uid="uid://ce2o1btwte4i6" path="res://Resources/Common cards resources/Pierce.tres" id="7_l8sbb"]
+[ext_resource type="Resource" uid="uid://bq43e1owpaudj" path="res://Resources/Common cards resources/Poison dart.tres" id="8_0cgxv"]
+[ext_resource type="Resource" uid="uid://c1n53h5gfnv83" path="res://Resources/Common cards resources/Shield.tres" id="9_gipxf"]
+[ext_resource type="Resource" uid="uid://cei5i8cmjhpqy" path="res://Resources/Common cards resources/slash.tres" id="10_7io22"]
+[ext_resource type="Resource" uid="uid://bg41rywf50mm2" path="res://Resources/Common cards resources/Stun.tres" id="11_uhlfd"]
+[ext_resource type="Resource" uid="uid://bpx0gk4fwgevj" path="res://Resources/Common cards resources/Thrust.tres" id="12_nq2mc"]
+[ext_resource type="Resource" uid="uid://qn54dvyfdrjc" path="res://Resources/Common cards resources/Warm Touch.tres" id="13_3la2d"]
+
+[node name="CardUpgradeUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qwuky")
+all_cards_in_game = Array[ExtResource("2_o6gij")]([ExtResource("3_0dhn2"), ExtResource("4_6kr27"), ExtResource("5_5yfo5"), ExtResource("6_pmh16"), ExtResource("7_l8sbb"), ExtResource("8_0cgxv"), ExtResource("9_gipxf"), ExtResource("10_7io22"), ExtResource("11_uhlfd"), ExtResource("12_nq2mc"), ExtResource("13_3la2d")])
+
+[node name="Background" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="TopBar" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 422.0
+offset_bottom = 48.0
+theme_override_constants/separation = 50
+
+[node name="BackButton" type="Button" parent="TopBar"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Back"
+
+[node name="TitleLabel" type="Label" parent="TopBar"]
+layout_mode = 2
+text = "Card Upgrades"
+
+[node name="MaterialLabel" type="Label" parent="TopBar"]
+layout_mode = 2
+text = "Materials: 0"
+horizontal_alignment = 1
+
+[node name="MainLayout" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainLayout"]
+custom_minimum_size = Vector2(100, 200)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+size_flags_stretch_ratio = 3.1
+horizontal_scroll_mode = 2
+vertical_scroll_mode = 0
+scroll_deadzone = 2
+
+[node name="GridContainer" type="HBoxContainer" parent="MainLayout/ScrollContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="DimBackground" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.11, 0.11, 0.11, 0.68235296)
+
+[node name="DetailsPanel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 70.0
+offset_right = 755.0
+offset_bottom = 526.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DetailsPanel"]
+layout_mode = 0
+offset_top = -4.0
+offset_right = 300.0
+offset_bottom = 456.0
+
+[node name="Cancel" type="Button" parent="DetailsPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.93, 0.93, 0.93, 1)
+text = "Cancel
+"
+
+[node name="CardImage" type="TextureRect" parent="DetailsPanel/VBoxContainer"]
+custom_minimum_size = Vector2(200, 250)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CardNameLabel" type="Label" parent="DetailsPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="StatsLabel" type="RichTextLabel" parent="DetailsPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+bbcode_enabled = true
+
+[node name="CostLabel" type="Label" parent="DetailsPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Cost: 50"
+
+[node name="UpgradeButton" type="Button" parent="DetailsPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Upgrade
+"
+
+[connection signal="pressed" from="TopBar/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="DetailsPanel/VBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="DetailsPanel/VBoxContainer/UpgradeButton" to="." method="_on_upgrade_button_pressed"]

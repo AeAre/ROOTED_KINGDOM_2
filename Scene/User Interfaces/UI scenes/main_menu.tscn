@@ -51,7 +51,7 @@ icon = ExtResource("2_eh1oq")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Inventory and Shop" type="Button" parent="ButtonManager"]
+[node name="Cards" type="Button" parent="ButtonManager"]
 layout_mode = 0
 offset_left = 893.0
 offset_top = 298.0
@@ -61,8 +61,7 @@ theme_override_fonts/font = ExtResource("2_jykwv")
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxEmpty_4mbs0")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_nbfal")
-text = "Inventory/Shop
-"
+text = "Cards"
 icon = ExtResource("2_eh1oq")
 icon_alignment = 1
 expand_icon = true
@@ -130,7 +129,7 @@ icon_alignment = 1
 expand_icon = true
 
 [connection signal="pressed" from="ButtonManager/Start Battle" to="ButtonManager" method="_on_start_battle_pressed"]
-[connection signal="pressed" from="ButtonManager/Inventory and Shop" to="ButtonManager" method="_on_inventory_and_shop_pressed"]
+[connection signal="pressed" from="ButtonManager/Cards" to="ButtonManager" method="_on_inventory_and_shop_pressed"]
 [connection signal="pressed" from="ButtonManager/Characters" to="ButtonManager" method="_on_characters_pressed"]
 [connection signal="pressed" from="ButtonManager/Tutorial" to="ButtonManager" method="_on_tutorial_pressed"]
 [connection signal="pressed" from="ButtonManager/Settings" to="ButtonManager" method="_on_settings_pressed"]

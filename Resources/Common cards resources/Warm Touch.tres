@@ -7,10 +7,11 @@
 script = ExtResource("2_1cttj")
 card_name = "Warm Touch"
 card_image = ExtResource("1_ync2v")
+description = "Heals all allies by 30"
 shield = 5
 heal_amount = 30
 energy_cost = 3
-description = "Heals all allies by 30"
 is_aoe = true
 aoe_targets = 3
+heal_growth = 2
 metadata/_custom_type_script = "uid://olc2cw5uohq6"

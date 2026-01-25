@@ -16,7 +16,7 @@ func _on_start_battle_pressed() -> void:
 
 
 func _on_inventory_and_shop_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scene/User Interfaces/UI scenes/inventory_and_shop.tscn")
+	get_tree().change_scene_to_file("res://Scene/CardUpgradeUI.tscn")
 
 
 func _on_characters_pressed() -> void:

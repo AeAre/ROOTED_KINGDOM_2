@@ -7,9 +7,10 @@
 script = ExtResource("2_yn7dl")
 card_name = "Sacred Barrier"
 card_image = ExtResource("1_mkp88")
+description = "Give 8% shield to all heroes on the field"
 shield = 17
 energy_cost = 2
-description = "Give 8% shield to all heroes on the field"
 is_aoe = true
 aoe_targets = 3
+shield_growth = 3
 metadata/_custom_type_script = "uid://olc2cw5uohq6"

@@ -7,9 +7,10 @@
 script = ExtResource("1_6g3k0")
 card_name = "Parry"
 card_image = ExtResource("1_e2mba")
+description = "Parry the attack and deals 4 damage, and also gain 5 shield"
 damage = 5
 shield = 5
-description = "Parry the attack and deals 4 damage, and also gain 5 shield"
 aoe_targets = 1
 critical_chance = 30
+damage_growth = 2
 metadata/_custom_type_script = "uid://olc2cw5uohq6"
