@@ -1,11 +1,64 @@
 [gd_scene load_steps=2 format=3 uid="uid://cnjv8y2vfxphv"]
 
-[ext_resource type="Script" uid="uid://cl30yucb15jeq" path="res://Scene/TowerSelection.gd" id="1_p0bcw"]
+[sub_resource type="GDScript" id="GDScript_yggx8"]
+script/source = "extends Control
+
+@onready var desc_label = $DescriptionPanel/Label # Make sure this is a RichTextLabel!
+var selected_floor = 1
+
+# --- ICON PATHS (UPDATE THESE!) ---
+const GEM_ICON_PATH = \"res://Asset/Backgrounds/gem_1.webp\"
+const CRYSTAL_ICON_PATH = \"res://Asset/Backgrounds/gem_3.webp\"
+
+func _ready():
+	# Ensure \"VBox\" matches your Scene Tree exactly (case sensitive!)
+	var container = $ScrollContainer/VBox
+	
+	container.get_node(\"Floor1\").pressed.connect(_on_floor_selected.bind(1, \"Floor 1: One Grunt\"))
+	container.get_node(\"Floor2\").pressed.connect(_on_floor_selected.bind(2, \"Floor 2: Two Grunts\"))
+	container.get_node(\"Floor3\").pressed.connect(_on_floor_selected.bind(3, \"Floor 3: The Trio\"))
+	container.get_node(\"Floor4\").pressed.connect(_on_floor_selected.bind(4, \"Floor 4: The four enemies\"))
+	container.get_node(\"Floor5\").pressed.connect(_on_floor_selected.bind(5, \"Floor 5: The Mid-Boss\"))
+	container.get_node(\"Floor6\").pressed.connect(_on_floor_selected.bind(6, \"Floor 6: The benevolent\"))
+	container.get_node(\"Floor7\").pressed.connect(_on_floor_selected.bind(7, \"Floor 7: The benevolent\"))
+	container.get_node(\"Floor8\").pressed.connect(_on_floor_selected.bind(8, \"Floor 8: The benevolent\"))
+	container.get_node(\"Floor9\").pressed.connect(_on_floor_selected.bind(9, \"Floor 9: The benevolent\"))
+	container.get_node(\"Floor10\").pressed.connect(_on_floor_selected.bind(10, \"Floor 10: The benevolent\"))
+	
+	# Redirect the button to the Character Selection scene
+	$StartBattleButton.text = \"Choose Characters\" # Optional: Change button text
+	$StartBattleButton.pressed.connect(_on_choose_characters_pressed)
+
+func _on_floor_selected(floor_num: int, description: String):
+	selected_floor = floor_num
+	Global.current_tower_floor = floor_num
+	
+	# 1. Get the reward data from Global
+	var reward = Global.floor_rewards.get(floor_num, {\"small\": 0, \"crystal\": 0})
+	
+	# 2. Build the Text with Icons
+	# We use [img=30] to set the size of the icon to 30 pixels
+	var text = \"[b]\" + description + \"[/b]\\n\\n\"
+	text += \"Rewards:\\n\"
+	
+	if reward[\"small\"] > 0:
+		text += \"[img=25]%s[/img] %d  \" % [GEM_ICON_PATH, reward[\"small\"]]
+		
+	if reward[\"crystal\"] > 0:
+		text += \"[img=25]%s[/img] %d\" % [CRYSTAL_ICON_PATH, reward[\"crystal\"]]
+	
+	# 3. Update the Label
+	desc_label.text = text
+
+func _on_choose_characters_pressed():
+	Global.from_tower_mode = true # Preparing for battle!
+	get_tree().change_scene_to_file(\"res://Scene/User Interfaces/CharacterScenes/CharacterSelection.tscn\")
+"
 
 [node name="TowerSelection" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_p0bcw")
+script = SubResource("GDScript_yggx8")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 0
@@ -89,10 +142,12 @@ offset_top = 35.0
 offset_right = 1143.0
 offset_bottom = 630.0
 
-[node name="Label" type="Label" parent="DescriptionPanel"]
+[node name="Label" type="RichTextLabel" parent="DescriptionPanel"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_right = 400.0
+offset_bottom = 226.0
+bbcode_enabled = true
+fit_content = true
 
 [node name="StartBattleButton" type="Button" parent="."]
 layout_mode = 0

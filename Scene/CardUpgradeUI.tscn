@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bjr25em7jm6c"]
+[gd_scene load_steps=16 format=3 uid="uid://bjr25em7jm6c"]
 
 [ext_resource type="Script" uid="uid://dl4duh8ewrkbh" path="res://Scene/CardUpgradeUI.gd" id="1_qwuky"]
 [ext_resource type="Script" uid="uid://olc2cw5uohq6" path="res://Script/CardData.gd" id="2_o6gij"]
@@ -13,6 +13,8 @@
 [ext_resource type="Resource" uid="uid://bg41rywf50mm2" path="res://Resources/Common cards resources/Stun.tres" id="11_uhlfd"]
 [ext_resource type="Resource" uid="uid://bpx0gk4fwgevj" path="res://Resources/Common cards resources/Thrust.tres" id="12_nq2mc"]
 [ext_resource type="Resource" uid="uid://qn54dvyfdrjc" path="res://Resources/Common cards resources/Warm Touch.tres" id="13_3la2d"]
+[ext_resource type="Texture2D" uid="uid://dcm4yl4kcn7wn" path="res://Asset/Backgrounds/gem_1.webp" id="14_6kr27"]
+[ext_resource type="Texture2D" uid="uid://rjoebry8l2at" path="res://Asset/Backgrounds/gem_3.webp" id="15_5yfo5"]
 
 [node name="CardUpgradeUi" type="Control"]
 layout_mode = 3
@@ -33,7 +35,7 @@ offset_bottom = 648.0
 [node name="TopBar" type="HBoxContainer" parent="."]
 layout_mode = 0
 offset_right = 422.0
-offset_bottom = 48.0
+offset_bottom = 66.0
 theme_override_constants/separation = 50
 
 [node name="BackButton" type="Button" parent="TopBar"]
@@ -44,11 +46,6 @@ text = "Back"
 [node name="TitleLabel" type="Label" parent="TopBar"]
 layout_mode = 2
 text = "Card Upgrades"
-
-[node name="MaterialLabel" type="Label" parent="TopBar"]
-layout_mode = 2
-text = "Materials: 0"
-horizontal_alignment = 1
 
 [node name="MainLayout" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -131,6 +128,57 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Upgrade
 "
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 842.0
+offset_top = 16.0
+offset_right = 1152.0
+offset_bottom = 96.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="SmallGemHolder" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/SmallGemHolder"]
+custom_minimum_size = Vector2(60, 40)
+layout_mode = 2
+texture = ExtResource("14_6kr27")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SmallGemLabel" type="Label" parent="MarginContainer/HBoxContainer/SmallGemHolder"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "0"
+
+[node name="CrystalGemHolder" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/CrystalGemHolder"]
+custom_minimum_size = Vector2(30, 40)
+layout_mode = 2
+texture = ExtResource("15_5yfo5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CrystalLabel" type="Label" parent="MarginContainer/HBoxContainer/CrystalGemHolder"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "0"
 
 [connection signal="pressed" from="TopBar/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="DetailsPanel/VBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

@@ -17,4 +17,5 @@ character_illustration = ExtResource("1_ck40k")
 max_health = 115
 unique_card = ExtResource("8_uoa73")
 common_cards = Array[ExtResource("1_q2phu")]([ExtResource("4_5if1j"), ExtResource("5_y8lat"), ExtResource("6_pr37i")])
+is_locked = true
 metadata/_custom_type_script = "uid://dcjbbujtui8uu"

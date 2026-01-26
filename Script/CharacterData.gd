@@ -12,3 +12,6 @@ class_name CharacterData
 @export_group("Deck")
 @export var unique_card: CardData
 @export var common_cards: Array[CardData]
+
+@export var is_locked: bool = false 
+@export var unlock_cost: int = 1000

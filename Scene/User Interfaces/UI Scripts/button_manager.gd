@@ -1,15 +1,16 @@
 extends Control
 
+@onready var small_gem_label = $"../MarginContainer/HBoxContainer/SmallGemHolder/SmallGemLabel"
+@onready var crystal_label = $"../MarginContainer/HBoxContainer/CrystalGemHolder/CrystalLabel"
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-# func _process(delta: float) -> void:
-#	pass
-
+	update_currency_ui()
+	
+	
+func update_currency_ui():
+	# Display the values from Global
+	small_gem_label.text = str(Global.small_gems)
+	crystal_label.text = str(Global.crystal_gems)
 
 func _on_start_battle_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scene/User Interfaces/UI scenes/start_battle.tscn")
@@ -20,6 +21,7 @@ func _on_inventory_and_shop_pressed() -> void:
 
 
 func _on_characters_pressed() -> void:
+	Global.from_tower_mode = false # Just looking at characters
 	get_tree().change_scene_to_file("res://Scene/User Interfaces/CharacterScenes/CharacterSelection.tscn")
 
 

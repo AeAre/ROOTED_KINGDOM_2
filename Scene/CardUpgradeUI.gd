@@ -6,7 +6,9 @@ extends Control
 
 # UI References (Connect these unique names to your nodes if you use %UniqueName, 
 # or just use $Path/To/Node)
-@onready var material_label = $TopBar/MaterialLabel
+@onready var small_gem_label =$MarginContainer/HBoxContainer/SmallGemHolder/SmallGemLabel
+@onready var crystal_label = $MarginContainer/HBoxContainer/CrystalGemHolder/CrystalLabel
+
 @onready var grid_container = $MainLayout/ScrollContainer/GridContainer
 @onready var details_panel = $DetailsPanel
 @onready var card_name_label = $DetailsPanel/VBoxContainer/CardNameLabel
@@ -14,15 +16,14 @@ extends Control
 @onready var cost_label = $DetailsPanel/VBoxContainer/CostLabel
 @onready var upgrade_button = $DetailsPanel/VBoxContainer/UpgradeButton
 @onready var card_image = $DetailsPanel/VBoxContainer/CardImage
-
-@onready var dim_background = $DimBackground # The semi-transparent black rect
+@onready var dim_background = $DimBackground
 
 # Track what the player is currently looking at
 var current_selected_card: CardData = null
 
 func _ready():
 	# 1. Update the currency display
-	update_material_label()
+	update_currency_display()
 	
 	# 2. Clear dummy buttons in the grid (if any)
 	for child in grid_container.get_children():
@@ -84,27 +85,26 @@ func select_card(data: CardData):
 	cost_label.text = "Materials Needed: " + str(data.upgrade_cost)
 	
 	# Button check
-	upgrade_button.disabled = Global.upgrade_materials < data.upgrade_cost
+	upgrade_button.disabled = Global.small_gems < data.upgrade_cost
 
 # --- 4. BUTTON SIGNALS ---
 func _on_upgrade_button_pressed():
 	if current_selected_card == null: return
 	
-	# Ask Global to do the math and deduction
 	var success = Global.attempt_upgrade(current_selected_card)
 	
 	if success:
-		# Refresh the UI to show new stats and new material count
-		update_material_label()
-		select_card(current_selected_card) # Re-select to update the numbers
+		# Now we call the updated display function
+		update_currency_display()
+		select_card(current_selected_card)
 
 func _on_back_button_pressed():
 	# Go back to Main Menu (Change path if needed)
 	get_tree().change_scene_to_file("res://Scene/User Interfaces/UI scenes/main_menu.tscn")
 
-func update_material_label():
-	material_label.text = "Materials: " + str(Global.upgrade_materials)
-
+func update_currency_display():
+	small_gem_label.text = str(Global.small_gems)
+	crystal_label.text = str(Global.crystal_gems)
 
 func _on_cancel_pressed() -> void:
 	details_panel.visible = false

@@ -1,8 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://qde0e5mwnany"]
+[gd_scene load_steps=17 format=3 uid="uid://qde0e5mwnany"]
 
 [ext_resource type="Script" uid="uid://bxn5segpvyh4e" path="res://Scene/User Interfaces/UI Scripts/button_manager.gd" id="1_kxbd2"]
 [ext_resource type="Texture2D" uid="uid://cdfpkjhi1gi77" path="res://Asset/User Interface/button_ui.png" id="2_eh1oq"]
 [ext_resource type="FontFile" uid="uid://dtdw2k1jvjn37" path="res://Asset/Fonts/times.ttf" id="2_jykwv"]
+[ext_resource type="Texture2D" uid="uid://dcm4yl4kcn7wn" path="res://Asset/Backgrounds/gem_1.webp" id="4_87orj"]
+[ext_resource type="Texture2D" uid="uid://rjoebry8l2at" path="res://Asset/Backgrounds/gem_3.webp" id="5_qelcm"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jykwv"]
 
@@ -127,6 +129,56 @@ text = "Quit
 icon = ExtResource("2_eh1oq")
 icon_alignment = 1
 expand_icon = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_left = 801.0
+offset_top = 16.0
+offset_right = 1111.0
+offset_bottom = 96.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="SmallGemHolder" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/SmallGemHolder"]
+custom_minimum_size = Vector2(60, 40)
+layout_mode = 2
+texture = ExtResource("4_87orj")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SmallGemLabel" type="Label" parent="MarginContainer/HBoxContainer/SmallGemHolder"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "0"
+
+[node name="CrystalGemHolder" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/CrystalGemHolder"]
+custom_minimum_size = Vector2(30, 40)
+layout_mode = 2
+texture = ExtResource("5_qelcm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CrystalLabel" type="Label" parent="MarginContainer/HBoxContainer/CrystalGemHolder"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "0"
 
 [connection signal="pressed" from="ButtonManager/Start Battle" to="ButtonManager" method="_on_start_battle_pressed"]
 [connection signal="pressed" from="ButtonManager/Cards" to="ButtonManager" method="_on_inventory_and_shop_pressed"]

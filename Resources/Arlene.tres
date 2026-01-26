@@ -16,4 +16,5 @@ character_sprite = ExtResource("2_a3b3a")
 character_illustration = ExtResource("1_vxghk")
 unique_card = ExtResource("8_3u8k0")
 common_cards = Array[ExtResource("1_r141m")]([ExtResource("4_7vmdm"), ExtResource("5_st0tk"), ExtResource("6_4bc3a")])
+is_locked = true
 metadata/_custom_type_script = "uid://dcjbbujtui8uu"
