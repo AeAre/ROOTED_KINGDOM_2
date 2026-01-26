@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bi4fmeelgp436"]
 
-[ext_resource type="Script" uid="uid://bm2un4qtoc7da" path="res://Scenes/Chapter Folder/Stage UIs/stage_slot.gd" id="1_f8eut"]
+[ext_resource type="Script" uid="uid://bm2un4qtoc7da" path="res://Scene/User Interfaces/Story Mode/Chapter Folder/Stage UIs/stage_slot.gd" id="1_f8eut"]
 
 [node name="Stage Slot" type="Control"]
 layout_mode = 3

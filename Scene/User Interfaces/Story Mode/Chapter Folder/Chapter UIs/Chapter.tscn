@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ceqk76ftc3ebt"]
+[gd_scene load_steps=7 format=3 uid="uid://ceqk76ftc3ebt"]
 
-[ext_resource type="Script" uid="uid://4iy6qcofxgpj" path="res://Scene/User Interfaces/Chapter Folder/Chapter UIs/chapter_scene.gd" id="1_01e5g"]
-[ext_resource type="Script" uid="uid://b1ifmqw0neycm" path="res://Scene/User Interfaces/Chapter Folder/Stage UIs/stage_manager.gd" id="2_fe0i6"]
+[ext_resource type="Script" uid="uid://4iy6qcofxgpj" path="res://Scene/User Interfaces/Story Mode/Chapter Folder/Chapter UIs/chapter_scene.gd" id="1_01e5g"]
+[ext_resource type="Script" uid="uid://b1ifmqw0neycm" path="res://Scene/User Interfaces/Story Mode/Chapter Folder/Stage UIs/stage_manager.gd" id="2_fe0i6"]
 [ext_resource type="Texture2D" uid="uid://cao4jwwshsvv3" path="res://Asset/images.png" id="3_02l1p"]
 [ext_resource type="FontFile" uid="uid://dtdw2k1jvjn37" path="res://Asset/Fonts/times.ttf" id="4_v6pnn"]
+[ext_resource type="PackedScene" uid="uid://rmdg2sxyff1i" path="res://Scene/User Interfaces/Story Mode/Chapter Folder/Stage UIs/Stage Confirmation/stage_confimation.tscn" id="5_v6pnn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_486k3"]
 font = ExtResource("4_v6pnn")
@@ -46,7 +47,7 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -1.9160408
-anchor_top = 0.5732728
+anchor_top = 0.5732727
 anchor_right = -1.9160401
 anchor_bottom = 0.5732727
 offset_left = 455.0
@@ -61,7 +62,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Chapter Title" type="Label" parent="UI Manager"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -1.6993339
+anchor_left = -1.6993347
 anchor_top = 0.43706208
 anchor_right = -1.6993347
 anchor_bottom = 0.43706208
@@ -73,3 +74,8 @@ text = "Empty Text"
 label_settings = SubResource("LabelSettings_486k3")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="Stage Confimation" parent="." instance=ExtResource("5_v6pnn")]
+scale = Vector2(1.4450126, 1.2694756)
+
+[editable path="Stage Confimation"]

@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://3dgl7l1vwjcq"]
+
+[ext_resource type="Script" uid="uid://c2svi3hqold06" path="res://Scene/User Interfaces/Story Mode/Story Mode UIs/start_battle_slot.gd" id="1_uwob4"]
+[ext_resource type="Texture2D" uid="uid://cao4jwwshsvv3" path="res://Asset/images.png" id="1_xa1ml"]
+[ext_resource type="FontFile" uid="uid://d0sq1luf5fm1p" path="res://Asset/Fonts/Humanistic.ttf" id="2_3fshj"]
+[ext_resource type="FontFile" uid="uid://dtdw2k1jvjn37" path="res://Asset/Fonts/times.ttf" id="3_ox3et"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bsmg4"]
+font = ExtResource("2_3fshj")
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_llp7a"]
+font = ExtResource("3_ox3et")
+font_size = 24
+
+[node name="Story Mode" type="Button"]
+offset_left = 20.0
+offset_top = 32.0
+offset_right = 911.0
+offset_bottom = 313.0
+text = "Story Mode"
+script = ExtResource("1_uwob4")
+
+[node name="Image" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 892.0
+offset_bottom = 280.0
+texture = ExtResource("1_xa1ml")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 894.0
+offset_bottom = 281.0
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 892.0
+offset_bottom = 64.0
+text = "Title Scene"
+label_settings = SubResource("LabelSettings_bsmg4")
+vertical_alignment = 1
+
+[node name="Current Stage-Level" type="Label" parent="."]
+layout_mode = 0
+offset_left = 625.0
+offset_top = 230.0
+offset_right = 892.0
+offset_bottom = 282.0
+text = "Currently in Stage 0 - 0"
+label_settings = SubResource("LabelSettings_llp7a")
+horizontal_alignment = 1
+vertical_alignment = 1

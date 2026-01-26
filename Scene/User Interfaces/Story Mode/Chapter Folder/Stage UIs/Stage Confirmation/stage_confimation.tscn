@@ -1,7 +1,7 @@
 [gd_scene load_steps=22 format=3 uid="uid://rmdg2sxyff1i"]
 
 [ext_resource type="Texture2D" uid="uid://cao4jwwshsvv3" path="res://Asset/images.png" id="1_6eyf2"]
-[ext_resource type="Script" uid="uid://bdjqqhpvad4c1" path="res://Scene/User Interfaces/Chapter Folder/Stage UIs/Stage Confirmation/stage_confimation.gd" id="1_kla3i"]
+[ext_resource type="Script" uid="uid://bdjqqhpvad4c1" path="res://Scene/User Interfaces/Story Mode/Chapter Folder/Stage UIs/Stage Confirmation/stage_confimation.gd" id="1_kla3i"]
 [ext_resource type="Texture2D" uid="uid://cdfpkjhi1gi77" path="res://Asset/User Interface/button_ui.png" id="2_xh8vs"]
 [ext_resource type="FontFile" uid="uid://dtdw2k1jvjn37" path="res://Asset/Fonts/times.ttf" id="3_iht3i"]
 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://qmnutdlpk68l"]
+[gd_scene load_steps=7 format=3 uid="uid://qmnutdlpk68l"]
 
 [ext_resource type="Script" uid="uid://dg4em0ukvp7ku" path="res://Scene/User Interfaces/UI Scripts/button_manager_start.gd" id="1_nfl2a"]
+[ext_resource type="PackedScene" uid="uid://3dgl7l1vwjcq" path="res://Scene/User Interfaces/Story Mode/Story Mode UIs/start_battle_slot.tscn" id="2_t4b46"]
 [ext_resource type="FontFile" uid="uid://dtdw2k1jvjn37" path="res://Asset/Fonts/times.ttf" id="2_ygvaf"]
 [ext_resource type="Texture2D" uid="uid://cdfpkjhi1gi77" path="res://Asset/User Interface/button_ui.png" id="3_t4b46"]
 
@@ -17,29 +18,30 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_nfl2a")
 
-[node name="Story Mode" type="Button" parent="ButtonManager"]
+[node name="Story Mode" parent="ButtonManager" instance=ExtResource("2_t4b46")]
 layout_mode = 0
-offset_left = 477.0
-offset_top = 282.0
-offset_right = 678.0
-offset_bottom = 339.0
-text = "Story Mode"
+offset_left = 21.0
+offset_top = 18.0
+offset_right = 912.0
+offset_bottom = 299.0
+text = ""
+title = "Story Mode"
 
-[node name="Tower Mode" type="Button" parent="ButtonManager"]
+[node name="Tower Mode" parent="ButtonManager" instance=ExtResource("2_t4b46")]
 layout_mode = 0
-offset_left = 479.0
-offset_top = 351.0
-offset_right = 679.0
-offset_bottom = 413.0
-text = "Tower Mode
-"
+offset_left = 22.0
+offset_top = 326.0
+offset_right = 913.0
+offset_bottom = 607.0
+text = ""
+title = "Tower Mode"
 
 [node name="Back" type="Button" parent="ButtonManager"]
 layout_mode = 0
-offset_left = 31.0
-offset_top = 47.0
-offset_right = 153.0
-offset_bottom = 102.0
+offset_left = 984.0
+offset_top = 26.0
+offset_right = 1106.0
+offset_bottom = 81.0
 theme_override_fonts/font = ExtResource("2_ygvaf")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_2sahd")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_objsq")

@@ -12,4 +12,4 @@ func _ready() -> void:
 #func _process(delta: float) -> void:
 #	pass
 func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scene/User Interfaces/Chapter Folder/Chapter UIs/chapter_selection.tscn")
+	get_tree().change_scene_to_file("res://Scene/User Interfaces/Story Mode/Chapter Folder/Chapter UIs/chapter_selection.tscn")

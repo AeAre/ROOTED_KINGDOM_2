@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bg08wns7ql4g4"]
 
-[ext_resource type="Script" uid="uid://subjv0e7ekgs" path="res://Scene/User Interfaces/Chapter Folder/Chapter UIs/chapter_panel.gd" id="1_o2ucw"]
+[ext_resource type="Script" uid="uid://subjv0e7ekgs" path="res://Scene/User Interfaces/Story Mode/Chapter Folder/Chapter UIs/chapter_panel.gd" id="1_o2ucw"]
 [ext_resource type="FontFile" uid="uid://d0sq1luf5fm1p" path="res://Asset/Fonts/Humanistic.ttf" id="2_e6xpw"]
 [ext_resource type="FontFile" uid="uid://dtdw2k1jvjn37" path="res://Asset/Fonts/times.ttf" id="3_blh7p"]
 

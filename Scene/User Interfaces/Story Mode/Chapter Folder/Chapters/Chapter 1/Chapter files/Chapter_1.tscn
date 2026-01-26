@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=3 uid="uid://c7jklw6ydj26y"]
 
-[ext_resource type="Script" uid="uid://cv20pydghwwqy" path="res://Scene/User Interfaces/Chapter Folder/Chapters/Chapter 1/Chapter files/chapter_scene_1.gd" id="1_m0qpd"]
-[ext_resource type="Script" uid="uid://b1ifmqw0neycm" path="res://Scene/User Interfaces/Chapter Folder/Stage UIs/stage_manager.gd" id="2_eebky"]
+[ext_resource type="Script" uid="uid://cv20pydghwwqy" path="res://Scene/User Interfaces/Story Mode/Chapter Folder/Chapters/Chapter 1/Chapter files/chapter_scene_1.gd" id="1_m0qpd"]
+[ext_resource type="Script" uid="uid://b1ifmqw0neycm" path="res://Scene/User Interfaces/Story Mode/Chapter Folder/Stage UIs/stage_manager.gd" id="2_eebky"]
 [ext_resource type="Texture2D" uid="uid://cdfpkjhi1gi77" path="res://Asset/User Interface/button_ui.png" id="3_m0qpd"]
-[ext_resource type="PackedScene" uid="uid://bi4fmeelgp436" path="res://Scene/User Interfaces/Chapter Folder/Stage UIs/stage_slot.tscn" id="3_v1ojb"]
-[ext_resource type="PackedScene" uid="uid://rmdg2sxyff1i" path="res://Scene/User Interfaces/Chapter Folder/Stage UIs/Stage Confirmation/stage_confimation.tscn" id="4_nyspv"]
-[ext_resource type="PackedScene" uid="uid://ds0x8k3bwi2qm" path="res://Scene/User Interfaces/Chapter Folder/Chapters/Chapter 1/Stages/stage_1_1.tscn" id="5_4eeoq"]
+[ext_resource type="PackedScene" uid="uid://bi4fmeelgp436" path="res://Scene/User Interfaces/Story Mode/Chapter Folder/Stage UIs/stage_slot.tscn" id="3_v1ojb"]
+[ext_resource type="PackedScene" uid="uid://rmdg2sxyff1i" path="res://Scene/User Interfaces/Story Mode/Chapter Folder/Stage UIs/Stage Confirmation/stage_confimation.tscn" id="4_nyspv"]
+[ext_resource type="PackedScene" uid="uid://ds0x8k3bwi2qm" path="res://Scene/User Interfaces/Story Mode/Chapter Folder/Chapters/Chapter 1/Stages/stage_1_1.tscn" id="5_4eeoq"]
 [ext_resource type="Texture2D" uid="uid://cao4jwwshsvv3" path="res://Asset/images.png" id="6_asr4g"]
 [ext_resource type="FontFile" uid="uid://dtdw2k1jvjn37" path="res://Asset/Fonts/times.ttf" id="7_m0qpd"]
 
