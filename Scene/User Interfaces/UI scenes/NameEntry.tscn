@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqcqptdmvmh2a"]
+
+[ext_resource type="Script" uid="uid://dq48pm6j1b8p4" path="res://Scene/User Interfaces/UI scenes/NameEntry.gd" id="1_0d5iv"]
+
+[node name="NameEntry" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0d5iv")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1160.0
+offset_bottom = 648.0
+color = Color(1, 1, 1, 0)
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect"]
+layout_mode = 0
+offset_right = 1158.0
+offset_bottom = 649.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CenterContainer"]
+custom_minimum_size = Vector2(200, 130)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ColorRect/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Enter your name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NameInput" type="LineEdit" parent="ColorRect/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ConfirmButton" type="Button" parent="ColorRect/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+text = "Confirm"
+
+[connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/ConfirmButton" to="." method="_on_confirm_button_pressed"]

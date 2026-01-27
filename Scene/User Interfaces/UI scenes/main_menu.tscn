@@ -32,8 +32,9 @@
 [node name="MainMenu" type="Node2D"]
 
 [node name="Title" type="TextureRect" parent="."]
-offset_right = 605.0
-offset_bottom = 125.0
+offset_top = 83.0
+offset_right = 703.0
+offset_bottom = 321.0
 texture = ExtResource("1_qelcm")
 
 [node name="ButtonManager" type="Control" parent="."]
@@ -137,9 +138,9 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-offset_left = 801.0
+offset_left = 675.0
 offset_top = 16.0
-offset_right = 1111.0
+offset_right = 985.0
 offset_bottom = 96.0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
@@ -185,6 +186,17 @@ custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "0"
+
+[node name="Profile" type="MarginContainer" parent="."]
+offset_left = 18.0
+offset_top = 1.0
+offset_right = 204.0
+offset_bottom = 87.0
+
+[node name="PlayerNameLabel" type="Label" parent="Profile"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Name"
 
 [connection signal="pressed" from="ButtonManager/Start Battle" to="ButtonManager" method="_on_start_battle_pressed"]
 [connection signal="pressed" from="ButtonManager/Cards" to="ButtonManager" method="_on_inventory_and_shop_pressed"]

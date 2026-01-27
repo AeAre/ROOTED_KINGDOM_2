@@ -1,5 +1,8 @@
 extends Node
 
+var player_name: String = ""
+const SAVE_PATH = "user://player_data.save"
+
 # --- EXISTING VARIABLES ---
 var current_tower_floor: int = 1
 var floors_cleared: Array = [] 
@@ -15,6 +18,12 @@ var crystal_gems: int = 100
 var unlocked_heroes: Array[String] = ["Hero"] # Start with your default hero name here
 
 var from_tower_mode: bool = false
+
+func _ready() -> void:
+	load_data()
+	# pass
+	# reset_player_data()
+	
 var floor_rewards = {
 	1: { "small": 100, "crystal": 0 },
 	2: { "small": 150, "crystal": 0 },
@@ -34,11 +43,12 @@ func add_to_team(data: CharacterData):
 		
 func clear_team():
 	selected_team.clear()
-
+	
 func mark_floor_cleared(floor_num: int):
 	if not floors_cleared.has(floor_num):
 		floors_cleared.append(floor_num)
-
+	save_data()
+	
 func get_card_damage(data: CardData) -> int:
 	# If the card isn't in our dictionary yet, it's level 0 (Base stats)
 	var lvl = card_levels.get(data.card_name, 0)
@@ -57,18 +67,19 @@ func get_card_heal(data: CardData) -> int:
 func get_card_mana(data: CardData) -> int:
 	var lvl = card_levels.get(data.card_name, 0)
 	return data.mana_gain + (data.mana_gain * lvl)
-
+	
 # 4. Get the Current Level Number (For UI)
 func get_card_level_number(data: CardData) -> int:
 	# Returns 1, 2, 3... instead of 0, 1, 2...
-	return card_levels.get(data.card_name, 0) + 1
-
+	save_data()
+	return card_levels.get(data.card_name, 0) + 1 
+	
 # 5. The Upgrade Action
 func attempt_upgrade(data: CardData) -> bool:
 	if small_gems >= data.upgrade_cost:
 		# 1. Deduct Cost
 		small_gems -= data.upgrade_cost
-		
+		save_data()
 		# 2. Increase Level
 		if not card_levels.has(data.card_name):
 			card_levels[data.card_name] = 0
@@ -78,7 +89,7 @@ func attempt_upgrade(data: CardData) -> bool:
 	else:
 		print("Not enough Small Gems!")
 		return false
-
+	
 
 func grant_floor_reward(floor_num: int):
 	if floor_rewards.has(floor_num):
@@ -86,23 +97,23 @@ func grant_floor_reward(floor_num: int):
 		small_gems += reward["small"]
 		crystal_gems += reward["crystal"]
 		print("Victory! Gained: ", reward["small"], " Gems and ", reward["crystal"], " Crystals")
-
+	save_data()
 
 
 
 func try_redeem_code(code: String) -> String:
+	
 	match code:
 		"RICH":
 			small_gems += 5000
 			crystal_gems += 50
+			save_data()
 			return "Success! +5000 Gems\n+50 Crystals"
 		"POOR":
 			small_gems = 0
 			crystal_gems = 0
+			save_data()
 			return "Wallet Empty..."
-		"HEAL":
-			# Example of other cheats
-			return "Heal cheat not implemented yet."
 		_:
 			return "Invalid Code"
 	
@@ -112,3 +123,32 @@ func is_hero_unlocked(hero_name: String) -> bool:
 func unlock_hero(hero_name: String):
 	if not unlocked_heroes.has(hero_name):
 		unlocked_heroes.append(hero_name)
+	save_data()
+	
+func save_data():
+	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	var data = {
+		"player_name": player_name,
+		"small_gems": small_gems,
+		"crystal_gems": crystal_gems
+		# Add other variables you want to save here
+	}
+	file.store_var(data)
+	
+	
+func load_data():
+	if FileAccess.file_exists(SAVE_PATH):
+		var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
+		var data = file.get_var()
+		player_name = data.get("player_name", "")
+		small_gems = data.get("small_gems", 5000)
+		crystal_gems = data.get("crystal_gems", 100)
+	
+func reset_player_data():
+	player_name = ""
+	small_gems = 5000
+	crystal_gems = 100
+	# Delete the physical file from your computer
+	if FileAccess.file_exists(SAVE_PATH):
+		DirAccess.remove_absolute(SAVE_PATH)
+	print("Data Reset! Restart the game to see the Name Scene.")
