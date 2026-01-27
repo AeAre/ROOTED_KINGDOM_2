@@ -366,26 +366,18 @@ func advance_round():
 
 func execute_slotted_actions():
 	for data in slotted_cards:
-		
-		# --- 1. DAMAGE LOGIC ---
 		if data.damage > 0:
-			var enemies = get_alive_enemies()
-			if not enemies.is_empty():
-				
-				# CHANGE: Get dynamic damage from Global
+			# USE THE NEW BRAIN HERE
+			var targets = get_targets_for_action(data.is_aoe, data.aoe_targets)
+			
+			if not targets.is_empty():
 				var final_damage = Global.get_card_damage(data)
-				
-				# Calculate Crit
 				var is_crit = randi() % 100 < data.critical_chance
 				if is_crit: final_damage = int(final_damage * 1.5)
 				
-				# Apply Damage
-				if data.is_aoe:
-					var hits = min(data.aoe_targets, enemies.size())
-					for i in range(hits):
-						enemies[i].take_damage(final_damage, is_crit)
-				else:
-					enemies[0].take_damage(final_damage, is_crit)
+				# Hit everyone in the targets list
+				for target in targets:
+					target.take_damage(final_damage, is_crit)
 
 		# --- 2. SHIELD LOGIC ---
 		if data.shield > 0:
@@ -475,7 +467,19 @@ func setup_tower_enemies():
 			var enemy_resource = selected_floor_data[i]
 			enemy_nodes[i].setup_enemy(enemy_resource)
 			enemy_nodes[i].show() # Explicitly show the 4th dummy
-
+	
+	for i in range(selected_floor_data.size()):
+		if i < enemy_nodes.size():
+			var enemy_resource = selected_floor_data[i]
+			var enemy_node = enemy_nodes[i] # This is your "Dummy"
+			
+			enemy_node.setup_enemy(enemy_resource)
+			enemy_node.show()
+			
+			# NEW: Connect the click signal to a function in BattleManager
+			if not enemy_node.enemy_selected.is_connected(_on_enemy_clicked):
+				enemy_node.enemy_selected.connect(_on_enemy_clicked)
+				
 func check_battle_status():
 	# get_alive_enemies() already filters out dead/invalid units
 	var alive_enemies = get_alive_enemies()
@@ -530,3 +534,45 @@ func _on_global_info_button_pressed():
 		# Check if the card is valid and has the script attached
 		if is_instance_valid(card) and card.has_method("set_description_visible"):
 			card.set_description_visible(is_info_mode_on)
+
+func _on_enemy_clicked(clicked_enemy):
+	# 1. Unlock all enemies first
+	for enemy in get_alive_enemies():
+		enemy.set_target_lock(false)
+	
+	# 2. Lock the one we clicked
+	clicked_enemy.set_target_lock(true)
+	
+
+func get_targets_for_action(is_aoe: bool, num_targets: int) -> Array:
+	var alive_enemies = get_alive_enemies()
+	var targets = []
+	
+	if alive_enemies.is_empty():
+		return targets
+
+	# Find if someone is locked
+	var locked_enemy = null
+	for e in alive_enemies:
+		if e.is_locked_target:
+			locked_enemy = e
+			break
+	
+	if is_aoe:
+		# If locked, they are target #1
+		if locked_enemy:
+			targets.append(locked_enemy)
+		
+		# Fill the rest with others
+		for e in alive_enemies:
+			if e != locked_enemy and targets.size() < num_targets:
+				targets.append(e)
+	else:
+		# Single Target: Use locked enemy, or default to front (index 0)
+		if locked_enemy:
+			targets.append(locked_enemy)
+		else:
+			targets.append(alive_enemies[0])
+			
+	return targets
+	

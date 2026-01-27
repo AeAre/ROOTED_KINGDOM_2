@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c383wxvj0hh7q"]
+[gd_scene load_steps=25 format=3 uid="uid://c383wxvj0hh7q"]
 
 [ext_resource type="PackedScene" uid="uid://bplpwpncwxjh4" path="res://Scene/CardUI.tscn" id="1_fxwnf"]
 [ext_resource type="Script" uid="uid://1mh1lv3r2q5c" path="res://Script/BattleManager.gd" id="1_vsh2u"]
@@ -12,9 +12,42 @@
 [ext_resource type="Resource" uid="uid://cst0ty6jx3wqd" path="res://Resources/Enemies resources/Gornot4.tres" id="6_jxk86"]
 [ext_resource type="Resource" uid="uid://cqmjjngvfv0m6" path="res://Resources/Enemies resources/Floor5Boss.tres" id="7_3314g"]
 [ext_resource type="PackedScene" uid="uid://bsv08pscmpght" path="res://Scene/DamagePopup.tscn" id="10_4x6d6"]
+[ext_resource type="Shader" uid="uid://dc3w3hg2ro5dg" path="res://Scene/shaders/Enemy1.gdshader" id="13_4l1qv"]
+[ext_resource type="Shader" uid="uid://dus4tb4wupj8i" path="res://Scene/shaders/Enemy2.gdshader" id="14_4l1qv"]
+[ext_resource type="Shader" uid="uid://b0i6r2sa125wn" path="res://Scene/shaders/Enemy3.gdshader" id="15_jxk86"]
+[ext_resource type="Shader" uid="uid://sg6ate85e70j" path="res://Scene/shaders/Enemy4.gdshader" id="16_3314g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vsh2u"]
-size = Vector2(311.5, 317.5)
+size = Vector2(168.61078, 176.06259)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3314g"]
+shader = ExtResource("13_4l1qv")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4x6d6"]
+shader = ExtResource("14_4l1qv")
+shader_parameter/line_color = Color(1, 1, 0, 1)
+shader_parameter/line_thickness = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nqr2r"]
+size = Vector2(129, 213.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bkjeu"]
+shader = ExtResource("15_jxk86")
+shader_parameter/line_color = Color(1, 1, 0, 1)
+shader_parameter/line_thickness = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4l1qv"]
+size = Vector2(185.42027, 175.62665)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hjqj7"]
+shader = ExtResource("16_3314g")
+shader_parameter/line_color = Color(1, 1, 0, 1)
+shader_parameter/line_thickness = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jxk86"]
+size = Vector2(167.54832, 227.93532)
 
 [node name="Battlefield" type="Node2D"]
 script = ExtResource("1_vsh2u")
@@ -229,6 +262,7 @@ is_enemy = true
 target_height = 250.0
 
 [node name="AnimSprite" type="AnimatedSprite2D" parent="EnemyTeam/Enemy"]
+material = SubResource("ShaderMaterial_3314g")
 position = Vector2(1.9999733, 357)
 scale = Vector2(-0.5, 0.445)
 
@@ -260,13 +294,13 @@ offset_bottom = 300.0
 theme_override_colors/font_color = Color(0, 0.11764706, 1, 1)
 text = "Shield:0"
 
-[node name="Area2D" type="Area2D" parent="EnemyTeam/Enemy"]
+[node name="ClickArea" type="Area2D" parent="EnemyTeam/Enemy"]
 position = Vector2(-40, 273.00003)
 scale = Vector2(0.8952639, 0.9224108)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyTeam/Enemy/Area2D"]
-visible = false
-position = Vector2(170.25, 209.25)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyTeam/Enemy/ClickArea"]
+position = Vector2(25.159424, 46.399017)
+scale = Vector2(0.9999997, 1)
 shape = SubResource("RectangleShape2D_vsh2u")
 
 [node name="Enemy2" type="Node2D" parent="EnemyTeam"]
@@ -278,6 +312,7 @@ is_enemy = true
 target_height = 250.0
 
 [node name="AnimSprite" type="AnimatedSprite2D" parent="EnemyTeam/Enemy2"]
+material = SubResource("ShaderMaterial_4x6d6")
 position = Vector2(55.74997, 459)
 scale = Vector2(-0.5, 0.445)
 
@@ -309,14 +344,12 @@ offset_bottom = 419.0
 theme_override_colors/font_color = Color(0.08627451, 0.039215688, 1, 1)
 text = "Shield:0"
 
-[node name="Area2D" type="Area2D" parent="EnemyTeam/Enemy2"]
-position = Vector2(62.999992, 362)
-scale = Vector2(0.8952639, 0.9224108)
+[node name="ClickArea" type="Area2D" parent="EnemyTeam/Enemy2"]
+position = Vector2(55, 456)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyTeam/Enemy2/Area2D"]
-visible = false
-position = Vector2(170.25, 209.25)
-shape = SubResource("RectangleShape2D_vsh2u")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyTeam/Enemy2/ClickArea"]
+position = Vector2(-9, 24.25)
+shape = SubResource("RectangleShape2D_nqr2r")
 
 [node name="Enemy3" type="Node2D" parent="EnemyTeam"]
 position = Vector2(1598, -12)
@@ -327,6 +360,7 @@ is_enemy = true
 target_height = 250.0
 
 [node name="AnimSprite" type="AnimatedSprite2D" parent="EnemyTeam/Enemy3"]
+material = SubResource("ShaderMaterial_bkjeu")
 position = Vector2(-628.24994, 391)
 scale = Vector2(-0.5, 0.445)
 
@@ -358,14 +392,14 @@ offset_bottom = 346.0
 theme_override_colors/font_color = Color(0.1882353, 0.18039216, 1, 1)
 text = "Shield:0"
 
-[node name="Area2D" type="Area2D" parent="EnemyTeam/Enemy3"]
-position = Vector2(-614.00006, 279)
+[node name="ClickArea" type="Area2D" parent="EnemyTeam/Enemy3"]
+position = Vector2(-624.00006, 361)
 scale = Vector2(0.8952639, 0.9224108)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyTeam/Enemy3/Area2D"]
-visible = false
-position = Vector2(170.25, 209.25)
-shape = SubResource("RectangleShape2D_vsh2u")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyTeam/Enemy3/ClickArea"]
+position = Vector2(6.7020116, 37.94406)
+scale = Vector2(0.9999997, 1)
+shape = SubResource("RectangleShape2D_4l1qv")
 
 [node name="Enemy4" type="Node2D" parent="EnemyTeam"]
 position = Vector2(1598, -12)
@@ -376,6 +410,7 @@ is_enemy = true
 target_height = 250.0
 
 [node name="AnimSprite" type="AnimatedSprite2D" parent="EnemyTeam/Enemy4"]
+material = SubResource("ShaderMaterial_hjqj7")
 position = Vector2(-875.94, 467.46875)
 scale = Vector2(-0.42941666, 0.37955877)
 
@@ -407,14 +442,14 @@ offset_bottom = 403.0
 theme_override_colors/font_color = Color(0.1882353, 0.18039216, 1, 1)
 text = "Shield:0"
 
-[node name="Area2D" type="Area2D" parent="EnemyTeam/Enemy4"]
-position = Vector2(-873.00006, 363)
+[node name="ClickArea" type="Area2D" parent="EnemyTeam/Enemy4"]
+position = Vector2(-880.00006, 455.00003)
 scale = Vector2(0.8952639, 0.9224108)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyTeam/Enemy4/Area2D"]
-visible = false
-position = Vector2(170.25, 209.25)
-shape = SubResource("RectangleShape2D_vsh2u")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyTeam/Enemy4/ClickArea"]
+position = Vector2(-14.520813, 23.714996)
+scale = Vector2(0.9999997, 1)
+shape = SubResource("RectangleShape2D_jxk86")
 
 [connection signal="pressed" from="CanvasLayer/MenuButton" to="." method="_on_menu_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndTurnButton" to="." method="_on_end_turn_button_pressed"]

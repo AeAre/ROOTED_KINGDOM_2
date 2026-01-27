@@ -22,6 +22,7 @@ var max_aoe_targets: int = 1
 @onready var hp_bar = $HealthBar
 @onready var shield_label = $ShieldLabel
 # -------------
+var is_locked_target: bool = false
 
 func _ready():
 	# We wait a frame to ensure UI nodes are ready before updating
@@ -117,3 +118,28 @@ func die():
 	var tween = create_tween()
 	tween.tween_property(self, "modulate:a", 0, 0.5)
 	tween.tween_callback(queue_free)
+
+func set_target_lock(should_lock: bool):
+	is_locked_target = should_lock
+	
+	is_locked_target = should_lock
+	
+	if anim_sprite and anim_sprite.material:
+		var mat = anim_sprite.material
+		var tween = create_tween()
+		
+		
+		if should_lock:
+			# Smoothly grow the outline to 3.0 thickness over 0.2 seconds
+			tween.tween_method(set_outline_thickness, 0.0, 3.0, 0.2)
+			# Change color to yellow/gold for the target
+			mat.set_shader_parameter("line_color", Color(1.0, 0.9, 0.3, 1.0))
+		else:
+			# Smoothly shrink the outline back to 0
+			tween.tween_method(set_outline_thickness, 3.0, 0.0, 0.2)
+		
+
+func set_outline_thickness(value: float):
+	if anim_sprite and anim_sprite.material:
+		anim_sprite.material.set_shader_parameter("line_thickness", value)
+		

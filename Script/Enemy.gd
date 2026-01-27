@@ -1,5 +1,12 @@
 extends BattleCharacter
+signal enemy_selected(node)
 
+func _ready():
+	# We need this to catch the mouse click
+	var area = get_node_or_null("ClickArea")
+	if area:
+		area.input_event.connect(_on_input_event)
+		
 func setup_enemy(data: EnemyData):
 	if data == null:
 		hide()
@@ -35,3 +42,12 @@ func setup_enemy(data: EnemyData):
 	
 	update_ui()
 	show()
+
+func _on_input_event(_viewport, event, _shape_idx):
+	# Using 'is_action_pressed' is sometimes more reliable than event.pressed
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			# This stops the click from "falling through" to nodes behind it
+			get_viewport().set_input_as_handled() 
+			enemy_selected.emit(self)
+			print("Enemy clicked: ", char_name)
