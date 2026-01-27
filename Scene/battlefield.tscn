@@ -211,6 +211,13 @@ offset_top = 3.0
 offset_right = 413.0
 offset_bottom = 160.76
 
+[node name="GlobalInfoButton" type="Button" parent="CanvasLayer"]
+offset_left = 1007.0
+offset_top = 460.0
+offset_right = 1130.0
+offset_bottom = 491.0
+text = "Show card info"
+
 [node name="EnemyTeam" type="Node2D" parent="."]
 
 [node name="Enemy" type="Node2D" parent="EnemyTeam"]
@@ -411,3 +418,4 @@ shape = SubResource("RectangleShape2D_vsh2u")
 
 [connection signal="pressed" from="CanvasLayer/MenuButton" to="." method="_on_menu_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GlobalInfoButton" to="." method="_on_global_info_button_pressed"]

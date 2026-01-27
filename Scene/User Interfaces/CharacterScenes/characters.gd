@@ -173,6 +173,9 @@ func update_details(data: CharacterData):
 		row.add_child(c_card)
 		c_card.setup(card_data)
 		
+		if c_card.has_method("toggle_info_capability"):
+			c_card.toggle_info_capability(false)
+			
 		if c_card.has_node("VBoxContainer/PlayButton"):
 			c_card.get_node("VBoxContainer/PlayButton").hide()
 		

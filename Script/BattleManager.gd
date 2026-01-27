@@ -17,6 +17,9 @@ extends Node2D
 @onready var hand_container = %Hand
 @onready var mana_label = $CanvasLayer/EnergyLabel
 
+@onready var global_info_button = $CanvasLayer/GlobalInfoButton
+var is_info_mode_on: bool = false
+
 var mana_popup_scene = preload("res://Scene/ManaPopup.tscn") 
 var card_scene = preload("res://Scene/CardUI.tscn")
 
@@ -53,6 +56,13 @@ func _ready():
 	# Wait a tiny bit for the engine to remove them from the count
 	await get_tree().process_frame 
 	
+	var btn = get_node_or_null("CanvasLayer/GlobalInfoButton")
+	if btn:
+		if not btn.pressed.is_connected(_on_global_info_button_pressed):
+			btn.pressed.connect(_on_global_info_button_pressed)
+	else:
+		print("WARNING: 'GlobalInfoButton' not found in Battlefield Scene")
+		
 	# --- Existing Setup ---
 	setup_player_team()
 	build_deck_from_team()
@@ -201,6 +211,8 @@ func create_card_instance(data: CardData):
 	hand_container.add_child(new_card)
 	new_card.setup(data)
 	
+	if new_card.has_method("toggle_info_capability"):
+		new_card.toggle_info_capability(true)
 	# Connect the button click
 	new_card.get_node("VBoxContainer/PlayButton").pressed.connect(_on_card_played.bind(data, new_card))
 
@@ -216,13 +228,17 @@ func end_current_phase():
 	start_current_phase()
 
 func _on_card_played(data: CardData, card_node: Node):
-	# Safety Checks
 	if phases[current_phase_index] != "player": return
 	if slotted_cards.size() >= max_slots: return 
 	if current_mana < data.mana_cost: return
 
 	# 1. Deduct Mana
 	current_mana -= data.mana_cost
+	
+	# --- NEW FIX: Force description OFF before moving ---
+	if card_node.has_method("set_description_visible"):
+		card_node.set_description_visible(false)
+	# ----------------------------------------------------
 	
 	# 2. Add to Slot Logic
 	slotted_cards.append(data)
@@ -234,17 +250,14 @@ func _on_card_played(data: CardData, card_node: Node):
 	# 4. SWAP SIGNAL: Change button from "Play" to "Return"
 	var btn = card_node.get_node("VBoxContainer/PlayButton")
 	
-	# Disconnect the "Play" function
 	if btn.pressed.is_connected(_on_card_played):
 		btn.pressed.disconnect(_on_card_played)
 	
-	# Connect the "Return" function
 	btn.pressed.connect(return_card_to_hand.bind(data, card_node))
 	
-	# Visual updates for slotted card
-	btn.text = "Return" # Optional: Change text to show it can be removed
-	btn.disabled = false # Ensure it's clickable!
-	card_node.modulate = Color(1, 1, 1) # Keep it bright
+	btn.text = "Return"
+	btn.disabled = false 
+	card_node.modulate = Color(1, 1, 1) 
 	
 	update_mana_ui()
 	
@@ -263,6 +276,8 @@ func return_card_to_hand(data: CardData, card_node: Node):
 	# 3. Move Visuals back to Hand
 	card_node.get_parent().remove_child(card_node)
 	hand_container.add_child(card_node)
+	
+	card_node.toggle_info_capability(true)
 	
 	# 4. SWAP SIGNAL: Change button from "Return" to "Play"
 	var btn = card_node.get_node("VBoxContainer/PlayButton")
@@ -304,23 +319,26 @@ func update_mana_ui():
 	
 	var is_player_phase = phases[current_phase_index] == "player"
 
-	# Update Hand Cards (Dim if too expensive)
 	for card in hand_container.get_children():
 		if "card_data" in card and card.card_data != null:
 			var cost = card.card_data.mana_cost
 			var btn = card.get_node("VBoxContainer/PlayButton")
+			var content = card.get_node("VBoxContainer") # The visual content
 			
 			if not is_player_phase or cost > current_mana:
 				btn.disabled = true
-				card.modulate = Color(0.4, 0.4, 0.4) 
+				# We dim the VBoxContainer ONLY
+				content.modulate = Color(0.4, 0.4, 0.4) 
 			else:
 				btn.disabled = false
-				card.modulate = Color(1, 1, 1)
+				content.modulate = Color(1, 1, 1)
 
-	# Update Slotted Cards (Always bright and clickable for Undo)
+	# Slotted cards should always be bright
 	for card in slot_container.get_children():
 		card.modulate = Color(1, 1, 1)
 		var btn = card.get_node("VBoxContainer/PlayButton")
+		var content = card.get_node("VBoxContainer")
+		content.modulate = Color(1, 1, 1)
 		btn.disabled = false
 
 
@@ -498,3 +516,17 @@ func spawn_mana_popup(amount: int):
 	# Position it right on top of the Mana Label
 	popup.global_position = mana_label.global_position + Vector2(20, -20)
 	popup.setup(amount)
+
+func _on_global_info_button_pressed():
+	is_info_mode_on = !is_info_mode_on
+	
+	# Update Button Text (Optional, remove if you don't want text changes)
+	var btn = get_node_or_null("CanvasLayer/GlobalInfoButton")
+	if btn:
+		btn.text = "Hide Info" if is_info_mode_on else "Show Info"
+
+	# SAFE LOOP: Only touches valid cards
+	for card in hand_container.get_children():
+		# Check if the card is valid and has the script attached
+		if is_instance_valid(card) and card.has_method("set_description_visible"):
+			card.set_description_visible(is_info_mode_on)

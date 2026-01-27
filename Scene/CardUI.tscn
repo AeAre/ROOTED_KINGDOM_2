@@ -24,3 +24,25 @@ stretch_mode = 6
 
 [node name="PlayButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+
+[node name="DescriptionPanel" type="Panel" parent="."]
+layout_mode = 2
+
+[node name="DescriptionLabel" type="Label" parent="DescriptionPanel"]
+layout_mode = 0
+offset_top = 28.0
+offset_right = 97.0
+offset_bottom = 146.0
+theme_override_font_sizes/font_size = 12
+autowrap_mode = 3
+
+[node name="CloseButton" type="Button" parent="DescriptionPanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -101.0
+offset_bottom = 27.0
+grow_horizontal = 0
+
+[connection signal="pressed" from="DescriptionPanel/CloseButton" to="." method="_on_close_button_pressed"]
