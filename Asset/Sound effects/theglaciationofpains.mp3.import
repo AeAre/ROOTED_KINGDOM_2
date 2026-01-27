@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ctg4mmn5lvsyh"
+path="res://.godot/imported/theglaciationofpains.mp3-748aabb23accd1f260c784b75ecedbce.mp3str"
+
+[deps]
+
+source_file="res://Asset/Sound effects/theglaciationofpains.mp3"
+dest_files=["res://.godot/imported/theglaciationofpains.mp3-748aabb23accd1f260c784b75ecedbce.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

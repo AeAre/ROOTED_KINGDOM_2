@@ -3,27 +3,26 @@ extends Node
 var player_name: String = ""
 const SAVE_PATH = "user://player_data.save"
 
-# --- EXISTING VARIABLES ---
+var button_click_sfx = preload("res://Asset/Sound effects/button_effects.mp3")
+var sfx_player: AudioStreamPlayer
+
+# --- PROGRESSION VARIABLES ---
+# NOTE: Changing these numbers here won't work if a save file already exists!
+# You must call reset_player_data() once to see these changes.
 var current_tower_floor: int = 1
 var floors_cleared: Array = [] 
 var selected_team: Array[CharacterData] = []
 var player_team: Array = []
 
-# --- NEW: UPGRADE SYSTEM VARIABLES ---
 var upgrade_materials: int = 500
 var card_levels: Dictionary = {}
 var small_gems: int = 5000
 var crystal_gems: int = 100
 
-var unlocked_heroes: Array[String] = ["Hero"] # Start with your default hero name here
+var unlocked_heroes: Array[String] = ["Hero"] 
 
 var from_tower_mode: bool = false
 
-func _ready() -> void:
-	load_data()
-	# pass
-	# reset_player_data()
-	
 var floor_rewards = {
 	1: { "small": 100, "crystal": 0 },
 	2: { "small": 150, "crystal": 0 },
@@ -35,31 +34,60 @@ var floor_rewards = {
 	8: { "small": 200, "crystal": 1 },
 	9: { "small": 250, "crystal": 1 },
 	10: { "small": 1000, "crystal": 5 },
-	# Add more floors here...
 }
 
+func _ready() -> void:
+	# 1. Setup Audio first
+	setup_audio_node()
+	
+	# 2. Load Data (This will overwrite the variables above with saved data)
+	load_game()
+	
+	# 3. Connect buttons
+	get_tree().node_added.connect(_on_node_added)
+	connect_buttons_recursive(get_tree().root)
+
+# --- TEAM MANAGEMENT ---
 func add_to_team(data: CharacterData):
 	selected_team.append(data)
 		
 func clear_team():
 	selected_team.clear()
-	
+
+# --- REWARD & UNLOCK LOGIC ---
 func mark_floor_cleared(floor_num: int):
 	if not floors_cleared.has(floor_num):
 		floors_cleared.append(floor_num)
-	save_data()
+		# Only save if we actually added something new
+		save_game()
 	
+func grant_floor_reward(floor_num: int):
+	if floor_rewards.has(floor_num):
+		var reward = floor_rewards[floor_num]
+		small_gems += reward["small"]
+		crystal_gems += reward["crystal"]
+		print("Victory! Gained: ", reward["small"], " Gems and ", reward["crystal"], " Crystals")
+		save_game()
+
+# --- THIS WAS MISSING! ---
+func unlock_hero(hero_name: String):
+	if not unlocked_heroes.has(hero_name):
+		unlocked_heroes.append(hero_name)
+		print("Unlocked new hero: ", hero_name)
+		save_game()
+
+func is_hero_unlocked(hero_name: String) -> bool:
+	return unlocked_heroes.has(hero_name)
+
+# --- UPGRADE LOGIC ---
 func get_card_damage(data: CardData) -> int:
-	# If the card isn't in our dictionary yet, it's level 0 (Base stats)
 	var lvl = card_levels.get(data.card_name, 0)
 	return data.damage + (data.damage_growth * lvl)
 
-# 2. Get Shield based on Level
 func get_card_shield(data: CardData) -> int:
 	var lvl = card_levels.get(data.card_name, 0)
 	return data.shield + (data.shield_growth * lvl)
 
-# 3. Get Heal based on Level
 func get_card_heal(data: CardData) -> int:
 	var lvl = card_levels.get(data.card_name, 0)
 	return data.heal_amount + (data.heal_growth * lvl)
@@ -68,87 +96,133 @@ func get_card_mana(data: CardData) -> int:
 	var lvl = card_levels.get(data.card_name, 0)
 	return data.mana_gain + (data.mana_gain * lvl)
 	
-# 4. Get the Current Level Number (For UI)
 func get_card_level_number(data: CardData) -> int:
-	# Returns 1, 2, 3... instead of 0, 1, 2...
-	save_data()
+	# FIXED: Removed save_game() from here. 
+	# Getters should never save, they just read data.
 	return card_levels.get(data.card_name, 0) + 1 
 	
-# 5. The Upgrade Action
 func attempt_upgrade(data: CardData) -> bool:
 	if small_gems >= data.upgrade_cost:
-		# 1. Deduct Cost
 		small_gems -= data.upgrade_cost
-		save_data()
-		# 2. Increase Level
+		
 		if not card_levels.has(data.card_name):
 			card_levels[data.card_name] = 0
 		
 		card_levels[data.card_name] += 1
+		
+		print("Upgrade Successful! Saved.")
+		save_game()
 		return true
 	else:
 		print("Not enough Small Gems!")
 		return false
-	
-
-func grant_floor_reward(floor_num: int):
-	if floor_rewards.has(floor_num):
-		var reward = floor_rewards[floor_num]
-		small_gems += reward["small"]
-		crystal_gems += reward["crystal"]
-		print("Victory! Gained: ", reward["small"], " Gems and ", reward["crystal"], " Crystals")
-	save_data()
-
-
 
 func try_redeem_code(code: String) -> String:
-	
 	match code:
 		"RICH":
-			small_gems += 5000
-			crystal_gems += 50
-			save_data()
+			small_gems += 9999
+			crystal_gems += 99
+			save_game()
 			return "Success! +5000 Gems\n+50 Crystals"
 		"POOR":
 			small_gems = 0
 			crystal_gems = 0
-			save_data()
+			save_game()
 			return "Wallet Empty..."
+		"RESET":
+			reset_player_data()
+			return "Save File Deleted."
 		_:
 			return "Invalid Code"
-	
-func is_hero_unlocked(hero_name: String) -> bool:
-	return unlocked_heroes.has(hero_name)
 
-func unlock_hero(hero_name: String):
-	if not unlocked_heroes.has(hero_name):
-		unlocked_heroes.append(hero_name)
-	save_data()
+# --- SAVE SYSTEM ---
+func save_game():
+	var config = ConfigFile.new()
 	
-func save_data():
-	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
-	var data = {
-		"player_name": player_name,
-		"small_gems": small_gems,
-		"crystal_gems": crystal_gems
-		# Add other variables you want to save here
-	}
-	file.store_var(data)
+	config.set_value("Progression", "player_name", player_name)
 	
+	config.set_value("Progression", "small_gems", small_gems)
+	config.set_value("Progression", "crystal_gems", crystal_gems)
+	config.set_value("Progression", "unlocked_heroes", unlocked_heroes)
+	config.set_value("Progression", "current_floor", current_tower_floor)
+	config.set_value("Progression", "card_levels", card_levels)
+	config.set_value("Progression", "floors_cleared", floors_cleared)
 	
-func load_data():
-	if FileAccess.file_exists(SAVE_PATH):
-		var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
-		var data = file.get_var()
-		player_name = data.get("player_name", "")
-		small_gems = data.get("small_gems", 5000)
-		crystal_gems = data.get("crystal_gems", 100)
+	var err = config.save(SAVE_PATH)
+	if err == OK:
+		print("Game Saved! Name: " + player_name)
+	else:
+		print("Error saving game.")
+	
+func load_game():
+	var config = ConfigFile.new()
+	var err = config.load(SAVE_PATH)
+	
+	if err != OK: return 
+	
+	# 1. LOAD THE NAME
+	player_name = config.get_value("Progression", "player_name", "")
+	
+	# 2. LOAD THE REST
+	small_gems = config.get_value("Progression", "small_gems", 5000)
+	crystal_gems = config.get_value("Progression", "crystal_gems", 100)
+	unlocked_heroes = config.get_value("Progression", "unlocked_heroes", ["Hero"])
+	current_tower_floor = config.get_value("Progression", "current_floor", 1)
+	card_levels = config.get_value("Progression", "card_levels", {})
+	floors_cleared = config.get_value("Progression", "floors_cleared", [])
+	
+	print("Loaded Data. Player Name: " + player_name)
 	
 func reset_player_data():
 	player_name = ""
 	small_gems = 5000
 	crystal_gems = 100
+	unlocked_heroes = ["Hero"]
+	card_levels = {}
+	current_tower_floor = 1
+	floors_cleared = []
+	
 	# Delete the physical file from your computer
 	if FileAccess.file_exists(SAVE_PATH):
 		DirAccess.remove_absolute(SAVE_PATH)
-	print("Data Reset! Restart the game to see the Name Scene.")
+	print("Data Reset! Restart the game to see fresh defaults.")
+
+# --- AUDIO SYSTEM ---
+func setup_audio_node():
+	sfx_player = AudioStreamPlayer.new()
+	add_child(sfx_player)
+	# Default to Master if SFX bus doesn't exist to prevent errors
+	if AudioServer.get_bus_index("SFX") != -1:
+		sfx_player.bus = "SFX"
+	else:
+		sfx_player.bus = "Master"
+	
+func play_button_sfx():
+	if sfx_player and button_click_sfx:
+		sfx_player.stream = button_click_sfx
+		sfx_player.pitch_scale = randf_range(0.98, 1.02)
+		sfx_player.play()
+		
+func _on_node_added(node: Node):
+	if node is Button:
+		_connect_button(node)
+
+func connect_buttons_recursive(node: Node):
+	if node is Button:
+		_connect_button(node)
+	for child in node.get_children():
+		connect_buttons_recursive(child)
+		
+func _connect_button(btn: Button):
+	if not btn.pressed.is_connected(play_button_sfx):
+		btn.pressed.connect(play_button_sfx)
+
+func get_player_data_as_dict() -> Dictionary:
+	return {
+		"player_name": player_name,
+		"small_gems": small_gems,
+		"crystal_gems": crystal_gems,
+		"unlocked_heroes": unlocked_heroes,
+		"current_floor": current_tower_floor,
+		"card_levels": card_levels
+	}

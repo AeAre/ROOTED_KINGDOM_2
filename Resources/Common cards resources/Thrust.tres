@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://bpx0gk4fwgevj"]
+[gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://bpx0gk4fwgevj"]
 
 [ext_resource type="Texture2D" uid="uid://dv6jyu2onlfgu" path="res://Asset/Common cards/Thrust.jpg" id="1_7keqb"]
 [ext_resource type="Script" uid="uid://olc2cw5uohq6" path="res://Script/CardData.gd" id="1_cl7x7"]
+[ext_resource type="AudioStream" uid="uid://qj1hg2jl4g4p" path="res://Asset/Sound effects/thrust.mp3" id="3_g8jic"]
 
 [resource]
 script = ExtResource("1_cl7x7")
@@ -12,4 +13,5 @@ mana_cost = 1
 aoe_targets = 1
 critical_chance = 30
 damage_growth = 3
+sound_effect = ExtResource("3_g8jic")
 metadata/_custom_type_script = "uid://olc2cw5uohq6"

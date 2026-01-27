@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://c55c341gbenxw"]
+[gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://c55c341gbenxw"]
 
 [ext_resource type="Texture2D" uid="uid://bh8yc86cpagib" path="res://Asset/Common cards/Gun down.jpg" id="1_l5lvx"]
 [ext_resource type="Script" uid="uid://olc2cw5uohq6" path="res://Script/CardData.gd" id="1_utgqj"]
+[ext_resource type="AudioStream" uid="uid://ovjsivaguyxm" path="res://Asset/Sound effects/gundown.mp3" id="3_7qtlj"]
 
 [resource]
 script = ExtResource("1_utgqj")
@@ -12,4 +13,5 @@ damage = 15
 mana_cost = 1
 aoe_targets = 1
 damage_growth = 2
+sound_effect = ExtResource("3_7qtlj")
 metadata/_custom_type_script = "uid://olc2cw5uohq6"

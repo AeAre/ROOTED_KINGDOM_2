@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://3dgl7l1vwjcq"]
 
 [ext_resource type="Script" uid="uid://c2svi3hqold06" path="res://Scene/User Interfaces/Story Mode/Story Mode UIs/start_battle_slot.gd" id="1_uwob4"]
-[ext_resource type="Texture2D" uid="uid://cao4jwwshsvv3" path="res://Asset/images.png" id="1_xa1ml"]
+[ext_resource type="Texture2D" uid="uid://cao4jwwshsvv3" path="res://Asset/Characters/images.png" id="1_xa1ml"]
 [ext_resource type="FontFile" uid="uid://d0sq1luf5fm1p" path="res://Asset/Fonts/Humanistic.ttf" id="2_3fshj"]
 [ext_resource type="FontFile" uid="uid://dtdw2k1jvjn37" path="res://Asset/Fonts/times.ttf" id="3_ox3et"]
 

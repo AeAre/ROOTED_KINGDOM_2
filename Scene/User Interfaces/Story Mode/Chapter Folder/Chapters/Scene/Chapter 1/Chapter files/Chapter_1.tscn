@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bi4fmeelgp436" path="res://Scene/User Interfaces/Story Mode/Chapter Folder/Stage UIs/stage_slot.tscn" id="5_vui1m"]
 [ext_resource type="PackedScene" uid="uid://jnpuy3mxoc6t" path="res://Scene/User Interfaces/Story Mode/Dialogue Folders/Dialogue Scenes/Stage_Scene_1-1.tscn" id="6_2s5pc"]
 [ext_resource type="PackedScene" uid="uid://ds0x8k3bwi2qm" path="res://Scene/User Interfaces/Story Mode/Chapter Folder/Chapters/Scene/Chapter 1/Stages/stage_1_1.tscn" id="6_bhkcx"]
-[ext_resource type="Texture2D" uid="uid://cao4jwwshsvv3" path="res://Asset/images.png" id="7_sat6q"]
+[ext_resource type="Texture2D" uid="uid://cao4jwwshsvv3" path="res://Asset/Characters/images.png" id="7_sat6q"]
 [ext_resource type="PackedScene" uid="uid://rmdg2sxyff1i" path="res://Scene/User Interfaces/Story Mode/Chapter Folder/Stage UIs/Stage Confirmation/stage_confimation.tscn" id="8_672ou"]
 [ext_resource type="Texture2D" uid="uid://l45mprnx01t8" path="res://Asset/User Interface/pause.png" id="9_sjonj"]
 

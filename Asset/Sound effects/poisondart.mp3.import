@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://7reiatlsghyr"
+path="res://.godot/imported/poisondart.mp3-88a9a10702733eab6442726e77ad1aa7.mp3str"
+
+[deps]
+
+source_file="res://Asset/Sound effects/poisondart.mp3"
+dest_files=["res://.godot/imported/poisondart.mp3-88a9a10702733eab6442726e77ad1aa7.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

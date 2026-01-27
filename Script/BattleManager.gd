@@ -48,6 +48,15 @@ var max_slots: int = 3
 var phases: Array = ["player", "enemy"]
 var current_phase_index: int = 0
 
+# Sound effects
+@onready var sfx_player = $CanvasLayer/SFXPlayer
+@onready var bgm_player = $CanvasLayer/BGMPlayer
+
+var battle_themes: Array[String] = [
+	"res://Asset/Sound effects/background effect1.mp3",
+	"res://Asset/Sound effects/background effect2.mp3"
+]
+
 func _ready():
 	# --- NEW: Clear editor placeholders ---
 	for child in hand_container.get_children():
@@ -62,12 +71,21 @@ func _ready():
 			btn.pressed.connect(_on_global_info_button_pressed)
 	else:
 		print("WARNING: 'GlobalInfoButton' not found in Battlefield Scene")
-		
+	
+	if Global.current_tower_floor == 10:
+		bgm_player.stream = load("res://Asset/Sound effects/background effect3.mp3")
+	else:
+		# --- RANDOM BGM LOGIC ---
+		var random_track_path = battle_themes.pick_random()
+		bgm_player.stream = load(random_track_path)
+	
+	# Play the selected track
+	bgm_player.play()
+			
 	# --- Existing Setup ---
 	setup_player_team()
 	build_deck_from_team()
 	setup_tower_enemies()
-	
 	update_mana_ui()
 	start_current_phase()
 	
@@ -365,28 +383,39 @@ func advance_round():
 	round_number += 1
 
 func execute_slotted_actions():
+	is_processing_turn = true
+	
 	for data in slotted_cards:
+		# --- BEAT 1: THE SOUND & ANTICIPATION ---
+		# Play the sound immediately when the card "activates"
+		if data.sound_effect and sfx_player:
+			sfx_player.stream = data.sound_effect
+			sfx_player.pitch_scale = randf_range(0.95, 1.05) 
+			sfx_player.play()
+		
+		# Give the player 0.15 seconds to hear the start of the sound 
+		# before the damage numbers pop up. This feels more natural.
+		await get_tree().create_timer(0.15).timeout
+
+		# --- BEAT 2: THE IMPACT (STAT LOGIC) ---
+		# This is where the health bars actually move
+		
+		# 1. Damage
 		if data.damage > 0:
-			# USE THE NEW BRAIN HERE
 			var targets = get_targets_for_action(data.is_aoe, data.aoe_targets)
-			
 			if not targets.is_empty():
 				var final_damage = Global.get_card_damage(data)
 				var is_crit = randi() % 100 < data.critical_chance
 				if is_crit: final_damage = int(final_damage * 1.5)
 				
-				# Hit everyone in the targets list
 				for target in targets:
 					target.take_damage(final_damage, is_crit)
 
-		# --- 2. SHIELD LOGIC ---
+		# 2. Shield
 		if data.shield > 0:
 			var targets = get_alive_players()
 			if not targets.is_empty():
-				
-				# CHANGE: Get dynamic shield from Global
 				var final_shield = Global.get_card_shield(data)
-				
 				if data.is_aoe:
 					var hits = min(data.aoe_targets, targets.size())
 					for i in range(hits):
@@ -395,23 +424,18 @@ func execute_slotted_actions():
 					targets.sort_custom(func(a, b): return a.current_health < b.current_health)
 					targets[0].add_shield(final_shield)
 					
+		# 3. Mana
 		if data.mana_gain > 0:
 			var gain = Global.get_card_mana(data)
-			current_mana = min(current_mana + gain, max_mana) # Added min() to respect max_mana
-			
-			# NEW: Show the visual popup!
+			current_mana = min(current_mana + gain, max_mana)
 			spawn_mana_popup(gain)
-			
 			update_mana_ui()
 			
-		# --- 3. HEAL LOGIC ---
+		# 4. Heal
 		if data.heal_amount > 0:
 			var targets = get_alive_players()
 			if not targets.is_empty():
-				
-				# CHANGE: Get dynamic heal from Global
 				var final_heal = Global.get_card_heal(data)
-				
 				if data.is_aoe:
 					var hits = min(data.aoe_targets, targets.size())
 					for i in range(hits):
@@ -420,12 +444,19 @@ func execute_slotted_actions():
 					targets.sort_custom(func(a, b): return a.current_health < b.current_health)
 					targets[0].heal(final_heal)
 
+		# --- BEAT 3: RECOVERY ---
+		# We wait for the "Impact" animations (like damage popups) to finish
+		# and for the sound to reach its tail end.
+		# 0.6 seconds is usually the "sweet spot" for card games.
 		discard_pile.append(data)
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(1).timeout
 
-	# Cleanup
+	# --- FINAL CLEANUP ---
+	# Only clear the visual cards AFTER all actions are done
 	for child in slot_container.get_children():
+		# Optional: Add a small fade-out tween here later for extra polish!
 		child.queue_free()
+		
 	slotted_cards.clear()
 	check_battle_status()
 
@@ -489,6 +520,7 @@ func check_battle_status():
 	if alive_players.is_empty():
 		print("Defeat! All heroes have fallen.")
 		await get_tree().create_timer(1.0).timeout
+		fade_out_music()
 		GlobalMenu.show_loss_menu() # Trigger the loss UI
 		return
 		
@@ -497,6 +529,7 @@ func check_battle_status():
 		if Global.current_tower_floor > 0:
 			print("Victory! All enemies defeated.")
 			Global.mark_floor_cleared(Global.current_tower_floor) #
+			fade_out_music()
 			GlobalMenu.show_victory_menu() 
 	
 func get_alive_players() -> Array:
@@ -576,3 +609,8 @@ func get_targets_for_action(is_aoe: bool, num_targets: int) -> Array:
 			
 	return targets
 	
+func fade_out_music():
+	var tween = create_tween()
+	# Fades volume down to -80 (silent) over 1.5 seconds
+	tween.tween_property(bgm_player, "volume_db", -80.0, 1.5)
+	tween.tween_callback(bgm_player.stop)

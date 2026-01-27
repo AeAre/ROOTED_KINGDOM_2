@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://bkmqdfk1cob5s"]
+[gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://bkmqdfk1cob5s"]
 
 [ext_resource type="Script" uid="uid://olc2cw5uohq6" path="res://Script/CardData.gd" id="1_6jplm"]
 [ext_resource type="Texture2D" uid="uid://c7bkoubmjeao1" path="res://Asset/Characters/Sean Signature.jpg" id="1_ys7tt"]
+[ext_resource type="AudioStream" uid="uid://pj3ia1iqn75" path="res://Asset/Sound effects/thesharpshooterofdeath.mp3" id="3_bmnps"]
 
 [resource]
 script = ExtResource("1_6jplm")
@@ -13,4 +14,5 @@ heal_amount = 11
 mana_cost = 5
 aoe_targets = 1
 critical_chance = 70
+sound_effect = ExtResource("3_bmnps")
 metadata/_custom_type_script = "uid://olc2cw5uohq6"

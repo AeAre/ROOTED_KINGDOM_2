@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c57qyvc3ubhwh"
+path="res://.godot/imported/theluminouswarriorsmash.mp3-214d1fd1377339074950152e53e36a6a.mp3str"
+
+[deps]
+
+source_file="res://Asset/Sound effects/theluminouswarriorsmash.mp3"
+dest_files=["res://.godot/imported/theluminouswarriorsmash.mp3-214d1fd1377339074950152e53e36a6a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

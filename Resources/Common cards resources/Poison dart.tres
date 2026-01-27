@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://bq43e1owpaudj"]
+[gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://bq43e1owpaudj"]
 
 [ext_resource type="Script" uid="uid://olc2cw5uohq6" path="res://Script/CardData.gd" id="1_frn3b"]
 [ext_resource type="Texture2D" uid="uid://bsdx2ibxxkcpk" path="res://Asset/Common cards/Poison dart.jpg" id="1_hr2mt"]
+[ext_resource type="AudioStream" uid="uid://7reiatlsghyr" path="res://Asset/Sound effects/poisondart.mp3" id="3_md57h"]
 
 [resource]
 script = ExtResource("1_frn3b")
@@ -14,4 +15,5 @@ is_aoe = true
 aoe_targets = 2
 critical_chance = 30
 damage_growth = 2
+sound_effect = ExtResource("3_md57h")
 metadata/_custom_type_script = "uid://olc2cw5uohq6"

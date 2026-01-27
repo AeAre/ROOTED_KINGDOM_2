@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ovjsivaguyxm"
+path="res://.godot/imported/gundown.mp3-11eb1081d3250f8a1aa23aa6ca962f03.mp3str"
+
+[deps]
+
+source_file="res://Asset/Sound effects/gundown.mp3"
+dest_files=["res://.godot/imported/gundown.mp3-11eb1081d3250f8a1aa23aa6ca962f03.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

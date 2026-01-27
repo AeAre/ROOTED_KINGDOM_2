@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bm47tpj6tdltx"
+path="res://.godot/imported/warm_touch.mp3-5050a4c665451fd8e9036670a224d6b9.mp3str"
+
+[deps]
+
+source_file="res://Asset/Sound effects/warm_touch.mp3"
+dest_files=["res://.godot/imported/warm_touch.mp3-5050a4c665451fd8e9036670a224d6b9.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
