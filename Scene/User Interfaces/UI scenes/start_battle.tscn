@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://qmnutdlpk68l"]
+[gd_scene load_steps=8 format=3 uid="uid://qmnutdlpk68l"]
 
+[ext_resource type="PackedScene" uid="uid://diw3xv0en0ynt" path="res://Scene/User Interfaces/UI Asset Components/background_i.tscn" id="1_2sahd"]
 [ext_resource type="Script" uid="uid://dg4em0ukvp7ku" path="res://Scene/User Interfaces/UI Scripts/button_manager_start.gd" id="1_nfl2a"]
 [ext_resource type="PackedScene" uid="uid://3dgl7l1vwjcq" path="res://Scene/User Interfaces/Story Mode/Story Mode UIs/start_battle_slot.tscn" id="2_t4b46"]
 [ext_resource type="FontFile" uid="uid://dtdw2k1jvjn37" path="res://Asset/Fonts/times.ttf" id="2_ygvaf"]
@@ -10,6 +11,15 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_objsq"]
 
 [node name="Start_Battle" type="Node2D"]
+
+[node name="User Interface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1153.0
+offset_bottom = 648.0
+
+[node name="Background I" parent="User Interface" instance=ExtResource("1_2sahd")]
+layout_mode = 1
 
 [node name="ButtonManager" type="Control" parent="."]
 layout_mode = 3

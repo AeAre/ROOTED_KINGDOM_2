@@ -1,9 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://3dgl7l1vwjcq"]
+[gd_scene load_steps=8 format=3 uid="uid://3dgl7l1vwjcq"]
 
 [ext_resource type="Script" uid="uid://c2svi3hqold06" path="res://Scene/User Interfaces/Story Mode/Story Mode UIs/start_battle_slot.gd" id="1_uwob4"]
 [ext_resource type="Texture2D" uid="uid://cao4jwwshsvv3" path="res://Asset/Characters/images.png" id="1_xa1ml"]
 [ext_resource type="FontFile" uid="uid://d0sq1luf5fm1p" path="res://Asset/Fonts/Humanistic.ttf" id="2_3fshj"]
 [ext_resource type="FontFile" uid="uid://dtdw2k1jvjn37" path="res://Asset/Fonts/times.ttf" id="3_ox3et"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uwob4"]
+content_margin_left = 14.0
+content_margin_top = 14.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_bsmg4"]
 font = ExtResource("2_3fshj")
@@ -39,6 +43,7 @@ offset_left = 1.0
 offset_top = -1.0
 offset_right = 892.0
 offset_bottom = 64.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_uwob4")
 text = "Title Scene"
 label_settings = SubResource("LabelSettings_bsmg4")
 vertical_alignment = 1

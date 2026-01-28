@@ -1,40 +1,82 @@
-[gd_scene load_steps=18 format=3 uid="uid://qde0e5mwnany"]
+[gd_scene load_steps=34 format=3 uid="uid://qde0e5mwnany"]
 
 [ext_resource type="Script" uid="uid://bxn5segpvyh4e" path="res://Scene/User Interfaces/UI Scripts/button_manager.gd" id="1_kxbd2"]
+[ext_resource type="PackedScene" uid="uid://diw3xv0en0ynt" path="res://Scene/User Interfaces/UI Asset Components/background_i.tscn" id="1_nbfal"]
 [ext_resource type="Texture2D" uid="uid://io3a4q46b3pk" path="res://Asset/User Interface/Title_Banner_v1.png" id="1_qelcm"]
 [ext_resource type="Texture2D" uid="uid://cdfpkjhi1gi77" path="res://Asset/User Interface/button_ui.png" id="2_eh1oq"]
 [ext_resource type="FontFile" uid="uid://dtdw2k1jvjn37" path="res://Asset/Fonts/times.ttf" id="2_jykwv"]
 [ext_resource type="Texture2D" uid="uid://dcm4yl4kcn7wn" path="res://Asset/Backgrounds/gem_1.webp" id="4_87orj"]
 [ext_resource type="Texture2D" uid="uid://rjoebry8l2at" path="res://Asset/Backgrounds/gem_3.webp" id="5_qelcm"]
+[ext_resource type="FontFile" uid="uid://d0sq1luf5fm1p" path="res://Asset/Fonts/Humanistic.ttf" id="7_qrawm"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jykwv"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qrawm"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tce8e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r0e6h"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4mbs0"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nbfal"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sxgnl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_80nln"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_87orj"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yu5iq"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t3k3t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8sg52"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eh1oq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4wod1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d8y1c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cntet"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qelcm"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mdbvn"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e5jgt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_csd3b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lqnyc"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xyor1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gbfi8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_okapm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bsri0"]
+font = ExtResource("7_qrawm")
+font_size = 32
 
 [node name="MainMenu" type="Node2D"]
 
+[node name="Background" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 651.0
+
+[node name="Background I" parent="Background" instance=ExtResource("1_nbfal")]
+layout_mode = 1
+
 [node name="Title" type="TextureRect" parent="."]
-offset_top = 83.0
-offset_right = 703.0
-offset_bottom = 321.0
+offset_left = -2.0
+offset_top = 4.0
+offset_right = 701.0
+offset_bottom = 242.0
 texture = ExtResource("1_qelcm")
 
 [node name="ButtonManager" type="Control" parent="."]
@@ -46,14 +88,16 @@ script = ExtResource("1_kxbd2")
 
 [node name="Start Battle" type="Button" parent="ButtonManager"]
 layout_mode = 0
-offset_left = 889.0
-offset_top = 124.0
-offset_right = 1082.0
-offset_bottom = 213.0
+offset_left = 887.0
+offset_top = 173.0
+offset_right = 1080.0
+offset_bottom = 262.0
 theme_override_fonts/font = ExtResource("2_jykwv")
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxEmpty_jykwv")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_qrawm")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_tce8e")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_r0e6h")
 text = "Start/Battle
 "
 icon = ExtResource("2_eh1oq")
@@ -62,14 +106,16 @@ expand_icon = true
 
 [node name="Cards" type="Button" parent="ButtonManager"]
 layout_mode = 0
-offset_left = 893.0
-offset_top = 298.0
-offset_right = 1091.0
-offset_bottom = 385.0
+offset_left = 887.0
+offset_top = 352.0
+offset_right = 1085.0
+offset_bottom = 439.0
 theme_override_fonts/font = ExtResource("2_jykwv")
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxEmpty_4mbs0")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_nbfal")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_sxgnl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_80nln")
 text = "Cards"
 icon = ExtResource("2_eh1oq")
 icon_alignment = 1
@@ -77,14 +123,16 @@ expand_icon = true
 
 [node name="Characters" type="Button" parent="ButtonManager"]
 layout_mode = 0
-offset_left = 892.0
-offset_top = 215.0
-offset_right = 1089.0
-offset_bottom = 296.0
+offset_left = 886.0
+offset_top = 268.0
+offset_right = 1083.0
+offset_bottom = 349.0
 theme_override_fonts/font = ExtResource("2_jykwv")
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxEmpty_87orj")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_yu5iq")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_t3k3t")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8sg52")
 text = "Characters"
 icon = ExtResource("2_eh1oq")
 icon_alignment = 1
@@ -100,6 +148,8 @@ theme_override_fonts/font = ExtResource("2_jykwv")
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxEmpty_eh1oq")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_4wod1")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_d8y1c")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cntet")
 text = "Tutorial
 "
 icon = ExtResource("2_eh1oq")
@@ -116,6 +166,8 @@ theme_override_fonts/font = ExtResource("2_jykwv")
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxEmpty_qelcm")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_mdbvn")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_e5jgt")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_csd3b")
 text = "Settings"
 icon = ExtResource("2_eh1oq")
 icon_alignment = 1
@@ -130,7 +182,10 @@ offset_bottom = 628.0
 theme_override_fonts/font = ExtResource("2_jykwv")
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxEmpty_87orj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_lqnyc")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_xyor1")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_gbfi8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_okapm")
 text = "Quit
 "
 icon = ExtResource("2_eh1oq")
@@ -138,10 +193,10 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-offset_left = 675.0
-offset_top = 16.0
-offset_right = 985.0
-offset_bottom = 96.0
+offset_left = 845.0
+offset_top = 14.0
+offset_right = 1155.0
+offset_bottom = 94.0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -188,15 +243,17 @@ theme_override_font_sizes/font_size = 25
 text = "0"
 
 [node name="Profile" type="MarginContainer" parent="."]
-offset_left = 18.0
-offset_top = 1.0
-offset_right = 204.0
-offset_bottom = 87.0
+offset_left = 882.0
+offset_top = 124.0
+offset_right = 1068.0
+offset_bottom = 157.0
 
 [node name="PlayerNameLabel" type="Label" parent="Profile"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Name"
+label_settings = SubResource("LabelSettings_bsri0")
+horizontal_alignment = 1
 
 [connection signal="pressed" from="ButtonManager/Start Battle" to="ButtonManager" method="_on_start_battle_pressed"]
 [connection signal="pressed" from="ButtonManager/Cards" to="ButtonManager" method="_on_inventory_and_shop_pressed"]

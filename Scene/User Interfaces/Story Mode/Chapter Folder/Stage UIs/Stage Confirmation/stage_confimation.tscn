@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://rmdg2sxyff1i"]
 
-[ext_resource type="Texture2D" uid="uid://cao4jwwshsvv3" path="res://Asset/Characters/images.png" id="1_6eyf2"]
 [ext_resource type="Script" uid="uid://bdjqqhpvad4c1" path="res://Scene/User Interfaces/Story Mode/Chapter Folder/Stage UIs/Stage Confirmation/stage_confimation.gd" id="1_kla3i"]
+[ext_resource type="PackedScene" uid="uid://cpbalixgroyd1" path="res://Scene/User Interfaces/UI Asset Components/Stage Images/Source/stage_image.tscn" id="2_tb3dc"]
 [ext_resource type="Texture2D" uid="uid://cdfpkjhi1gi77" path="res://Asset/User Interface/button_ui.png" id="2_xh8vs"]
 [ext_resource type="FontFile" uid="uid://dtdw2k1jvjn37" path="res://Asset/Fonts/times.ttf" id="3_iht3i"]
 [ext_resource type="Texture2D" uid="uid://l45mprnx01t8" path="res://Asset/User Interface/pause.png" id="3_tb3dc"]
@@ -10,7 +10,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_stea2"]
 font = ExtResource("3_iht3i")
-font_size = 64
+font_size = 32
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iht3i"]
 
@@ -51,49 +51,52 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.5584048, 1.5585049)
 script = ExtResource("1_kla3i")
 
 [node name="Panel" type="Panel" parent="."]
-layout_mode = 0
-offset_right = 1895.0
-offset_bottom = 1076.0
-scale = Vector2(0.59755045, 0.5948517)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Panel"]
-layout_mode = 0
-offset_left = 294.0
-offset_top = 223.0
-offset_right = 1595.0
-offset_bottom = 849.0
-texture = ExtResource("1_6eyf2")
+[node name="Stage Image" parent="Panel" instance=ExtResource("2_tb3dc")]
+layout_mode = 1
+offset_left = 95.0
+offset_top = 57.0
+offset_right = -71.0
+offset_bottom = -53.0
 
 [node name="Stage Titles" type="Control" parent="Panel"]
 layout_mode = 1
-anchors_preset = 0
-offset_left = 3.0000002
-offset_top = 3.2359686
-offset_right = 1896.4259
-offset_bottom = 218.96729
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 192.0
+grow_horizontal = 2
 
 [node name="Stage Tittle Banner" type="TextureRect" parent="Panel/Stage Titles"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -29.13434
-offset_bottom = 29.134338
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -202.5
+offset_right = 202.5
+offset_bottom = 170.0
 grow_horizontal = 2
-grow_vertical = 2
 texture = ExtResource("3_tb3dc")
+expand_mode = 1
 
 [node name="Stage Title Label" type="Label" parent="Panel/Stage Titles"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -161.0
+offset_top = 50.0
+offset_right = 161.0
+offset_bottom = 122.0
 grow_horizontal = 2
-grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_kfu43")
 text = "Stage Title"
 label_settings = SubResource("LabelSettings_stea2")
@@ -102,10 +105,10 @@ vertical_alignment = 1
 
 [node name="Play" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 605.6535
-offset_top = 878.02637
-offset_right = 909.55414
-offset_bottom = 1024.7236
+offset_left = 327.0
+offset_top = 476.0
+offset_right = 558.0
+offset_bottom = 594.0
 theme_override_fonts/font = ExtResource("3_iht3i")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxEmpty_iht3i")
@@ -126,12 +129,15 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="Objective" type="Label" parent="Panel"]
-visible = false
-layout_mode = 0
-offset_left = 3.0
-offset_top = 639.0
-offset_right = 1897.0
-offset_bottom = 790.0
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -33.5
+offset_bottom = 33.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_h0ypx")
 text = "Objective"
 label_settings = SubResource("LabelSettings_njk7v")
@@ -140,10 +146,10 @@ vertical_alignment = 1
 
 [node name="Back" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 910.628
-offset_top = 894.2062
-offset_right = 1212.381
-offset_bottom = 1019.33026
+offset_left = 600.0
+offset_top = 484.0
+offset_right = 832.75305
+offset_bottom = 592.0
 theme_override_fonts/font = ExtResource("3_iht3i")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxEmpty_132fm")

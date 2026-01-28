@@ -1,32 +1,38 @@
-[gd_scene load_steps=2 format=3 uid="uid://bi4fmeelgp436"]
+[gd_scene load_steps=3 format=3 uid="uid://bi4fmeelgp436"]
 
 [ext_resource type="Script" uid="uid://bm2un4qtoc7da" path="res://Scene/User Interfaces/Story Mode/Chapter Folder/Stage UIs/stage_slot.gd" id="1_f8eut"]
+[ext_resource type="PackedScene" uid="uid://cpbalixgroyd1" path="res://Scene/User Interfaces/UI Asset Components/Stage Images/Source/stage_image.tscn" id="2_28qhb"]
 
 [node name="Stage Slot" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 317.0
-offset_bottom = 274.0
+offset_right = 225.0
+offset_bottom = 200.0
 script = ExtResource("1_f8eut")
-Stage_number = null
-Scene_type = null
-Objective = null
 
-[node name="Stage Slot bg" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 7.0
-offset_top = 4.0
-offset_right = 314.0
-offset_bottom = 270.0
-
-[node name="Stage Button" type="Button" parent="."]
-layout_mode = 0
+[node name="Interface" type="Control" parent="."]
+clip_contents = true
+anchors_preset = 0
 offset_left = 5.0
-offset_top = 2.0
-offset_right = 318.0
-offset_bottom = 267.0
+offset_right = 226.0
+offset_bottom = 198.0
+
+[node name="Stage Image" parent="Interface" instance=ExtResource("2_28qhb")]
+layout_mode = 1
+offset_left = -126.0
+offset_top = -70.0
+offset_right = 128.0
+offset_bottom = 77.0
+
+[node name="Stage Button" type="Button" parent="Interface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 64
 icon_alignment = 1
 expand_icon = true
 
-[connection signal="pressed" from="Stage Button" to="." method="_on_stage_button_pressed"]
+[connection signal="pressed" from="Interface/Stage Button" to="." method="_on_stage_button_pressed"]

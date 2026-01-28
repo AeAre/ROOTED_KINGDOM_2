@@ -3,6 +3,8 @@ extends Control
 var stage_scene: PackedScene
 @onready var title = $"Panel/Stage Titles/Stage Title Label"
 @onready var objective = $Panel/Objective
+@onready var image = $"Panel/Stage Image/image"
+
 # Called when the node enters the scene tree for the first time.
 #func _ready() -> void:
 #	pass # Replace with function body.

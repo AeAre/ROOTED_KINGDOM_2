@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bjr25em7jm6c"]
+[gd_scene load_steps=17 format=3 uid="uid://bjr25em7jm6c"]
 
 [ext_resource type="Script" uid="uid://dl4duh8ewrkbh" path="res://Scene/CardUpgradeUI.gd" id="1_qwuky"]
 [ext_resource type="Script" uid="uid://olc2cw5uohq6" path="res://Script/CardData.gd" id="2_o6gij"]
@@ -13,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://bg41rywf50mm2" path="res://Resources/Common cards resources/Stun.tres" id="11_uhlfd"]
 [ext_resource type="Resource" uid="uid://bpx0gk4fwgevj" path="res://Resources/Common cards resources/Thrust.tres" id="12_nq2mc"]
 [ext_resource type="Resource" uid="uid://qn54dvyfdrjc" path="res://Resources/Common cards resources/Warm Touch.tres" id="13_3la2d"]
+[ext_resource type="PackedScene" uid="uid://diw3xv0en0ynt" path="res://Scene/User Interfaces/UI Asset Components/background_i.tscn" id="14_5yfo5"]
 [ext_resource type="Texture2D" uid="uid://dcm4yl4kcn7wn" path="res://Asset/Backgrounds/gem_1.webp" id="14_6kr27"]
 [ext_resource type="Texture2D" uid="uid://rjoebry8l2at" path="res://Asset/Backgrounds/gem_3.webp" id="15_5yfo5"]
 
@@ -25,6 +26,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qwuky")
 all_cards_in_game = Array[ExtResource("2_o6gij")]([ExtResource("3_0dhn2"), ExtResource("4_6kr27"), ExtResource("5_5yfo5"), ExtResource("6_pmh16"), ExtResource("7_l8sbb"), ExtResource("8_0cgxv"), ExtResource("9_gipxf"), ExtResource("10_7io22"), ExtResource("11_uhlfd"), ExtResource("12_nq2mc"), ExtResource("13_3la2d")])
+
+[node name="Background2" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 651.0
+
+[node name="Background I" parent="Background2" instance=ExtResource("14_5yfo5")]
+layout_mode = 1
 
 [node name="Background" type="TextureRect" parent="."]
 visible = false

@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://whd5cf2nocco"]
+[gd_scene load_steps=6 format=3 uid="uid://whd5cf2nocco"]
 
 [ext_resource type="Script" uid="uid://bgujr7thbisqm" path="res://Scene/User Interfaces/UI Scripts/button_manager_inventory.gd" id="1_vauk6"]
+[ext_resource type="FontFile" uid="uid://dtdw2k1jvjn37" path="res://Asset/Fonts/times.ttf" id="2_86g2i"]
+[ext_resource type="Texture2D" uid="uid://cdfpkjhi1gi77" path="res://Asset/User Interface/button_ui.png" id="3_xdi81"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eubp2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r1jqd"]
 
 [node name="Inventory and Shop" type="Node2D"]
 
@@ -13,11 +19,18 @@ script = ExtResource("1_vauk6")
 
 [node name="Back" type="Button" parent="Button Manager"]
 layout_mode = 0
-offset_left = 31.0
-offset_top = 47.0
-offset_right = 153.0
-offset_bottom = 102.0
+offset_left = 908.0
+offset_top = 21.0
+offset_right = 1103.0
+offset_bottom = 101.0
+theme_override_fonts/font = ExtResource("2_86g2i")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_eubp2")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_r1jqd")
 text = "Back
 "
+icon = ExtResource("3_xdi81")
+icon_alignment = 1
+expand_icon = true
 
 [connection signal="pressed" from="Button Manager/Back" to="Button Manager" method="_on_back_pressed"]
