@@ -12,20 +12,22 @@
 
 [node name="Start_Battle" type="Node2D"]
 
-[node name="User Interface" type="Control" parent="."]
+[node name="Background" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 1153.0
-offset_bottom = 648.0
+offset_right = 1152.0
+offset_bottom = 651.0
 
-[node name="Background I" parent="User Interface" instance=ExtResource("1_2sahd")]
+[node name="Background I" parent="Background" instance=ExtResource("1_2sahd")]
 layout_mode = 1
 
 [node name="ButtonManager" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_nfl2a")
 
 [node name="Story Mode" parent="ButtonManager" instance=ExtResource("2_t4b46")]
@@ -47,12 +49,17 @@ text = ""
 title = "Tower Mode"
 
 [node name="Back" type="Button" parent="ButtonManager"]
-layout_mode = 0
-offset_left = 984.0
-offset_top = 26.0
-offset_right = 1106.0
-offset_bottom = 81.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 922.0
+offset_top = 21.0
+offset_right = 1117.0
+offset_bottom = 101.0
+grow_horizontal = 0
 theme_override_fonts/font = ExtResource("2_ygvaf")
+theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxEmpty_2sahd")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_objsq")
 text = "Back
