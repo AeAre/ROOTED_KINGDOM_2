@@ -21,7 +21,7 @@ class_name CardData
 @export var shield_growth: int = 0      # How much shield increases per level
 @export var heal_growth: int = 0        # How much healing increases per level
 @export var upgrade_cost: int = 50      # How much Material it costs to upgrade
-
+@export var mana_gain_growth: int = 1
 @export_group("Visuals & Audio")
 @export var sound_effect: AudioStream
 	

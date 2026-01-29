@@ -11,7 +11,6 @@ func _ready() -> void:
 func _on_redeem_pressed():
 	var code = cheat_input.text.to_upper() 
 	var result = Global.try_redeem_code(code)
-	
-	
+
 	feedback_lbl.text = result
 	cheat_input.text = ""

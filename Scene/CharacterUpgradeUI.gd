@@ -4,8 +4,8 @@ extends Control
 @onready var crystal_label = $CurrenciesBackground/MarginContainer/HBoxContainer/CrystalGemHolder/CrystalLabel
 
 # --- CONFIGURATION ---
-@export var all_available_heroes: Array[CharacterData] = [] 
-@export var card_ui_scene: PackedScene = preload("res://Scene/CardUI.tscn") 
+@export var all_available_heroes: Array[CharacterData] = []
+@export var card_ui_scene: PackedScene = preload("res://Scene/CardUI.tscn")
 
 # --- UI REFERENCES ---
 @onready var hero_hbox = $SelectionScroll/HeroHBox
@@ -15,15 +15,15 @@ extends Control
 @onready var hp_label = $UpgradePanel/HBoxContainer/StatsVBox/HPUpgradeLabel
 @onready var card_hbox = $UpgradePanel/HBoxContainer/CardsVBox/CardScroll/CardHBox
 
-# --- CArds ---
+# --- CARDS ---
 @onready var card_name_lbl = $UpgradePanel/HBoxContainer/CardsVBox/CardDetailVBox/CardNameLabel
-@onready var card_dmg_lbl = $UpgradePanel/HBoxContainer/CardsVBox/CardDetailVBox/CardDmgLabel
+@onready var card_stats_lbl = $UpgradePanel/HBoxContainer/CardsVBox/CardDetailVBox/CardDmgLabel # Renamed variable for clarity
 
 @onready var cards_vbox = $UpgradePanel/HBoxContainer/CardsVBox
 @onready var show_cards_btn = $UpgradePanel/HBoxContainer/StatsVBox/ShowCards
-@onready var upgrade_panel_node = $UpgradePanel 
+@onready var upgrade_panel_node = $UpgradePanel
 
-var collapsed_width: float = 305.0 
+var collapsed_width: float = 305.0
 var expanded_width: float = 640.0
 
 var selected_hero: CharacterData = null
@@ -33,11 +33,14 @@ func _ready() -> void:
 	cards_vbox.hide()
 	upgrade_panel_node.size.x = collapsed_width
 	show_cards_btn.text = "Show Cards"
+	
+	# Connect Buttons
 	$BackButton.pressed.connect(func(): get_tree().change_scene_to_file("res://Scene/User Interfaces/UI scenes/main_menu.tscn"))
 	show_cards_btn.pressed.connect(_on_show_cards_toggled)
 	$UpgradePanel/HBoxContainer/StatsVBox/UpgradeCharButton.pressed.connect(_on_upgrade_char_pressed)
 	$UpgradePanel/HBoxContainer/CardsVBox/CardDetailVBox/UpgradeCardButton.pressed.connect(_on_upgrade_card_pressed)
-	populate_hero_list() 
+	
+	populate_hero_list()
 	update_currency_display()
 
 func _on_show_cards_toggled():
@@ -69,7 +72,7 @@ func populate_hero_list():
 		if hero.character_illustration:
 			btn.texture_normal = hero.character_illustration
 		else:
-			btn.texture_normal = preload("res://Asset/Characters/Arlene/Arlene.jpg") 
+			btn.texture_normal = preload("res://Asset/Characters/Arlene/Arlene.jpg")
 			
 		btn.ignore_texture_size = true
 		btn.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
@@ -78,10 +81,10 @@ func populate_hero_list():
 		var is_actually_locked = hero.is_locked and not Global.is_hero_unlocked(hero.name)
 		
 		if is_actually_locked:
-			btn.modulate = Color(0.2, 0.2, 0.2) 
-			btn.disabled = true 
+			btn.modulate = Color(0.2, 0.2, 0.2)
+			btn.disabled = true
 		else:
-			btn.modulate = Color(1, 1, 1) 
+			btn.modulate = Color(1, 1, 1)
 			btn.disabled = false
 			btn.pressed.connect(_on_hero_selected.bind(hero))
 		
@@ -91,13 +94,13 @@ func _on_hero_selected(hero: CharacterData):
 	selected_hero = hero
 	upgrade_panel.show()
 	
+	# Reset card view state
 	cards_vbox.hide()
 	upgrade_panel_node.size.x = collapsed_width
 	show_cards_btn.text = "Show Cards"
 	
 	char_preview.texture = hero.character_illustration
 	name_label.text = hero.name
-	
 	
 	update_hero_stats_ui()
 
@@ -125,30 +128,61 @@ func load_hero_cards(hero: CharacterData):
 		card_hbox.add_child(card_node)
 		card_node.setup(card)
 		
+		# Ensure we can select it
 		var btn = card_node.get_node("VBoxContainer/PlayButton")
 		btn.text = "Select"
 		
+		# If this card is currently selected, highlight it
 		if selected_card and selected_card.card_name == card.card_name:
-			card_node.modulate = Color(1.5, 1.5, 1.5) 
+			card_node.modulate = Color(1.5, 1.5, 1.5)
 			
 		btn.pressed.connect(_on_card_selected.bind(card))
 
+# --- THIS IS THE FIX FOR THE "DAMAGE ONLY" BUG ---
 func _on_card_selected(card: CardData):
 	selected_card = card
 	var cur_lvl = Global.get_card_level_number(card)
-	var cur_dmg = Global.get_card_damage(card)
-	var next_dmg = cur_dmg + card.damage_growth
 	
 	card_name_lbl.text = card.card_name
 	$UpgradePanel/HBoxContainer/CardsVBox/CardDetailVBox/CardLvlLabel.text = "Level: " + str(cur_lvl)
-	card_dmg_lbl.text = "Damage: " + str(cur_dmg) + " -> " + str(next_dmg)
+	
+	# --- DYNAMIC STAT STRING BUILDING ---
+	var stats_text = ""
+	
+	# 1. CHECK DAMAGE
+	if card.damage > 0:
+		var cur_dmg = Global.get_card_damage(card)
+		var next_dmg = cur_dmg + card.damage_growth
+		stats_text += "Dmg: " + str(cur_dmg) + " -> " + str(next_dmg) + "\n"
+		
+	# 2. CHECK SHIELD
+	if card.shield > 0:
+		var cur_shd = Global.get_card_shield(card)
+		var next_shd = cur_shd + card.shield_growth
+		stats_text += "Shld: " + str(cur_shd) + " -> " + str(next_shd) + "\n"
+		
+	# 3. CHECK HEAL
+	if card.heal_amount > 0:
+		var cur_heal = Global.get_card_heal(card)
+		var next_heal = cur_heal + card.heal_growth
+		stats_text += "Heal: " + str(cur_heal) + " -> " + str(next_heal) + "\n"
+		
+	# 4. CHECK MANA (Optional)
+	if card.mana_gain > 0:
+		var cur_mana = Global.get_card_mana(card)
+		var next_mana = cur_mana + card.mana_gain_growth # Assuming you added growth for mana
+		stats_text += "Mana: " + str(cur_mana) + " -> " + str(next_mana)
+	
+	card_stats_lbl.text = stats_text
 	
 	$UpgradePanel/HBoxContainer/CardsVBox/CardDetailVBox/UpgradeCardButton.text = "Upgrade (" + str(card.upgrade_cost) + ")"
+	
+	# Refresh visuals to show selection highlight
+	load_hero_cards(selected_hero)
 
 func update_currency_display():
 	small_gem_label.text = str(Global.small_gems)
 	crystal_label.text = str(Global.crystal_gems)
-	
 	
 func _on_upgrade_char_pressed():
 	if not selected_hero: return
@@ -156,7 +190,12 @@ func _on_upgrade_char_pressed():
 	if Global.upgrade_character(selected_hero):
 		update_hero_stats_ui()
 		update_currency_display()
-		load_hero_cards(selected_hero) 
+		
+		# Reload cards because upgrading Hero also upgrades Cards (per your logic)
+		if selected_card:
+			_on_card_selected(selected_card)
+		
+		load_hero_cards(selected_hero)
 		print("Hero Upgraded!")
 	else:
 		print("Not enough Gems for Hero Upgrade!")
@@ -174,7 +213,6 @@ func _on_upgrade_card_pressed():
 		
 func _on_cancel_pressed() -> void:
 	upgrade_panel.hide()
-
 
 func _on_shop_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scene/User Interfaces/CharacterScenes/CharacterSelection.tscn")
