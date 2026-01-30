@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @onready var cheat_input = $VBoxContainer/CheatInput
 @onready var redeem_btn = $VBoxContainer/RedeemButton

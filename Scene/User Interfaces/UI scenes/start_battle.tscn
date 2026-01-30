@@ -38,6 +38,7 @@ offset_right = 912.0
 offset_bottom = 299.0
 text = ""
 title = "Story Mode"
+mode = 0
 
 [node name="Tower Mode" parent="ButtonManager" instance=ExtResource("2_t4b46")]
 layout_mode = 0
@@ -47,6 +48,8 @@ offset_right = 913.0
 offset_bottom = 607.0
 text = ""
 title = "Tower Mode"
+mode = 1
+availability = true
 
 [node name="Back" type="Button" parent="ButtonManager"]
 layout_mode = 1

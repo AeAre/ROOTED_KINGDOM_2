@@ -1,12 +1,13 @@
-[gd_scene load_steps=33 format=3 uid="uid://qde0e5mwnany"]
+[gd_scene load_steps=34 format=3 uid="uid://qde0e5mwnany"]
 
 [ext_resource type="Script" uid="uid://bxn5segpvyh4e" path="res://Scene/User Interfaces/UI Scripts/button_manager.gd" id="1_kxbd2"]
 [ext_resource type="PackedScene" uid="uid://diw3xv0en0ynt" path="res://Scene/User Interfaces/UI Asset Components/background_i.tscn" id="1_nbfal"]
 [ext_resource type="Texture2D" uid="uid://cdfpkjhi1gi77" path="res://Asset/User Interface/button_ui.png" id="2_eh1oq"]
 [ext_resource type="FontFile" uid="uid://dtdw2k1jvjn37" path="res://Asset/Fonts/times.ttf" id="2_jykwv"]
+[ext_resource type="Texture2D" uid="uid://io3a4q46b3pk" path="res://Asset/User Interface/Title_Banner_v1.png" id="2_nbfal"]
+[ext_resource type="Texture2D" uid="uid://l45mprnx01t8" path="res://Asset/User Interface/pause.png" id="3_yu5iq"]
 [ext_resource type="Texture2D" uid="uid://dcm4yl4kcn7wn" path="res://Asset/Backgrounds/gem_1.webp" id="4_87orj"]
 [ext_resource type="Texture2D" uid="uid://rjoebry8l2at" path="res://Asset/Backgrounds/gem_3.webp" id="5_qelcm"]
-[ext_resource type="FontFile" uid="uid://d0sq1luf5fm1p" path="res://Asset/Fonts/Humanistic.ttf" id="7_qrawm"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jykwv"]
 
@@ -57,8 +58,11 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_okapm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bsri0"]
-font = ExtResource("7_qrawm")
+font = ExtResource("2_jykwv")
 font_size = 32
+outline_size = 12
+outline_color = Color(18.892157, 18.892157, 18.892157, 1)
+shadow_size = 15
 
 [node name="MainMenu" type="Node2D"]
 
@@ -71,6 +75,27 @@ offset_bottom = 651.0
 [node name="Background I" parent="Background" instance=ExtResource("1_nbfal")]
 layout_mode = 1
 
+[node name="Currency Banner" type="TextureRect" parent="Background"]
+layout_mode = 0
+offset_right = 447.525
+offset_bottom = 174.0
+texture = ExtResource("3_yu5iq")
+expand_mode = 1
+
+[node name="Name Banner" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -344.84497
+offset_top = 150.365
+offset_right = 102.6803
+offset_bottom = 324.36542
+grow_horizontal = 0
+scale = Vector2(0.515, 0.515)
+texture = ExtResource("3_yu5iq")
+expand_mode = 1
+
 [node name="ButtonManager" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -78,12 +103,24 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_kxbd2")
 
+[node name="Game Title" type="TextureRect" parent="ButtonManager"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 652.945
+offset_right = 1355.9458
+offset_bottom = 238.0
+grow_horizontal = 0
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("2_nbfal")
+
 [node name="Start Battle" type="Button" parent="ButtonManager"]
 layout_mode = 0
-offset_left = 887.0
-offset_top = 173.0
-offset_right = 1080.0
-offset_bottom = 262.0
+offset_left = 833.0
+offset_top = 230.0
+offset_right = 1026.0
+offset_bottom = 319.0
 theme_override_fonts/font = ExtResource("2_jykwv")
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxEmpty_jykwv")
@@ -98,10 +135,10 @@ expand_icon = true
 
 [node name="Cards" type="Button" parent="ButtonManager"]
 layout_mode = 0
-offset_left = 887.0
-offset_top = 352.0
-offset_right = 1085.0
-offset_bottom = 439.0
+offset_left = 833.0
+offset_top = 396.0
+offset_right = 1026.0
+offset_bottom = 485.0
 theme_override_fonts/font = ExtResource("2_jykwv")
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxEmpty_4mbs0")
@@ -115,10 +152,10 @@ expand_icon = true
 
 [node name="Characters" type="Button" parent="ButtonManager"]
 layout_mode = 0
-offset_left = 886.0
-offset_top = 268.0
-offset_right = 1083.0
-offset_bottom = 349.0
+offset_left = 833.0
+offset_top = 313.0
+offset_right = 1026.0
+offset_bottom = 402.0
 theme_override_fonts/font = ExtResource("2_jykwv")
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxEmpty_87orj")
@@ -185,10 +222,10 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-offset_left = 118.0
-offset_top = 21.0
-offset_right = 428.0
-offset_bottom = 101.0
+offset_left = 61.0
+offset_top = 49.0
+offset_right = 371.0
+offset_bottom = 129.0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -239,10 +276,10 @@ text = "0"
 [node name="Profile" type="MarginContainer" parent="."]
 modulate = Color(1, 0.07999998, 0.8619999, 1)
 self_modulate = Color(18.892157, 2.7287061, 2.7287061, 0.93333334)
-offset_left = 23.0
-offset_top = 29.0
-offset_right = 129.0
-offset_bottom = 96.0
+offset_left = 869.0
+offset_top = 164.75
+offset_right = 975.0
+offset_bottom = 231.74998
 
 [node name="PlayerNameLabel" type="Label" parent="Profile"]
 layout_mode = 2

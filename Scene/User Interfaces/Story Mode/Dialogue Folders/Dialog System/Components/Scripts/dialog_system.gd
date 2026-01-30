@@ -15,9 +15,16 @@ var Dialogue_access
 var Dialogue_speaker
 var Dialogue_array: Array
 var Dialogue_array_name: String
-var Dialogue_lines_arr: Array
+var Dialogue_lines_arr
 var Speaker_index:= 0
 var Dialogue_index:= 0
+var Dialogue_stanza_index:= 0
+var Dialogue_stanza
+var Dialogue_stanza_num
+var Dialogue_stanza_dict
+var Dialogue_stanza_dict_name
+var Dialogue_lines_arr_value # -- AS LINES THIS TIME ARE IN ARRAYS 
+var dialogue_lines_arr_value_index:= 0
 
 var UI_ARE_HIDDEN:= false
 # Called when the node enters the scene tree for the first time.
@@ -32,30 +39,65 @@ func load_JSON():
 		print("ERROR: JSON failed to parse. Check for typos/missing commas in the file.")
 		return
 		
-	Dialogue_access = Dialogue_data.get("Dialogue", [])
-	Dialogue_speaker = Dialogue_access[0]
-	Dialogue_array = Dialogue_speaker.keys()
+	Dialogue_stanza = Dialogue_data.get("Dialogue", [])
 	play_dialogue()
 
 func play_dialogue():
-	if Speaker_index <= Dialogue_array.size() - 1: # Speaker
-		Dialogue_array_name = Dialogue_array[Speaker_index]
-		Dialogue_lines_arr = Dialogue_speaker[Dialogue_array_name]
+	# Dialogue_stanza_name = Dialogue_stanza_name_arr[Dialogue_stanza_index]
+	# Dialogue_stanza 
+	#= Dialogue_access[Dialogue_stanza_index] # Array with Dictionary value
+	if Dialogue_stanza_index <= Dialogue_stanza.size() - 1:
+		#Dialogue_speaker = Dialogue_access[0]
+		#Dialogue_array = Dialogue_speaker.keys()
+		# Dialogue_array_name = Dialogue_array[Speaker_index]
+		# Dialogue_lines_arr = Dialogue_speaker[Dialogue_array_name]
 		
-		if Dialogue_array_name == "Narrator":
-			d_interface.speaker_panel.visible = false
-		if Dialogue_index <= Dialogue_lines_arr.size() - 1: # Dialogue
-			main_play_reaction(Dialogue_index)
-			main_play_collage(Dialogue_index)
-			d_interface.animate_text = true
-			d_interface.Dialogue_ui.visible_ratio = 0.0
-			d_interface.Dialogue_speaker.text = Dialogue_array_name
-			d_interface.Dialogue_ui.text = Dialogue_lines_arr[Dialogue_index]
-			Dialogue_index += 1
+		Dialogue_stanza_num = Dialogue_stanza[Dialogue_stanza_index] # Stanza contents (Speakers)
+		Dialogue_array = Dialogue_stanza_num.keys()
+		print(Dialogue_stanza_index)
+		
+		# Dialogue_lines_arr = Dialogue_stanza_num[Dialogue_stanza_num] # Narrator's lines
+		# Dialogue_lines_arr_value = Dialogue_lines_arr[Dialogue_index]
+		
+		# Dialogue_lines_arr_value = Dialogue_lines_arr[dialogue_lines_arr_value_index
+		
+		if Speaker_index <= Dialogue_array.size() - 1: # Speaker Condition
+			#print(Speaker_index)
+			Dialogue_array_name = Dialogue_array[Speaker_index] # Speaker
+			Dialogue_lines_arr = Dialogue_stanza_num[Dialogue_array_name] # Narrator's lines
+			if Dialogue_array_name == "Narrator" or Dialogue_array_name == "":
+				d_interface.speaker_panel.visible = false
+			else:
+				d_interface.speaker_panel.visible = true
+				
+			if Dialogue_index <= Dialogue_lines_arr.size() - 1: # Dialogue
+				Dialogue_lines_arr_value = Dialogue_lines_arr[Dialogue_index]
+				#if dialogue_lines_arr_value_index <= Dialogue_lines_arr.size() - 1:
+				main_play_reaction(Dialogue_index)
+				main_play_collage(Dialogue_index)
+				d_interface.animate_text = true
+				d_interface.Dialogue_ui.visible_ratio = 0.0
+				d_interface.Dialogue_speaker.text = Dialogue_array_name
+				d_interface.Dialogue_ui.text = Dialogue_lines_arr_value.replace("{{Name}}", Global.player_name)
+				print(Dialogue_lines_arr_value)
+				Dialogue_index += 1
+				#else:
+				#	if dialogue_lines_arr_value_index > Dialogue_lines_arr.size():
+				#	dialogue_lines_arr_value_index = 0
+				#Dialogue_index += 1
+			else:
+				if Dialogue_index != Dialogue_lines_arr.size() - 1 and Dialogue_index > Dialogue_lines_arr.size() - 1:
+					Dialogue_index = 0
+					Speaker_index += 1
+					print("Complete Lines!")
 		else:
 			if Speaker_index != Dialogue_array.size() - 1 and Speaker_index > Dialogue_array.size() - 1:
-				Dialogue_index = 0
-				Speaker_index += 1
+				Speaker_index = 0
+				Dialogue_stanza_index += 1
+				print("Complete Speaker!")
+	else:
+		if Dialogue_stanza_index != Dialogue_stanza.size() - 1 and Dialogue_stanza_index > Dialogue_stanza.size() - 1:
+			print("Complete Stanzas!")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 # func _process(delta: float) -> void:
 	# pass
