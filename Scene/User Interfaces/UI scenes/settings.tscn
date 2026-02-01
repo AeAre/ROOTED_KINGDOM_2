@@ -41,6 +41,7 @@ offset_bottom = 651.0
 
 [node name="Background I" parent="User Interface" instance=ExtResource("2_hqftw")]
 layout_mode = 1
+offset_bottom = 105.0
 
 [node name="Options" type="PanelContainer" parent="User Interface"]
 layout_mode = 1
@@ -48,8 +49,10 @@ anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -370.0
-offset_right = 338.0
+offset_left = -246.0
+offset_top = 31.0
+offset_right = 277.0
+offset_bottom = -131.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jh0e1")

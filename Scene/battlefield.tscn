@@ -63,8 +63,8 @@ floor_9_enemies = Array[ExtResource("2_nqr2r")]([ExtResource("3_4l1qv"), ExtReso
 floor_10_enemies = Array[ExtResource("2_nqr2r")]([ExtResource("7_3314g")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(579.25, 325)
-scale = Vector2(1.7017673, 1.5523809)
+position = Vector2(576.00006, 369)
+scale = Vector2(1.7017673, 1.7761904)
 texture = ExtResource("3_tkjg1")
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -74,6 +74,7 @@ position = Vector2(0, 1)
 [node name="PlayerTeam" type="Node2D" parent="."]
 
 [node name="Dummy1" type="Node2D" parent="PlayerTeam"]
+position = Vector2(0, 48)
 script = ExtResource("4_y8d5v")
 damage_node = ExtResource("10_4x6d6")
 target_height = 210.0
@@ -89,6 +90,7 @@ offset_right = 299.0
 offset_bottom = 213.0
 step = 1.0
 show_percentage = false
+metadata/_edit_use_anchors_ = true
 
 [node name="HPLabel" type="Label" parent="PlayerTeam/Dummy1/HealthBar"]
 layout_mode = 0
@@ -96,6 +98,7 @@ offset_right = 93.82709
 offset_bottom = 23.0
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="ShieldLabel" type="Label" parent="PlayerTeam/Dummy1"]
 offset_left = 273.0
@@ -104,6 +107,7 @@ offset_right = 334.0
 offset_bottom = 239.0
 theme_override_colors/font_color = Color(0.007843138, 0, 1, 1)
 text = "Shield:0"
+metadata/_edit_use_anchors_ = true
 
 [node name="Area2D" type="Area2D" parent="PlayerTeam/Dummy1"]
 position = Vector2(258, 186)
@@ -114,6 +118,7 @@ position = Vector2(113, 218)
 shape = SubResource("RectangleShape2D_vsh2u")
 
 [node name="Dummy2" type="Node2D" parent="PlayerTeam"]
+position = Vector2(0, 48)
 script = ExtResource("4_y8d5v")
 damage_node = ExtResource("10_4x6d6")
 target_height = 210.0
@@ -129,6 +134,7 @@ offset_right = 407.0
 offset_bottom = 318.0
 value = 100.0
 show_percentage = false
+metadata/_edit_use_anchors_ = true
 
 [node name="HPLabel" type="Label" parent="PlayerTeam/Dummy2/HealthBar"]
 layout_mode = 0
@@ -154,6 +160,7 @@ position = Vector2(113, 218)
 shape = SubResource("RectangleShape2D_vsh2u")
 
 [node name="Dummy3" type="Node2D" parent="PlayerTeam"]
+position = Vector2(0, 48)
 script = ExtResource("4_y8d5v")
 damage_node = ExtResource("10_4x6d6")
 target_height = 210.0
@@ -215,10 +222,10 @@ layout_mode = 2
 
 [node name="MenuButton" type="Button" parent="CanvasLayer"]
 unique_name_in_owner = true
-offset_left = 1050.0
-offset_top = 18.0
-offset_right = 1153.0
-offset_bottom = 63.0
+offset_left = 1034.0
+offset_top = 20.0
+offset_right = 1137.0
+offset_bottom = 65.0
 text = "Menu"
 
 [node name="EnergyLabel" type="Label" parent="CanvasLayer"]
@@ -229,10 +236,10 @@ offset_bottom = 612.0
 theme_override_font_sizes/font_size = 25
 
 [node name="EndTurnButton" type="Button" parent="CanvasLayer"]
-offset_left = 1007.0
-offset_top = 511.0
-offset_right = 1136.0
-offset_bottom = 542.0
+offset_left = 1005.0
+offset_top = 592.0
+offset_right = 1134.0
+offset_bottom = 623.0
 text = "End Turn"
 
 [node name="CardSlots" type="HBoxContainer" parent="CanvasLayer"]
@@ -245,10 +252,10 @@ offset_right = 413.0
 offset_bottom = 160.76
 
 [node name="GlobalInfoButton" type="Button" parent="CanvasLayer"]
-offset_left = 1007.0
-offset_top = 460.0
-offset_right = 1130.0
-offset_bottom = 491.0
+offset_left = 1001.0
+offset_top = 548.0
+offset_right = 1124.0
+offset_bottom = 579.0
 text = "Show card info"
 
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="CanvasLayer"]

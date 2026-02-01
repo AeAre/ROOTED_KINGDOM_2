@@ -29,6 +29,8 @@ offset_bottom = 651.0
 
 [node name="Background I" parent="User Interface/Background" instance=ExtResource("1_7bjc4")]
 layout_mode = 1
+offset_top = -19.0
+offset_bottom = 67.0
 
 [node name="Button Manager" type="Control" parent="User Interface"]
 anchors_preset = 0

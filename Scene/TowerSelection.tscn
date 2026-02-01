@@ -11,16 +11,17 @@ anchors_preset = 0
 script = ExtResource("1_tbygq")
 
 [node name="TowerModBackgroundV2" type="Sprite2D" parent="."]
-position = Vector2(581.9785, 327.49335)
-scale = Vector2(2.1128056, 1.9206275)
+position = Vector2(581.9785, 363.99332)
+scale = Vector2(2.1128056, 2.1353333)
 texture = ExtResource("1_22r1l")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
+z_index = 2
 layout_mode = 0
 offset_left = 354.99997
 offset_top = 35.0
 offset_right = 774.64856
-offset_bottom = 640.5922
+offset_bottom = 739.31903
 scale = Vector2(0.891222, 0.98250943)
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
@@ -193,10 +194,10 @@ vertical_alignment = 1
 
 [node name="DescriptionPanel" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 743.0
+offset_left = 800.0
 offset_top = 35.0
 offset_right = 1143.0
-offset_bottom = 630.0
+offset_bottom = 660.0
 
 [node name="Label" type="RichTextLabel" parent="DescriptionPanel"]
 layout_mode = 0
@@ -207,10 +208,10 @@ fit_content = true
 
 [node name="StartBattleButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 161.0
-offset_top = 541.0
-offset_right = 366.0
-offset_bottom = 624.0
+offset_left = 89.0
+offset_top = 575.0
+offset_right = 294.0
+offset_bottom = 660.0
 text = "Start battle"
 icon = ExtResource("1_p0bcw")
 flat = true
@@ -219,8 +220,10 @@ expand_icon = true
 
 [node name="Back" type="Button" parent="."]
 layout_mode = 0
-offset_right = 132.0
-offset_bottom = 52.0
+offset_left = 1.0
+offset_top = 15.0
+offset_right = 191.0
+offset_bottom = 138.0
 text = "Back
 "
 icon = ExtResource("1_p0bcw")

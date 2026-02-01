@@ -17,6 +17,7 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gnkuu")
@@ -27,6 +28,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("8_pbrkd")
@@ -128,7 +130,7 @@ horizontal_scroll_mode = 2
 vertical_scroll_mode = 0
 
 [node name="CardHBox" type="HBoxContainer" parent="UpgradePanel/HBoxContainer/CardsVBox/CardScroll"]
-custom_minimum_size = Vector2(350, 250)
+custom_minimum_size = Vector2(350, 230)
 layout_mode = 2
 
 [node name="CardDetailVBox" type="VBoxContainer" parent="UpgradePanel/HBoxContainer/CardsVBox"]
@@ -144,11 +146,11 @@ custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
 [node name="CardDmgLabel" type="Label" parent="UpgradePanel/HBoxContainer/CardsVBox/CardDetailVBox"]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 105)
 layout_mode = 2
 
 [node name="UpgradeCardButton" type="Button" parent="UpgradePanel/HBoxContainer/CardsVBox/CardDetailVBox"]
-custom_minimum_size = Vector2(0, 47)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [node name="BackButton" type="TextureButton" parent="."]

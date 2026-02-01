@@ -295,7 +295,6 @@ func return_card_to_hand(data: CardData, card_node: Node):
 	card_node.get_parent().remove_child(card_node)
 	hand_container.add_child(card_node)
 	
-	card_node.toggle_info_capability(true)
 	
 	# 4. SWAP SIGNAL: Change button from "Return" to "Play"
 	var btn = card_node.get_node("VBoxContainer/PlayButton")
