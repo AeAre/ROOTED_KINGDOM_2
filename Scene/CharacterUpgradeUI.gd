@@ -181,8 +181,8 @@ func _on_card_selected(card: CardData):
 	load_hero_cards(selected_hero)
 
 func update_currency_display():
-	small_gem_label.text = str(Global.small_gems)
-	crystal_label.text = str(Global.crystal_gems)
+	small_gem_label.text = "Gem: " + str(Global.small_gems)
+	crystal_label.text = "Crystal: " + str(Global.crystal_gems)
 	
 func _on_upgrade_char_pressed():
 	if not selected_hero: return

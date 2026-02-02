@@ -21,7 +21,7 @@ func setup(data: CardData):
 	if data.card_image:
 		card_image_node.texture = data.card_image
 	
-	play_button.text = "Play (" + str(data.mana_cost) + ")"
+	play_button.text = "Place (" + str(data.mana_cost) + ")"
 	
 	if desc_label:
 		desc_label.text = data.description

@@ -24,6 +24,8 @@ var card_levels: Dictionary = {}
 var character_levels: Dictionary = {}
 var roaster_list: Array = []
 
+var loading_target_scene: String = ""
+
 var floor_rewards = {
 	1: { "small": 100, "crystal": 0 },
 	2: { "small": 150, "crystal": 0 },
@@ -64,7 +66,7 @@ func get_card_heal(data: CardData) -> int:
 
 func get_card_mana(data: CardData) -> int:
 	var lvl = card_levels.get(data.card_name, 0)
-	return data.mana_gain + (data.mana_gain * lvl) # Assuming mana doesn't grow, multiply by 0 is safe
+	return data.mana_gain + (data.mana_gain * lvl)
 	
 func get_card_level_number(data: CardData) -> int:
 	return card_levels.get(data.card_name, 0) + 1
@@ -121,12 +123,10 @@ func upgrade_character(data: CharacterData) -> bool:
 	if small_gems >= cost:
 		small_gems -= cost
 		
-		# 1. Increase Character Level
 		if not character_levels.has(data.name):
 			character_levels[data.name] = 0
 		character_levels[data.name] += 1
 		
-		# 2. Increase Level of ALL their cards
 		var all_cards = []
 		if data.unique_card: all_cards.append(data.unique_card)
 		all_cards.append_array(data.common_cards)

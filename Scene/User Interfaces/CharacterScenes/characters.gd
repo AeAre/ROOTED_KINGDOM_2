@@ -42,8 +42,8 @@ func _ready():
 		team_panel.hide()
 		
 func update_currency_ui():
-	small_gem_label.text = str(Global.small_gems)
-	crystal_label.text = str(Global.crystal_gems)
+	small_gem_label.text = "Gem: " + str(Global.small_gems)
+	crystal_label.text = "Crystal: " + str(Global.crystal_gems)
 
 func display_roster():
 	for child in hero_grid.get_children():
@@ -122,7 +122,11 @@ func _on_unlock_hero_pressed():
 	
 func _on_confirm_battle_pressed():
 	if Global.selected_team.size() > 0:
-		get_tree().change_scene_to_file("res://Scene/battlefield.tscn")
+		# 1. Set the target destination
+		Global.loading_target_scene = "res://Scene/battlefield.tscn"
+		
+		# 2. Go to the loading scene
+		get_tree().change_scene_to_file("res://Scene/User Interfaces/LoadingScene.tscn")
 	else:
 		print("You must select at least one character!")
 

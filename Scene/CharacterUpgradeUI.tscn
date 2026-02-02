@@ -184,7 +184,7 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -338.0
+offset_left = -547.0
 offset_top = -29.0
 offset_right = 32.0
 offset_bottom = 117.0
@@ -193,31 +193,25 @@ texture = ExtResource("9_yy5vg")
 expand_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="CurrenciesBackground"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -155.0
-offset_top = -53.5
-offset_right = 155.0
-offset_bottom = 53.5
-grow_horizontal = 2
-grow_vertical = 2
+texture_filter = 1
+layout_mode = 0
+offset_left = 35.0
+offset_top = 17.0
+offset_right = 457.0
+offset_bottom = 124.0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CurrenciesBackground/MarginContainer"]
+modulate = Color(1, 0.87, 0.87, 1)
 layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="SmallGemHolder" type="HBoxContainer" parent="CurrenciesBackground/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
-theme_override_constants/separation = 20
 
 [node name="TextureRect" type="TextureRect" parent="CurrenciesBackground/MarginContainer/HBoxContainer/SmallGemHolder"]
 custom_minimum_size = Vector2(60, 40)
@@ -230,13 +224,18 @@ stretch_mode = 5
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6539801, 0.044738613, 0.70056635, 1)
+theme_override_constants/line_spacing = 3
+theme_override_constants/paragraph_spacing = 5
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/outline_size = 9
+theme_override_constants/shadow_outline_size = 7
 theme_override_font_sizes/font_size = 25
 text = "0"
 
 [node name="CrystalGemHolder" type="HBoxContainer" parent="CurrenciesBackground/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
-theme_override_constants/separation = 20
 
 [node name="TextureRect" type="TextureRect" parent="CurrenciesBackground/MarginContainer/HBoxContainer/CrystalGemHolder"]
 custom_minimum_size = Vector2(30, 40)
@@ -249,6 +248,12 @@ stretch_mode = 5
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.654902, 0.043137256, 0.7019608, 1)
+theme_override_constants/line_spacing = 3
+theme_override_constants/paragraph_spacing = 5
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/outline_size = 9
+theme_override_constants/shadow_outline_size = 7
 theme_override_font_sizes/font_size = 25
 text = "0"
 

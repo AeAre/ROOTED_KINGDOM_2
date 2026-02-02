@@ -512,7 +512,7 @@ func _on_global_info_button_pressed():
 	
 	var btn = get_node_or_null("CanvasLayer/GlobalInfoButton")
 	if btn:
-		btn.text = "Hide Info" if is_info_mode_on else "Show Info"
+		btn.text = "Hide Card Info" if is_info_mode_on else "Show Card Info"
 
 	# SAFE LOOP: Only touches valid cards
 	for card in hand_container.get_children():
