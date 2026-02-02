@@ -8,7 +8,6 @@ extends Control
 @onready var small_gem_label = $MarginContainer/HBoxContainer/SmallGemHolder/SmallGemLabel
 @onready var crystal_label = $MarginContainer/HBoxContainer/CrystalGemHolder/CrystalLabel
 
-# References for the Details Panel
 @onready var detail_name = $DetailPanel/VBoxContainer/NameLabel
 @onready var detail_stats = $DetailPanel/VBoxContainer/StatsLabel
 @onready var common_grid = $DetailPanel/VBoxContainer/ScrollContainer/CommonGrid
@@ -18,7 +17,6 @@ extends Control
 var selection_card_scene = preload("res://Scene/User Interfaces/CharacterScenes/SelectionCard.tscn")
 var card_ui_scene = preload("res://Scene/CardUI.tscn")
 
-# Store the currently viewed character data so we can unlock them
 var current_viewed_hero: CharacterData = null
 
 
@@ -27,7 +25,6 @@ func _ready():
 	display_roster()
 	update_currency_ui()
 	
-	# --- NEW: VISIBILITY LOGIC ---
 	# Only show the confirm button if we came from Tower Mode
 	confirm_button.visible = Global.from_tower_mode
 	
@@ -45,18 +42,18 @@ func _ready():
 		team_panel.hide()
 		
 func update_currency_ui():
-	# Display the values from Global
 	small_gem_label.text = str(Global.small_gems)
 	crystal_label.text = str(Global.crystal_gems)
 
-# --- 2. UPDATED ROSTER DISPLAY ---
 func display_roster():
 	for child in hero_grid.get_children():
 		child.queue_free()
 
-	for data in available_heroes:
+	for data in Global.roaster_list:
 		var card = selection_card_scene.instantiate()
 		hero_grid.add_child(card)
+		
+		Global.connect_buttons_recursive(card)
 		
 		card.get_node("Illustration").texture = data.character_illustration
 		card.get_node("NameLabel").text = data.name
@@ -64,25 +61,21 @@ func display_roster():
 		var is_actually_locked = data.is_locked and not Global.is_hero_unlocked(data.name)
 		
 		if is_actually_locked:
-			card.modulate = Color(0.3, 0.3, 0.3, 1.0) 
+			card.modulate = Color(0.3, 0.3, 0.3, 1.0)
 			card.get_node("NameLabel").text = "LOCKED"
 		else:
 			card.modulate = Color.WHITE
-			# --- FIX: RE-HIGHLIGHT SELECTED HEROES ---
-			# If this hero is already in the team, show the red highlight!
 			if data in Global.selected_team:
 				card.get_node("SelectionOverlay").show()
 		
 		card.pressed.connect(_on_hero_selection.bind(data, card))
 
 # --- 3. SELECTION LOGIC ---
-# --- UPDATED SELECTION LOGIC ---
 func _on_hero_selection(data: CharacterData, card_node: Button):
 	current_viewed_hero = data
 	update_details(data)
 	
 	# 1. Create a single variable to determine if the hero is locked or owned
-	# A hero is only "Actually Locked" if the resource says so AND Global hasn't unlocked them.
 	var is_actually_locked = data.is_locked and not Global.is_hero_unlocked(data.name)
 	
 	if is_actually_locked:
@@ -92,11 +85,9 @@ func _on_hero_selection(data: CharacterData, card_node: Button):
 			unlock_btn.show()
 			unlock_btn.disabled = (Global.small_gems < data.unlock_cost)
 		
-		# STOP HERE: Don't let them add to team
 		return 
 	
-	# 2. IF WE REACH THIS POINT, THE HERO IS UNLOCKED!
-	# Hide the unlock button immediately
+	# Hide the unlock button 
 	if unlock_btn: 
 		unlock_btn.hide()
 	
@@ -114,7 +105,6 @@ func _on_hero_selection(data: CharacterData, card_node: Button):
 		
 	update_team_ui()
 
-# --- 4. NEW: UNLOCK HERO LOGIC ---
 func _on_unlock_hero_pressed():
 	if current_viewed_hero == null: return
 	
@@ -155,9 +145,7 @@ func update_details(data: CharacterData):
 	for child in common_grid.get_children(): 
 		child.queue_free()
 
-	# IF LOCKED: Maybe hide cards or show them as "???"
-	# For now, we still show them so player knows what they are buying
-	
+	# IF LOCKED: Maybe hide cards or show them as "???"	
 	var all_cards = []
 	if data.unique_card:
 		all_cards.append(data.unique_card)
@@ -181,7 +169,6 @@ func update_details(data: CharacterData):
 		
 		var desc_label = Label.new()
 		# Only show description if unlocked? 
-		# If you want to hide description for locked chars, wrap this in an if !data.is_locked
 		desc_label.text = card_data.description 
 		desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		desc_label.custom_minimum_size.x = 320 

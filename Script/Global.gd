@@ -23,6 +23,9 @@ var from_tower_mode: bool = false
 var card_levels: Dictionary = {} 
 var character_levels: Dictionary = {}
 
+const HERO_DATABASE = preload("res://Resources/GameHeroList.tres")
+var roaster_list: Array = []
+
 var floor_rewards = {
 	1: { "small": 100, "crystal": 0 },
 	2: { "small": 150, "crystal": 0 },
@@ -41,14 +44,16 @@ const UPGRADE_COST_BASE = 100
 const UPGRADE_COST_MULTIPLIER = 1.5
 
 func _ready() -> void:
+	if HERO_DATABASE:
+		roaster_list.assign(HERO_DATABASE.all_heroes)
+		print("Global: Preloaded ", roaster_list.size(), " heroes.")
+	
 	setup_audio_node()
 	load_game()
 	
 	get_tree().node_added.connect(_on_node_added)
 	connect_buttons_recursive(get_tree().root)
 
-# --- GETTERS (CRITICAL FOR BATTLE) ---
-# When fighting, use THESE functions, not the raw card.damage!
 
 func get_card_damage(data: CardData) -> int:
 	var lvl = card_levels.get(data.card_name, 0)
@@ -81,7 +86,7 @@ func get_upgrade_cost(char_name: String) -> int:
 	return int(UPGRADE_COST_BASE * pow(UPGRADE_COST_MULTIPLIER, lvl))
 
 func try_redeem_code(code: String) -> String:
-	match code.to_upper(): # Added to_upper() so "rich" and "RICH" both work
+	match code.to_upper(): 
 		"RICH":
 			small_gems += 9999
 			crystal_gems += 99

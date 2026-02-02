@@ -14,8 +14,8 @@ func _ready() -> void:
 	
 func update_currency_ui():
 	# Display the values from Global
-	small_gem_label.text = str(Global.small_gems)
-	crystal_label.text = str(Global.crystal_gems)
+	small_gem_label.text = "Gem: " + str(Global.small_gems)
+	crystal_label.text =  "Crystal: " + str(Global.crystal_gems)
 
 func _on_start_battle_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scene/User Interfaces/UI scenes/start_battle.tscn")
