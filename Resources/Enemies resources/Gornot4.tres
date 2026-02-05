@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://cst0ty6jx3wqd"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=5 format=3 uid="uid://cst0ty6jx3wqd"]
 
 [ext_resource type="SpriteFrames" uid="uid://djsaubq64btn2" path="res://Resources/Animation resourcess/Enemy animations/Enemy4.tres" id="1_d4a58"]
+[ext_resource type="AudioStream" uid="uid://di44xdx04rajl" path="res://Asset/Sound effects/parry.mp3" id="1_icqma"]
 [ext_resource type="Script" uid="uid://de4ufxbti7lif" path="res://Script/EnemyData.gd" id="1_yrnme"]
+[ext_resource type="AudioStream" uid="uid://di6mxheucbbrf" path="res://Asset/Sound effects/enemysoundeeffects.mp3" id="2_lrdig"]
 
 [resource]
 script = ExtResource("1_yrnme")
@@ -11,4 +13,9 @@ max_health = 777
 base_damage = 13
 min_crit_chance = 35
 max_crit_chance = 65
+attack_sound_1 = ExtResource("2_lrdig")
+secondary_attack_chance = 0.5
+secondary_is_aoe = true
+secondary_aoe_targets = 2
+attack_sound_2 = ExtResource("1_icqma")
 metadata/_custom_type_script = "uid://de4ufxbti7lif"

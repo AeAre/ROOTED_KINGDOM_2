@@ -22,6 +22,7 @@ extends Node2D
 @export var floor_18_enemies: Array[EnemyData] = []
 @export var floor_19_enemies: Array[EnemyData] = []
 @export var floor_20_enemies: Array[EnemyData] = []
+
 # --- 1. NODE LINKS ---
 @onready var slot_container = %CardSlots
 @onready var player_team = $PlayerTeam
@@ -47,14 +48,13 @@ var discard_pile: Array = []
 var hand_size: int = 6
 var round_number: int = 1
 
-var max_mana: int = 20     # Hard Cap
-var current_mana: int = 4  # Starting Mana
+var max_mana: int = 20      # Hard Cap
+var current_mana: int = 4   # Starting Mana
 var mana_regen: int = 4
 
 # Card Slots
 var slotted_nodes: Array = []
 var max_slots: int = 3
-
 
 var phases: Array = ["player", "enemy"]
 var current_phase_index: int = 0
@@ -87,11 +87,9 @@ func _ready():
 		var random_track_path = battle_themes.pick_random()
 		bgm_player.stream = load(random_track_path)
 	
-	# Play the selected track
 	bgm_player.play()
 	
 	if stage_count_label:
-		# This uses your existing global variable to show "Stage: 1", "Stage: 2", etc.
 		stage_count_label.text = "Stage: " + str(Global.current_tower_floor)
 		
 	setup_player_team()
@@ -101,7 +99,7 @@ func _ready():
 	start_current_phase()
 	
 func setup_player_team():
-	var heroes_in_scene = player_team.get_children() # Dummy1, Dummy2, Dummy3
+	var heroes_in_scene = player_team.get_children() 
 	
 	for i in range(heroes_in_scene.size()):
 		var character_node = heroes_in_scene[i]
@@ -122,12 +120,6 @@ func build_deck_from_team():
 			deck.append(card)
 	
 	deck.shuffle()
-	
-# --- 3. THE CORE LOOP ---
-func _process(_delta: float):
-	if is_battle_paused:
-		return
-	
 
 # --- 4. TURN LOGIC ---
 func start_current_phase():
@@ -138,12 +130,10 @@ func start_current_phase():
 			var old_mana = current_mana
 			current_mana = min(current_mana + mana_regen, max_mana)
 			
-			# Calculate how much we actually gained (in case of cap)
 			var actual_gain = current_mana - old_mana
 			if actual_gain > 0:
 				spawn_mana_popup(actual_gain)
 		
-		# Highlight heroes
 		for hero in player_team.get_children():
 			hero.modulate = Color(1.2, 1.2, 1.2)
 			
@@ -151,7 +141,6 @@ func start_current_phase():
 		update_mana_ui()
 		
 	elif phase == "enemy":
-		# Dim heroes
 		for hero in player_team.get_children():
 			hero.modulate = Color(0.5, 0.5, 0.5)
 		
@@ -161,44 +150,41 @@ func start_current_phase():
 func execute_enemy_ai():
 	for enemy in get_alive_enemies():
 		var alive_heroes = get_alive_players()
-		if alive_heroes.is_empty():
-			break
+		if alive_heroes.is_empty(): break
 		
 		if enemy.has_method("process_stun_turn"):
 			if enemy.process_stun_turn():
-				# If true, they are stunned. 
-				# Wait a bit so the player sees they skipped their turn.
-				print(enemy.name + " skips turn due to stun.")
 				await get_tree().create_timer(0.5).timeout
-				continue # Skip to the next enemy immediately
-				
-		# --- 1. Calculate Damage & Crit ---
-		var damage_to_deal = enemy.base_damage
-		var is_crit = false
-		
-		# Roll for Crit (0-100)
-		if randi() % 100 < enemy.critical_chance:
-			is_crit = true
-			damage_to_deal = int(damage_to_deal * 1.5) # 1.5x Damage for Crit
-			print("CRITICAL HIT by " + enemy.char_name + "!")
+				continue 
 
-		# --- 2. Handle Target Selection (AOE vs Single) ---
-		var targets_to_hit = []
+		# 1. Get the full attack info from the enemy
+		var attack_decision = enemy.decide_attack()
 		
-		if enemy.is_aoe:
-			# AOE: Get multiple random heroes
+		# 2. Play Sound
+		if attack_decision["sfx"] and sfx_player:
+			sfx_player.stream = attack_decision["sfx"]
+			sfx_player.play()
+
+		# 3. Handle Target Selection (using the decision's AoE settings)
+		var targets_to_hit = []
+		if attack_decision["is_aoe"]:
 			alive_heroes.shuffle()
-			var hit_count = min(enemy.max_aoe_targets, alive_heroes.size())
+			var hit_count = min(attack_decision["aoe_targets"], alive_heroes.size())
 			for i in range(hit_count):
 				targets_to_hit.append(alive_heroes[i])
 		else:
-			# Single Target
 			targets_to_hit.append(alive_heroes.pick_random())
 
-		# --- 3. Apply Damage ---
+		# 4. Apply Damage
+		await get_tree().create_timer(0.2).timeout
+		var damage_to_deal = int(enemy.base_damage * attack_decision["damage_mult"])
+		
+		# We still check crit here using the enemy's calculated crit chance
+		var is_crit = randi() % 100 < enemy.critical_chance
+		if is_crit: damage_to_deal = int(damage_to_deal * 1.5)
+
 		for target in targets_to_hit:
 			target.take_damage(damage_to_deal, is_crit)
-			print(enemy.char_name + " dealt " + str(damage_to_deal) + " to " + target.char_name)
 
 		await get_tree().create_timer(0.8).timeout
 	
@@ -206,13 +192,9 @@ func execute_enemy_ai():
 	if not get_alive_players().is_empty():
 		end_current_phase()
 
-
 func spawn_cards():
 	var current_cards_in_hand = hand_container.get_child_count()
-	
 	var cards_to_draw = hand_size - current_cards_in_hand
-	
-	print("Hand has " + str(current_cards_in_hand) + " cards. Drawing " + str(cards_to_draw) + " new cards.")
 	
 	if cards_to_draw <= 0:
 		update_mana_ui()
@@ -245,6 +227,11 @@ func create_card_instance(data: CardData):
 	new_card.get_node("Visuals/VBoxContainer/PlayButton").pressed.connect(_on_card_played.bind(data, new_card))
 	
 func end_current_phase():
+	# --- SOUND KILL-SWITCH ---
+	# This stops any attack SFX from playing when we switch turns
+	if sfx_player:
+		sfx_player.stop()
+		
 	check_battle_status()
 	current_phase_index += 1
 	
@@ -256,87 +243,82 @@ func end_current_phase():
 
 func _on_card_played(data: CardData, card_node: Node):
 	if phases[current_phase_index] != "player": return
-	
+	if slotted_nodes.size() >= max_slots: return 
 	if current_mana < data.mana_cost:
 		if card_node.has_method("animate_error"):
-			card_node.animate_error() # Visual feedback for "No Mana"
+			card_node.animate_error() 
 		return
-
-	# If we have mana, play the card
-	if card_node.has_method("animate_play"):
-		card_node.animate_play()
-		
-	if slotted_nodes.size() >= max_slots: return 
-	if current_mana < data.mana_cost: return
-
-	# 1. Deduct Mana
+	
+	# 1. Pay Mana FIRST
 	current_mana -= data.mana_cost
 	
+	# 2. Move the card to the slot BEFORE calling update_mana_ui
 	if card_node.has_method("set_description_visible"):
 		card_node.set_description_visible(false)
 	
-	# 2. Add to Slot Logic
-	slotted_nodes.append(card_node)
-	
-	# 3. Move Visuals to Slot
+	if "is_in_hand" in card_node:
+		card_node.is_in_hand = false
+
+	slotted_nodes.append(card_node) 
 	card_node.get_parent().remove_child(card_node)
 	slot_container.add_child(card_node)
 	
-	var btn = card_node.get_node("Visuals/VBoxContainer/PlayButton")
+	# 3. Reset the color of THIS specific card immediately
+	# We target the 'content' node specifically since that's what turned dark
+	var content = card_node.get_node_or_null("Visuals/VBoxContainer")
+	if content:
+		content.modulate = Color(1, 1, 1)
+	card_node.modulate = Color(1, 1, 1)
+
+	# 4. Now update the rest of the hand
+	update_mana_ui()
 	
+	# 5. Handle the button logic
+	var btn = card_node.get_node("Visuals/VBoxContainer/PlayButton")
 	if btn.pressed.is_connected(_on_card_played):
 		btn.pressed.disconnect(_on_card_played)
 	
 	btn.pressed.connect(return_card_to_hand.bind(data, card_node))
-	
 	btn.text = "Return"
-	btn.disabled = false 
-	card_node.modulate = Color(1, 1, 1) 
-	
-	update_mana_ui()
 	
 func return_card_to_hand(data: CardData, card_node: Node):
 	if is_processing_turn: return
 	
-	# 1. Refund Mana
 	current_mana += data.mana_cost
 	current_mana = min(current_mana, max_mana)
 
-	# 2. Remove from Slot Logic
-	slotted_nodes.erase(data)
+	slotted_nodes.erase(card_node) 
 	
-	# 3. Move Visuals back to Hand
 	card_node.get_parent().remove_child(card_node)
 	hand_container.add_child(card_node)
 	
+	if "is_in_hand" in card_node:
+		card_node.is_in_hand = true
 	
-	# 4. SWAP SIGNAL: Change button from "Return" to "Play"
+	if card_node.has_method("set_description_visible"):
+		# Show description again if the global info toggle is ON
+		card_node.set_description_visible(is_info_mode_on)
+	
 	var btn = card_node.get_node("Visuals/VBoxContainer/PlayButton")
-	
 	if btn.pressed.is_connected(return_card_to_hand):
 		btn.pressed.disconnect(return_card_to_hand)
 		
 	btn.pressed.connect(_on_card_played.bind(data, card_node))
 	
-	# Visual Reset
-	btn.text = "Play"
+	btn.text = "Play (" + str(data.mana_cost) + ")"
 	
 	update_mana_ui()
 		
-# --- 2. THE TURN PROGRESSION ---
 func _on_end_turn_button_pressed():
-	if is_processing_turn: return # Stop spamming!
+	if is_processing_turn: return 
 	if phases[current_phase_index] != "player": return
 	
-	is_processing_turn = true # Lock the turn
+	is_processing_turn = true 
 	
-	# 2. Play the cards
 	await execute_slotted_actions()
 	
-	# 3. Move to Enemy Phase
 	end_current_phase()
 	
-	# 4. Unlock after the whole sequence (including enemy AI) is done
 	is_processing_turn = false
 
 func update_mana_ui():
@@ -349,7 +331,7 @@ func update_mana_ui():
 		if "card_data" in card and card.card_data != null:
 			var cost = card.card_data.mana_cost
 			var btn = card.get_node("Visuals/VBoxContainer/PlayButton")
-			var content = card.get_node("Visuals/VBoxContainer") # The visual content
+			var content = card.get_node("Visuals/VBoxContainer") 
 			
 			if not is_player_phase or cost > current_mana:
 				btn.disabled = true
@@ -358,34 +340,23 @@ func update_mana_ui():
 				btn.disabled = false
 				content.modulate = Color(1, 1, 1)
 
-	# Slotted cards should always be bright
 	for card in slot_container.get_children():
 		card.modulate = Color(1, 1, 1)
-		var btn = card.get_node("Visuals/VBoxContainer/PlayButton")
-		var content = card.get_node("Visuals/VBoxContainer")
-		content.modulate = Color(1, 1, 1)
-		btn.disabled = false
-
+		var btn = card.get_node_or_null("Visuals/VBoxContainer/PlayButton")
+		var content = card.get_node_or_null("Visuals/VBoxContainer")
+		if content:
+			content.modulate = Color(1, 1, 1) # Force it to white
+		if btn:
+			btn.disabled = false
 
 func reshuffle_discard_into_deck():
 	if discard_pile.is_empty():
-		print("WARNING: No cards left in deck OR discard pile!")
 		return
 		
-	print("--- Reshuffling Discard Pile into Deck ---")
 	deck = discard_pile.duplicate()
 	discard_pile.clear()
 	deck.shuffle()
 	
-func highlight_active_character():
-	for character in turn_order:
-		if character == active_character:
-			character.modulate = Color(1.2, 1.2, 1.2) # Brighten
-			character.scale = Vector2(1.1, 1.1) # Slightly larger
-		else:
-			character.modulate = Color(0.5, 0.5, 0.5) # Dim
-			character.scale = Vector2(1.0, 1.0) # Normal size
-
 func advance_round():
 	round_number += 1
 
@@ -395,15 +366,12 @@ func execute_slotted_actions():
 	for card_node in slotted_nodes:
 		if not is_instance_valid(card_node): continue
 		
-		var data = card_node.card_data # Get the resource from the node
+		var data = card_node.card_data 
 		
-		# --- ANIMATION START ---
 		if card_node.has_method("animate_as_active"):
 			card_node.animate_as_active()
 		
-		# Give a tiny pause for the card to "pop" before the sound/damage
 		await get_tree().create_timer(0.2).timeout
-		# --- ANIMATION END ---
 
 		if data.sound_effect and sfx_player:
 			sfx_player.stream = data.sound_effect
@@ -453,16 +421,12 @@ func execute_slotted_actions():
 		
 		# 5. Stun Logic
 		if data.stuns_enemy:
-			print("--- DEBUG: Card '", data.card_name, "' has stuns_enemy = TRUE")
 			var targets = get_targets_for_action(data.is_aoe, data.aoe_targets)
 			
 			if not targets.is_empty():
 				for target in targets:
 					if target.has_method("apply_stun"):
-						print("--- DEBUG: Calling apply_stun on ", target.char_name)
 						target.apply_stun(data.stun_duration)
-			else:
-				print("--- DEBUG: Stun failed - No targets found!")
 						
 		discard_pile.append(data)
 		await get_tree().create_timer(1).timeout
@@ -472,10 +436,6 @@ func execute_slotted_actions():
 		
 	slotted_nodes.clear()
 	check_battle_status()
-
-
-func _on_restart_button_pressed():
-	get_tree().reload_current_scene()
 
 
 func get_alive_enemies() -> Array:
@@ -513,65 +473,46 @@ func setup_tower_enemies():
 		
 	for node in enemy_nodes:
 		node.hide()
-		node.current_health = 0 # Ensure hidden ones are "dead" for the logic
+		node.current_health = 0 
 
 	for i in range(selected_floor_data.size()):
 		if i < enemy_nodes.size():
 			var enemy_resource = selected_floor_data[i]
 			enemy_nodes[i].setup_enemy(enemy_resource)
 			enemy_nodes[i].show() 
-	
-	for i in range(selected_floor_data.size()):
-		if i < enemy_nodes.size():
-			var enemy_resource = selected_floor_data[i]
-			var enemy_node = enemy_nodes[i] 
 			
-			enemy_node.setup_enemy(enemy_resource)
-			enemy_node.show()
-			
-			if not enemy_node.enemy_selected.is_connected(_on_enemy_clicked):
-				enemy_node.enemy_selected.connect(_on_enemy_clicked)
+			if not enemy_nodes[i].enemy_selected.is_connected(_on_enemy_clicked):
+				enemy_nodes[i].enemy_selected.connect(_on_enemy_clicked)
 				
 func check_battle_status():
-	# get_alive_enemies() already filters out dead/invalid units
 	var alive_enemies = get_alive_enemies()
 	var alive_players = get_alive_players()
 	
-	# 1. Check if Player Lost (All heroes dead)
 	if alive_players.is_empty():
-		print("Defeat! All heroes have fallen.")
 		await get_tree().create_timer(1.0).timeout
 		fade_out_music()
-		GlobalMenu.show_loss_menu() # Trigger the loss UI
+		GlobalMenu.show_loss_menu() 
 		return
 		
-	# Only trigger victory if there are NO alive enemies left
 	if alive_enemies.is_empty():
 		if Global.current_tower_floor > 0:
-			print("Victory! All enemies defeated.")
-			Global.mark_floor_cleared(Global.current_tower_floor) #
+			Global.mark_floor_cleared(Global.current_tower_floor) 
 			fade_out_music()
 			GlobalMenu.show_victory_menu() 
 	
 func get_alive_players() -> Array:
 	var alive = []
 	for hero in player_team.get_children():
-		# Check if the hero node exists and has health > 0
 		if is_instance_valid(hero) and hero.current_health > 0:
 			alive.append(hero)
 	return alive
-	
-func _on_menu_button_pressed() -> void:
-	GlobalMenu.show_pause_menu()
 
 func spawn_mana_popup(amount: int):
 	if mana_label == null: return
 	
 	var popup = mana_popup_scene.instantiate()
-	# Add it to the CanvasLayer so it stays on top of the UI
 	$CanvasLayer.add_child(popup)
 	
-	# Position it right on top of the Mana Label
 	popup.global_position = mana_label.global_position + Vector2(20, -20)
 	popup.setup(amount)
 
@@ -582,18 +523,13 @@ func _on_global_info_button_pressed():
 	if btn:
 		btn.text = "Hide Card Info" if is_info_mode_on else "Show Card Info"
 
-	# SAFE LOOP: Only touches valid cards
 	for card in hand_container.get_children():
-		# Check if the card is valid and has the script attached
 		if is_instance_valid(card) and card.has_method("set_description_visible"):
 			card.set_description_visible(is_info_mode_on)
 
 func _on_enemy_clicked(clicked_enemy):
-	# 1. Unlock all enemies first
 	for enemy in get_alive_enemies():
 		enemy.set_target_lock(false)
-	
-	# 2. Lock the one we clicked
 	clicked_enemy.set_target_lock(true)
 	
 
@@ -604,7 +540,6 @@ func get_targets_for_action(is_aoe: bool, num_targets: int) -> Array:
 	if alive_enemies.is_empty():
 		return targets
 
-	# Find if someone is locked
 	var locked_enemy = null
 	for e in alive_enemies:
 		if e.is_locked_target:
@@ -612,11 +547,8 @@ func get_targets_for_action(is_aoe: bool, num_targets: int) -> Array:
 			break
 	
 	if is_aoe:
-		# If locked, they are target #1
 		if locked_enemy:
 			targets.append(locked_enemy)
-		
-		# Fill the rest with others
 		for e in alive_enemies:
 			if e != locked_enemy and targets.size() < num_targets:
 				targets.append(e)
@@ -632,3 +564,10 @@ func fade_out_music():
 	var tween = create_tween()
 	tween.tween_property(bgm_player, "volume_db", -80.0, 1.5)
 	tween.tween_callback(bgm_player.stop)
+
+func _on_menu_button_pressed() -> void:
+	GlobalMenu.show_pause_menu()
+
+func _on_restart_button_pressed():
+	get_tree().reload_current_scene()
+	

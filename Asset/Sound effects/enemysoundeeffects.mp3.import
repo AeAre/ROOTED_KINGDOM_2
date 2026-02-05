@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://di6mxheucbbrf"
+path="res://.godot/imported/enemysoundeeffects.mp3-40ebd6ff754727116552630b35b0c873.mp3str"
+
+[deps]
+
+source_file="res://Asset/Sound effects/enemysoundeeffects.mp3"
+dest_files=["res://.godot/imported/enemysoundeeffects.mp3-40ebd6ff754727116552630b35b0c873.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

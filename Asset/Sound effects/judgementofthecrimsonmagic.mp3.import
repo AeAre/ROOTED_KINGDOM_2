@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bojmjug7278x0"
+path="res://.godot/imported/judgementofthecrimsonmagic.mp3-56ed088250c23241b5cff086a1ea4426.mp3str"
+
+[deps]
+
+source_file="res://Asset/Sound effects/judgementofthecrimsonmagic.mp3"
+dest_files=["res://.godot/imported/judgementofthecrimsonmagic.mp3-56ed088250c23241b5cff086a1ea4426.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

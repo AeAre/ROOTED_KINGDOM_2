@@ -168,8 +168,9 @@ func update_details(data: CharacterData):
 		if c_card.has_method("toggle_info_capability"):
 			c_card.toggle_info_capability(false)
 			
-		if c_card.has_node("VBoxContainer/PlayButton"):
-			c_card.get_node("VBoxContainer/PlayButton").hide()
+		var play_btn = c_card.get_node_or_null("Visuals/VBoxContainer/PlayButton")
+		if play_btn:
+			play_btn.hide()
 		
 		var desc_label = Label.new()
 		# Only show description if unlocked? 

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://bm7cgrmasembw"]
+[gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://bm7cgrmasembw"]
 
 [ext_resource type="Texture2D" uid="uid://y6xke5sg8tx1" path="res://Asset/Characters/Beatrix/Beatrix 4 cards/Beatrix card 1.jpg" id="1_e1or4"]
 [ext_resource type="Script" uid="uid://olc2cw5uohq6" path="res://Script/CardData.gd" id="2_eay75"]
+[ext_resource type="AudioStream" uid="uid://bkuhkf3hcijt6" path="res://Asset/Sound effects/Bloomintheendlessmeadow.mp3" id="3_eay75"]
 
 [resource]
 script = ExtResource("2_eay75")
@@ -14,4 +15,5 @@ mana_gain = 8
 mana_cost = 5
 is_aoe = true
 aoe_targets = 5
+sound_effect = ExtResource("3_eay75")
 metadata/_custom_type_script = "uid://olc2cw5uohq6"

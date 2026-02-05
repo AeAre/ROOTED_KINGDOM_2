@@ -2,8 +2,10 @@ extends BattleCharacter
 
 signal enemy_selected(node)
 
+var enemy_data: EnemyData # Store the reference to the resource
+
 func _ready():
-	super() # This is vital to capture the original color for stun reset
+	super()
 	var area = get_node_or_null("ClickArea")
 	if area:
 		if not area.input_event.is_connected(_on_input_event):
@@ -13,6 +15,8 @@ func setup_enemy(data: EnemyData):
 	if data == null:
 		hide()
 		return
+	
+	enemy_data = data # Save the whole resource for easy access
 		
 	char_name = data.name
 	max_health = data.max_health
@@ -21,6 +25,8 @@ func setup_enemy(data: EnemyData):
 	current_shield = data.base_shield
 	
 	critical_chance = randi_range(data.min_crit_chance, data.max_crit_chance)
+	
+	# Default/Normal values
 	is_aoe = data.is_aoe
 	max_aoe_targets = data.aoe_targets
 	
@@ -37,6 +43,25 @@ func setup_enemy(data: EnemyData):
 	
 	update_ui()
 	show()
+
+func decide_attack() -> Dictionary:
+	# Use randf() for floats (0.2 = 20%)
+	if enemy_data.attack_sound_2 != null and randf() < enemy_data.secondary_attack_chance:
+		return {
+			"sfx": enemy_data.attack_sound_2,
+			"damage_mult": enemy_data.secondary_damage_mult,
+			"is_aoe": enemy_data.secondary_is_aoe, # Pass the new toggle!
+			"aoe_targets": enemy_data.secondary_aoe_targets,
+			"is_secondary": true
+		}
+	else:
+		return {
+			"sfx": enemy_data.attack_sound_1,
+			"damage_mult": 1.0,
+			"is_aoe": enemy_data.is_aoe, # Pass the normal toggle
+			"aoe_targets": enemy_data.aoe_targets,
+			"is_secondary": false
+		}
 
 func _on_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton:

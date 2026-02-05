@@ -1,6 +1,8 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://dhgj4dae4hy2x"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=5 format=3 uid="uid://dhgj4dae4hy2x"]
 
+[ext_resource type="AudioStream" uid="uid://di6mxheucbbrf" path="res://Asset/Sound effects/enemysoundeeffects.mp3" id="1_41ydp"]
 [ext_resource type="Script" uid="uid://de4ufxbti7lif" path="res://Script/EnemyData.gd" id="1_kiovc"]
+[ext_resource type="AudioStream" uid="uid://7reiatlsghyr" path="res://Asset/Sound effects/poisondart.mp3" id="1_tsyxf"]
 [ext_resource type="SpriteFrames" uid="uid://blgbnhgrhy26j" path="res://Resources/Animation resourcess/Enemy animations/Enemy2.tres" id="1_vk04e"]
 
 [resource]
@@ -11,4 +13,9 @@ max_health = 435
 base_damage = 12
 min_crit_chance = 40
 max_crit_chance = 80
+attack_sound_1 = ExtResource("1_tsyxf")
+secondary_attack_chance = 0.5
+secondary_is_aoe = true
+secondary_aoe_targets = 2
+attack_sound_2 = ExtResource("1_41ydp")
 metadata/_custom_type_script = "uid://de4ufxbti7lif"

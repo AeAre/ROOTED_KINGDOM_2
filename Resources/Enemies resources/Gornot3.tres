@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://bv3ypd5hxbalt"]
+[gd_resource type="Resource" script_class="EnemyData" load_steps=4 format=3 uid="uid://bv3ypd5hxbalt"]
 
+[ext_resource type="AudioStream" uid="uid://di6mxheucbbrf" path="res://Asset/Sound effects/enemysoundeeffects.mp3" id="1_rhfy0"]
 [ext_resource type="Script" uid="uid://de4ufxbti7lif" path="res://Script/EnemyData.gd" id="1_tljba"]
 [ext_resource type="SpriteFrames" uid="uid://uc3oe6qm0rkn" path="res://Resources/Animation resourcess/Enemy animations/Enemy3.tres" id="1_yi0bd"]
 
@@ -13,4 +14,8 @@ min_crit_chance = 40
 max_crit_chance = 80
 is_aoe = true
 aoe_targets = 3
+attack_sound_1 = ExtResource("1_rhfy0")
+secondary_attack_chance = 0.5
+secondary_aoe_targets = 1
+attack_sound_2 = ExtResource("1_rhfy0")
 metadata/_custom_type_script = "uid://de4ufxbti7lif"
