@@ -74,7 +74,6 @@ label_settings = SubResource("LabelSettings_pf4lj")
 
 [node name="Volume Slider" type="HSlider" parent="User Interface/Options/VBoxContainer"]
 layout_mode = 2
-value = 50.0
 
 [node name="Fullscreen Check" type="CheckButton" parent="User Interface/Options/VBoxContainer"]
 layout_mode = 2
@@ -85,11 +84,13 @@ text = "Fullscreen:
 expand_icon = true
 
 [node name="Resolution Label" type="Label" parent="User Interface/Options/VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Resolution:"
 label_settings = SubResource("LabelSettings_pf4lj")
 
 [node name="OptionButton" type="OptionButton" parent="User Interface/Options/VBoxContainer"]
+visible = false
 layout_mode = 2
 selected = 0
 item_count = 3

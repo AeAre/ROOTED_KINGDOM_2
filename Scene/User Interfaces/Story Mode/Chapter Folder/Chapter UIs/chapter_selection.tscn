@@ -18,11 +18,12 @@
 font = ExtResource("3_78ck1")
 font_size = 64
 
-[node name="Chapter_Selection" type="Node2D"]
+[node name="Chapter_Selection" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_7gx8n")
 
 [node name="User Interface" type="Control" parent="."]
-layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
@@ -34,6 +35,7 @@ offset_bottom = 651.0
 
 [node name="Background I" parent="User Interface/Background" instance=ExtResource("2_pr2t5")]
 layout_mode = 1
+offset_bottom = 0.0
 
 [node name="Back" type="Button" parent="User Interface"]
 layout_mode = 1
@@ -65,7 +67,6 @@ text = "Chapters"
 label_settings = SubResource("LabelSettings_ipfjq")
 
 [node name="Chapter Manager" type="Control" parent="."]
-layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0

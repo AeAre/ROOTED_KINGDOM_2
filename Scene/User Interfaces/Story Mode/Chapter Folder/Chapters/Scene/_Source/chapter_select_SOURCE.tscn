@@ -22,13 +22,14 @@ bg_color = Color(0.11858138, 0.11858139, 0.11858132, 0.6666667)
 font = ExtResource("3_f4mfh")
 font_size = 48
 
-[node name="Stage Selection (Chapter)" type="Node2D"]
+[node name="Stage Selection (Chapter)" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_aduyx")
 chp_number = 1
 chp_title = "The World of Magic"
 
 [node name="Background" type="Control" parent="."]
-layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 651.0
@@ -37,6 +38,7 @@ offset_bottom = 651.0
 layout_mode = 1
 
 [node name="Back" type="Button" parent="."]
+layout_mode = 0
 offset_left = 922.0
 offset_top = 21.0
 offset_right = 1117.0
@@ -52,7 +54,6 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="Stage Manager" type="Control" parent="."]
-layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -73,7 +74,6 @@ theme_override_constants/separation = 250
 layout_mode = 2
 
 [node name="UI Manager" type="Control" parent="."]
-layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -126,6 +126,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Stage Confimation" parent="." instance=ExtResource("10_1t5p7")]
 visible = false
+layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0

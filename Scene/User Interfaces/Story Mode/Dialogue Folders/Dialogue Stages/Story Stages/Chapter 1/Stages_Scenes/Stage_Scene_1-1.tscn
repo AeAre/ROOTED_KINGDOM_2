@@ -1,7 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://jnpuy3mxoc6t"]
+[gd_scene load_steps=24 format=3 uid="uid://jnpuy3mxoc6t"]
 
 [ext_resource type="Script" uid="uid://n8pyg1g6u05c" path="res://Scene/User Interfaces/Story Mode/Dialogue Folders/Dialog System/Components/Scripts/dialog_system.gd" id="1_a8xgf"]
 [ext_resource type="PackedScene" uid="uid://dkgrs28nbmk1" path="res://Scene/User Interfaces/Story Mode/Dialogue Folders/Dialog System/Components/User Interface/Scenes/dialogue_interface.tscn" id="2_p1k3q"]
+[ext_resource type="Texture2D" uid="uid://cdfpkjhi1gi77" path="res://Asset/User Interface/button_ui.png" id="3_p1k3q"]
+[ext_resource type="FontFile" uid="uid://dtdw2k1jvjn37" path="res://Asset/Fonts/times.ttf" id="3_p3skp"]
 
 [sub_resource type="Animation" id="Animation_g2arh"]
 resource_name = "Fade In"
@@ -67,6 +69,26 @@ _data = {
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xauy0"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oosyw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jvn0m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p2s7h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8va1l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jrfrm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_njq30"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h4pnv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fw3p0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kcrg3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m2a7f"]
+
 [node name="Dialog System" type="Node2D"]
 script = ExtResource("1_a8xgf")
 JSON_file = "res://Scene/User Interfaces/Story Mode/Dialogue Folders/Dialogue Stages/Story Stages/Chapter 1/JSON/Stage_1-1.json"
@@ -117,19 +139,37 @@ offset_bottom = 34.0
 
 [node name="Hide" type="Button" parent="User Interface"]
 layout_mode = 0
-offset_left = 842.0
-offset_top = 14.0
-offset_right = 987.0
-offset_bottom = 63.0
+offset_left = 761.0
+offset_top = 10.0
+offset_right = 964.0
+offset_bottom = 87.0
+theme_override_fonts/font = ExtResource("3_p3skp")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_oosyw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jvn0m")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p2s7h")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8va1l")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jrfrm")
 text = "Hide"
+icon = ExtResource("3_p1k3q")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Skip" type="Button" parent="User Interface"]
 layout_mode = 0
-offset_left = 992.0
-offset_top = 13.0
-offset_right = 1134.0
-offset_bottom = 62.0
+offset_left = 955.0
+offset_top = 7.0
+offset_right = 1153.0
+offset_bottom = 95.0
+theme_override_fonts/font = ExtResource("3_p3skp")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_njq30")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_h4pnv")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_fw3p0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_kcrg3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m2a7f")
 text = "Skip"
+icon = ExtResource("3_p1k3q")
+icon_alignment = 1
+expand_icon = true
 
 [connection signal="pressed" from="Dialog Manager/Invisibile Button" to="." method="_on_invisibile_button_pressed"]
 [connection signal="pressed" from="User Interface/Hide" to="." method="_on_hide_pressed"]

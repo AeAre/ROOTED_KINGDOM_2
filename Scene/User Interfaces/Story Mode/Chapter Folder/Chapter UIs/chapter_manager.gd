@@ -11,3 +11,4 @@ extends Control
 
 func _on_chapter_panel_pressed() -> void:
 	get_tree().change_scene_to_packed($"Chapter 1".chp_scene)
+	StoryMode.declare_chapter($"Chapter 1".chp_number)

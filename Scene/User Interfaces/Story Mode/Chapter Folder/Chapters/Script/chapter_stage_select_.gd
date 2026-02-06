@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @export var chp_number: int
 @export var chp_title: String

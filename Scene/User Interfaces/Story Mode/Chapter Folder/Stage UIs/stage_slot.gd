@@ -8,15 +8,16 @@ extends Control
 
 @onready var stage_confirm = $"../../../../Stage Confimation"
 @onready var stage_image = $"Interface/Stage Image"
+@onready var stage_frame = $Interface/Frame
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$"Interface/Stage Button".text = Stage_number
 	stage_image.img.texture = Stage_img
 	if Scene_type == "Story":
-		$Interface/Frame.texture = load("res://Asset/User Interface/stage_slot_frame_story.png")
+		stage_frame.texture = preload("res://Asset/User Interface/stage_slot_frame_story.png")
 	elif Scene_type == "Battle":
-		$Interface/Frame.texture = load("res://Asset/User Interface/stage_slot_frame_tower.png")
+		stage_frame.texture = preload("res://Asset/User Interface/stage_slot_frame_tower.png")
 	else:
 		print("Scene_type is null or the texture of the Frame is absent.")
 	

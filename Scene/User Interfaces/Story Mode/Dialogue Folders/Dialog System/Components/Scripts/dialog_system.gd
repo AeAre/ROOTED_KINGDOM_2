@@ -25,6 +25,7 @@ var Dialogue_stanza_dict
 var Dialogue_stanza_dict_name
 var Dialogue_lines_arr_value # -- AS LINES THIS TIME ARE IN ARRAYS 
 var dialogue_lines_arr_value_index:= 0
+var lines # For managing lines; not the lines themselves
 
 var UI_ARE_HIDDEN:= false
 # Called when the node enters the scene tree for the first time.
@@ -54,7 +55,6 @@ func play_dialogue():
 		
 		Dialogue_stanza_num = Dialogue_stanza[Dialogue_stanza_index] # Stanza contents (Speakers)
 		Dialogue_array = Dialogue_stanza_num.keys()
-		print(Dialogue_stanza_index)
 		
 		# Dialogue_lines_arr = Dialogue_stanza_num[Dialogue_stanza_num] # Narrator's lines
 		# Dialogue_lines_arr_value = Dialogue_lines_arr[Dialogue_index]
@@ -65,6 +65,10 @@ func play_dialogue():
 			#print(Speaker_index)
 			Dialogue_array_name = Dialogue_array[Speaker_index] # Speaker
 			Dialogue_lines_arr = Dialogue_stanza_num[Dialogue_array_name] # Narrator's lines
+			
+			if typeof(Dialogue_lines_arr) == TYPE_STRING:
+				Dialogue_lines_arr = [Dialogue_lines_arr]
+				
 			if Dialogue_array_name == "Narrator" or Dialogue_array_name == "":
 				d_interface.speaker_panel.visible = false
 			else:
@@ -72,6 +76,7 @@ func play_dialogue():
 				
 			if Dialogue_index <= Dialogue_lines_arr.size() - 1: # Dialogue
 				Dialogue_lines_arr_value = Dialogue_lines_arr[Dialogue_index]
+				
 				#if dialogue_lines_arr_value_index <= Dialogue_lines_arr.size() - 1:
 				main_play_reaction(Dialogue_index)
 				main_play_collage(Dialogue_index)
@@ -79,25 +84,28 @@ func play_dialogue():
 				d_interface.Dialogue_ui.visible_ratio = 0.0
 				d_interface.Dialogue_speaker.text = Dialogue_array_name
 				d_interface.Dialogue_ui.text = Dialogue_lines_arr_value.replace("{{Name}}", Global.player_name)
-				print(Dialogue_lines_arr_value)
+				# print(Dialogue_lines_arr_value)
 				Dialogue_index += 1
 				#else:
 				#	if dialogue_lines_arr_value_index > Dialogue_lines_arr.size():
 				#	dialogue_lines_arr_value_index = 0
 				#Dialogue_index += 1
 			else:
-				if Dialogue_index != Dialogue_lines_arr.size() - 1 and Dialogue_index > Dialogue_lines_arr.size() - 1:
+				if Dialogue_index > Dialogue_lines_arr.size() - 1:
 					Dialogue_index = 0
 					Speaker_index += 1
 					print("Complete Lines!")
+					play_dialogue()
 		else:
-			if Speaker_index != Dialogue_array.size() - 1 and Speaker_index > Dialogue_array.size() - 1:
+			if Speaker_index > Dialogue_array.size() - 1:
 				Speaker_index = 0
 				Dialogue_stanza_index += 1
 				print("Complete Speaker!")
+				play_dialogue()
 	else:
-		if Dialogue_stanza_index != Dialogue_stanza.size() - 1 and Dialogue_stanza_index > Dialogue_stanza.size() - 1:
+		if Dialogue_stanza_index > Dialogue_stanza.size() - 1:
 			print("Complete Stanzas!")
+			finish_chapter()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 # func _process(delta: float) -> void:
 	# pass
@@ -129,6 +137,10 @@ func play_collage(_num: int, _bg: String):
 		_bg = ""
 		print("Image Unavaiable")
 	
+func finish_chapter():
+	if StoryMode._CURRENTLY_PLAYING_CHAPTER == 1:
+		get_tree().change_scene_to_file("res://Scene/User Interfaces/Story Mode/Chapter Folder/Chapters/Scene/Chapter 1/Chapter files/Chapter_1.tscn")
+		
 # Inputs
 # func _input(event: InputEvent) -> void:
 	
@@ -139,7 +151,7 @@ func _on_hide_pressed() -> void:
 		UI_ARE_HIDDEN = true
 
 func _on_skip_pressed() -> void:
-	pass # Replace with function body.
+	finish_chapter()
 
 func _on_invisibile_button_pressed() -> void:
 	if !UI_ARE_HIDDEN:
