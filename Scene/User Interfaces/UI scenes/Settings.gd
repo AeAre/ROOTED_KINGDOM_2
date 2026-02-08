@@ -6,7 +6,8 @@ extends Control
 
 @onready var bgm_select = $"User Interface/Options/VBoxContainer/BackgroundSound/BGMSelect"
 @onready var volume_slider = $"User Interface/Options/VBoxContainer/Volume/Volume Slider"
-@onready var fullscreen_check = $"User Interface/Options/VBoxContainer/Fullscreen Check"
+@onready var fullscreen_check = $"User Interface/Options/VBoxContainer/HBoxContainer/Fullscreen Check"
+@onready var mute_button = $"User Interface/Options/VBoxContainer/HBoxContainer/MuteButton"
 
 @onready var btn_bg_default = $"User Interface/Options/VBoxContainer/BgContainer/Btn_Default"
 @onready var btn_bg_dark = $"User Interface/Options/VBoxContainer/BgContainer/Btn_Dark"
@@ -22,6 +23,15 @@ func _ready() -> void:
 
 	setup_bgm_options()
 	
+	if mute_button:
+		update_mute_button_visuals()
+		
+	if mute_button:
+		update_mute_button_visuals()
+		
+		if not mute_button.pressed.is_connected(_on_mute_button_pressed):
+			mute_button.pressed.connect(_on_mute_button_pressed)
+
 	# --- CONNECT BACKGROUND BUTTONS ---
 	if btn_bg_default:
 		if not btn_bg_default.pressed.is_connected(_on_bg_default_pressed):
@@ -39,6 +49,36 @@ func _ready() -> void:
 		volume_slider.value = Global.master_volume
 		if not volume_slider.value_changed.is_connected(_on_volume_slider_value_changed):
 			volume_slider.value_changed.connect(_on_volume_slider_value_changed)
+
+func _on_mute_button_pressed():
+	Global.toggle_mute()
+	update_mute_button_visuals()
+
+func update_mute_button_visuals():
+	var is_muted = Global.is_muted
+	
+	if is_muted:
+		mute_button.text = "Unmute"
+		mute_button.modulate = Color(1, 1, 1) 
+		
+		if bgm_select:
+			bgm_select.disabled = true
+			bgm_select.modulate = Color(0.5, 0.5, 0.5, 0.4)
+			
+		if volume_slider:
+			volume_slider.editable = false
+			volume_slider.modulate = Color(0.5, 0.5, 0.5, 0.4)
+	else:
+		mute_button.text = "Mute All"
+		mute_button.modulate = Color(1, 1, 1)
+		
+		if bgm_select:
+			bgm_select.disabled = false
+			bgm_select.modulate = Color(1, 1, 1, 1)
+			
+		if volume_slider:
+			volume_slider.editable = true
+			volume_slider.modulate = Color(1, 1, 1, 1)
 
 func setup_bgm_options():
 	if not bgm_select: return
@@ -90,4 +130,3 @@ func _on_bg_dark_pressed():
 	
 func _on_bg_sword_pressed():
 	Global.set_background("Sword")
-	

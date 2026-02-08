@@ -5,6 +5,8 @@ var current_bgm_track_name: String = "Music 1" # Default
 
 var master_volume: float = 1.0
 
+var is_muted: bool = false
+
 # --- MUSIC TRACKS ---
 var bgm_tracks: Dictionary = {
 	"Music 1": "res://Asset/Backgrounds/Story Mode/bgMusic2.ogg",
@@ -88,13 +90,18 @@ func _ready() -> void:
 	
 	get_tree().tree_changed.connect(_on_scene_changed)
 	connect_buttons_recursive(get_tree().root)
-
+	apply_master_volume(master_volume)
 
 	await get_tree().process_frame
 	if get_tree().current_scene:
 		print("Global: Initial Scene is ", get_tree().current_scene.name)
 		check_and_play_bgm(get_tree().current_scene.name)
 
+func toggle_mute():
+	is_muted = !is_muted
+	apply_master_volume(master_volume) 
+	save_game()
+	
 func set_background(bg_name: String):
 	current_bg_name = bg_name
 	emit_signal("background_changed", bg_name)
@@ -271,6 +278,7 @@ func save_game():
 	config.set_value("settings", "bg_name", current_bg_name)
 	# Saving the Settings
 	config.set_value("settings", "master_volume", master_volume)
+	config.set_value("settings", "is_muted", is_muted)
 	
 	var err = config.save(SAVE_PATH)
 	if err == OK:
@@ -297,18 +305,23 @@ func load_game():
 	current_bgm_track_name = config.get_value("settings", "bgm_track_name", current_bgm_track_name)
 	
 	master_volume = config.get_value("settings", "master_volume", 1.0)
+	is_muted = config.get_value("settings", "is_muted", false)
 	
 	apply_master_volume(master_volume)
 
 func apply_master_volume(value: float):
 	var bus_index = AudioServer.get_bus_index("Master")
-	if value > 0:
-		# Using your specific math: value * value * 3
-		var volume_curve = value * value * 2
-		AudioServer.set_bus_volume_db(bus_index, linear_to_db(volume_curve))
-		AudioServer.set_bus_mute(bus_index, false)
-	else:
+	
+	# If global mute is ON, force mute the bus
+	if is_muted:
 		AudioServer.set_bus_mute(bus_index, true)
+	else:
+		if value > 0:
+			var volume_curve = value * value * 2
+			AudioServer.set_bus_volume_db(bus_index, linear_to_db(volume_curve))
+			AudioServer.set_bus_mute(bus_index, false)
+		else:
+			AudioServer.set_bus_mute(bus_index, true)
 		
 func reset_player_data():
 	player_name = ""
@@ -378,6 +391,9 @@ func _on_button_down(btn: BaseButton):
 	btn.scale = Vector2(0.95, 0.95)
 	
 func _on_button_up(btn: BaseButton):
+	if btn.disabled:
+		return 
+		
 	if btn.has_meta("previous_color"):
 		btn.modulate = btn.get_meta("previous_color")
 	else:

@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://wy0rcf7tva7k"]
+
+[sub_resource type="GDScript" id="GDScript_58l76"]
+script/source = "extends Control # or Control, depending on your parent node type
+
+func _ready():
+	# 1. Load the initial background on start
+	load_background(Global.background_options[Global.current_bg_name])
+	
+	# 2. Connect to the signal
+	Global.background_changed.connect(_on_background_changed)
+
+func _on_background_changed(new_bg_scene: PackedScene):
+	load_background(new_bg_scene)
+
+func load_background(bg_scene: PackedScene):
+	# Remove any existing background children first
+	for child in get_children():
+		child.queue_free()
+	
+	# Instance the new background scene
+	var new_bg = bg_scene.instantiate()
+	add_child(new_bg)
+	
+	# Ensure it stays behind everything
+	move_child(new_bg, 0)
+"
+
+[node name="Background 2" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_58l76")
