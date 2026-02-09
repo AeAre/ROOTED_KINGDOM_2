@@ -5,7 +5,7 @@ extends Node2D
 @onready var bg_anim = $"Dialog Manager/Background/Background Animation"
 @onready var d_bg = $"Dialog Manager/Background"
 # @onready var Character_Manager = $CharacterManger
-@onready var character_1 = $"Dialog Manager/Character Manager/Character"
+# @onready var character_1 = $"Dialog Manager/Character Manager/Character"
 
 @export_file("*.json") var JSON_file: String
 # @onready var Dialogue_UI = $"Dialog Manager/Dialogue Layer/Dialogue Interface"
@@ -45,7 +45,7 @@ func load_JSON():
 	play_dialogue()
 
 func play_dialogue():
-	character_1.slide("center")
+	# character_1.slide("center")
 	# Dialogue_stanza_name = Dialogue_stanza_name_arr[Dialogue_stanza_index]
 	# Dialogue_stanza 
 	#= Dialogue_access[Dialogue_stanza_index] # Array with Dictionary value
@@ -111,6 +111,7 @@ func play_dialogue():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 # func _process(delta: float) -> void:
 	# pass
+
 func main_play_reaction(_line_num: int): # play_reaction() main
 	# play_reaction(_line_num, $"Character Manager/Character Sprite")
 	pass # Add some play_reaction() which is from below

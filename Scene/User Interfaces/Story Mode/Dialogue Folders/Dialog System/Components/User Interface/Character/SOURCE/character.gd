@@ -2,8 +2,15 @@ extends Control
 
 @onready var Reactions = $Reactions
 @onready var Character = $"."
-@onready var PropertyAnim = $PropertyAnimation
+@onready var PropertyAnim = $PropertyAnimations
 
+enum property_fx {
+	Left,
+	Right,
+	Center,
+	Fade_In,
+	Fade_Out
+}
 # THIS IS HOW THIS WOULD WORK
 # EACH ANIMATION WILL BE CALLED IN DIALOGUE SYSTEM PROGRAM
 # EACH ANIMATION ARE CALLED IN THE SAME MANNER, MEANING THE NAMING CONVENTION
@@ -28,14 +35,23 @@ func mad():
 	Reactions.play("mad")
 
 # PROPERTY ANIMATIONS
-
-func slide(towards: String):
-	if towards.to_lower() == "center":
-		PropertyAnim.play("slide_to_center")
-	elif towards.to_lower() == "left":
-		PropertyAnim.play("slide_to_center")
-	elif towards.to_lower() == "right":
-		PropertyAnim.play("slide_to_center")
+# Slide
+func slide(towards: property_fx):
+	if towards == property_fx.Center:
+		if Character.position > 400:
+			PropertyAnim.play("slide_to_center_from_left")
+		elif Character.position < 400:
+			PropertyAnim.play("slide_to_center_from_right")
+	elif towards == property_fx.Left:
+		PropertyAnim.play("slide_to_left")
+	elif towards == property_fx.Right:
+		PropertyAnim.play("slide_to_right")
+# Fade
+func fade(value: property_fx):
+	if value == property_fx.Fade_In:
+		PropertyAnim.play("fade_in")
+	elif value == property_fx.Fade_Out:
+		PropertyAnim.play("fade_out")
 		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

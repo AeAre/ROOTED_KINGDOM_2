@@ -1,8 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://cyky44ageweol"]
+[gd_scene load_steps=28 format=3 uid="uid://cyky44ageweol"]
 
 [ext_resource type="Script" uid="uid://urj47kl2yubo" path="res://Scene/User Interfaces/Story Mode/Dialogue Folders/Dialog System/Components/User Interface/Character/SOURCE/character.gd" id="1_vlpk7"]
 [ext_resource type="Texture2D" uid="uid://dxe1er5qnj465" path="res://Asset/User Interface/Beatrix animation.png" id="2_5mich"]
-[ext_resource type="Texture2D" uid="uid://cmpprcr84ive7" path="res://Asset/Characters/enemies/1.png" id="3_w3vsc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fya37"]
 atlas = ExtResource("2_5mich")
@@ -135,11 +134,27 @@ animations = [{
 }]
 
 [sub_resource type="Animation" id="Animation_vy74j"]
+resource_name = "slide_to_center_from_left"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(400, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5mich"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
+tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -148,26 +163,108 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Reactions:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
-[sub_resource type="Animation" id="Animation_vlpk7"]
-resource_name = "slide_to_center"
+[sub_resource type="Animation" id="Animation_w3vsc"]
+resource_name = "slide_to_center_from_right"
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
+tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(400, 0)]
+"values": [Vector2(700, 0), Vector2(400, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vy74j"]
+[sub_resource type="Animation" id="Animation_fya37"]
+resource_name = "slide_to_left"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(400, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lqvii"]
+resource_name = "slide_to_right"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(400, 0), Vector2(700, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0hple"]
+resource_name = "fade_out"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Reactions:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_asmar"]
+resource_name = "fade_in"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Reactions:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5mich"]
 _data = {
-&"RESET": SubResource("Animation_vy74j"),
-&"slide_to_center": SubResource("Animation_vlpk7")
+&"RESET": SubResource("Animation_5mich"),
+&"fade_in": SubResource("Animation_asmar"),
+&"fade_out": SubResource("Animation_0hple"),
+&"slide_to_center_from_left": SubResource("Animation_vy74j"),
+&"slide_to_center_from_right": SubResource("Animation_w3vsc"),
+&"slide_to_left": SubResource("Animation_fya37"),
+&"slide_to_right": SubResource("Animation_lqvii")
 }
 
 [node name="Character" type="Control"]
@@ -180,15 +277,11 @@ grow_vertical = 2
 script = ExtResource("1_vlpk7")
 
 [node name="Reactions" type="AnimatedSprite2D" parent="."]
-visible = false
+position = Vector2(220.5, 370.5)
+scale = Vector2(3.675, 3.7499995)
 sprite_frames = SubResource("SpriteFrames_cixe7")
 
-[node name="PropertyAnimation" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Reactions")
+[node name="PropertyAnimations" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_vy74j")
+&"": SubResource("AnimationLibrary_5mich")
 }
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(167, 212)
-texture = ExtResource("3_w3vsc")
