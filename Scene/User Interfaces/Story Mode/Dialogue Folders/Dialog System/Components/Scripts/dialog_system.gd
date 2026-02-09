@@ -4,10 +4,11 @@ extends Node2D
 @onready var d_interface = $"Dialog Manager/Dialogue Interface"
 @onready var bg_anim = $"Dialog Manager/Background/Background Animation"
 @onready var d_bg = $"Dialog Manager/Background"
+# @onready var Character_Manager = $CharacterManger
+@onready var character_1 = $"Dialog Manager/Character Manager/Character"
 
 @export_file("*.json") var JSON_file: String
 # @onready var Dialogue_UI = $"Dialog Manager/Dialogue Layer/Dialogue Interface"
-
 
 var json_as_text
 var Dialogue_data
@@ -44,6 +45,7 @@ func load_JSON():
 	play_dialogue()
 
 func play_dialogue():
+	character_1.slide("center")
 	# Dialogue_stanza_name = Dialogue_stanza_name_arr[Dialogue_stanza_index]
 	# Dialogue_stanza 
 	#= Dialogue_access[Dialogue_stanza_index] # Array with Dictionary value
@@ -113,11 +115,11 @@ func main_play_reaction(_line_num: int): # play_reaction() main
 	# play_reaction(_line_num, $"Character Manager/Character Sprite")
 	pass # Add some play_reaction() which is from below
 
-func play_reaction(_num: int, _character: _CharacterSprite): # This is basically Sprite Manager
+func play_reaction(_num: int): # This is basically Sprite Manager
 	if _num == 0: 
 		pass # remove this when adding a _character.react()
 	else:
-		_character.react("")
+		pass#_character.react("")
 
 func main_hide(value: bool):	
 	$"Dialog Manager/Dialogue Interface".visible = value
@@ -140,7 +142,6 @@ func play_collage(_num: int, _bg: String):
 func finish_chapter():
 	if StoryMode._CURRENTLY_PLAYING_CHAPTER == 1:
 		get_tree().change_scene_to_file("res://Scene/User Interfaces/Story Mode/Chapter Folder/Chapters/Scene/Chapter 1/Chapter files/Chapter_1.tscn")
-		
 # Inputs
 # func _input(event: InputEvent) -> void:
 	
