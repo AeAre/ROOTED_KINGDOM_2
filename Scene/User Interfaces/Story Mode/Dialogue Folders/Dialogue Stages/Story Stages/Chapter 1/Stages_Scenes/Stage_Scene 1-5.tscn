@@ -90,7 +90,7 @@ _data = {
 
 [node name="Dialog System" type="Node2D"]
 script = ExtResource("1_g2arh")
-JSON_file = "res://Scene/User Interfaces/Story Mode/Dialogue Folders/Dialogue Stages/Story Stages/Chapter 1/JSON/Start_1-5.json"
+JSON_file = "res://Scene/User Interfaces/Story Mode/Dialogue Folders/Dialogue Stages/Story Stages/Chapter 1/JSON/Stage_1-5.json"
 
 [node name="Dialog Manager" type="Control" parent="."]
 layout_mode = 3
