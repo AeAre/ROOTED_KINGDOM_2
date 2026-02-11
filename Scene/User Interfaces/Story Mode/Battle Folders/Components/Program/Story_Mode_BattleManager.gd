@@ -483,7 +483,7 @@ func check_battle_status():
 		var current_stage_number = str(Global._CURRENTLY_PLAYING_CHAPTER) + " - " + str(Global._current_playing_on_stage)
 		
 		if Global._current_playing_on_stage > 0:
-			Global.set_stage_in_clear(current_stage_number)
+			Global.set_stage_unlocked(current_stage_number)
 			fade_out_music()
 			GlobalMenu.show_victory_menu()
 	
