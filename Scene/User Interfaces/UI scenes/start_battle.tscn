@@ -6,7 +6,7 @@
 [ext_resource type="FontFile" uid="uid://dtdw2k1jvjn37" path="res://Asset/Fonts/times.ttf" id="2_ygvaf"]
 [ext_resource type="Texture2D" uid="uid://cdfpkjhi1gi77" path="res://Asset/User Interface/button_ui.png" id="3_t4b46"]
 [ext_resource type="Texture2D" uid="uid://dvqx32t66s3mc" path="res://Asset/Backgrounds/Story Mode/gaia_sky.jpg" id="4_objsq"]
-[ext_resource type="Texture2D" uid="uid://dnxuvdehf47bo" path="res://Asset/User Interface/tower_mod_background_v2.webp" id="5_tgtv0"]
+[ext_resource type="Texture2D" uid="uid://6kmgs5s1swcl" path="res://Asset/User Interface/tower_mod_background_v2.jpg" id="5_tgtv0"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2sahd"]
 

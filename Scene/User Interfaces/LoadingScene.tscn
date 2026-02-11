@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b4brm6bfcgm2u"]
 
 [ext_resource type="Script" uid="uid://xggo1xt41vg1" path="res://Scene/User Interfaces/LoadingScene.gd" id="1_igoep"]
-[ext_resource type="Texture2D" uid="uid://cc5m44e6ot5vn" path="res://Asset/Backgrounds/Illustrationn.webp" id="2_ybeqp"]
+[ext_resource type="Texture2D" uid="uid://cm2xwoy3220ky" path="res://Asset/Backgrounds/illustrationn.jpg" id="2_uvq4n"]
 [ext_resource type="FontFile" uid="uid://dtdw2k1jvjn37" path="res://Asset/Fonts/times.ttf" id="3_uvq4n"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1qmgn"]
@@ -24,7 +24,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_ybeqp")
+texture = ExtResource("2_uvq4n")
 expand_mode = 1
 
 [node name="LoadingBar" type="ProgressBar" parent="."]

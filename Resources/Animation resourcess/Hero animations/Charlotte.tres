@@ -1,61 +1,42 @@
-[gd_resource type="SpriteFrames" load_steps=14 format=3 uid="uid://cywakqpa2mvgy"]
+[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://cywakqpa2mvgy"]
 
-[ext_resource type="Texture2D" uid="uid://00q8lt0nn4mo" path="res://Asset/User Interface/charlotte_left_side.webp" id="1_362ab"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_362ab"]
-atlas = ExtResource("1_362ab")
-region = Rect2(0, 225, 181, 225)
+[ext_resource type="Texture2D" uid="uid://bg84el0dhlqt4" path="res://Asset/User Interface/charlotte_left_side.png" id="1_362ab"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8h8hq"]
 atlas = ExtResource("1_362ab")
-region = Rect2(181, 225, 181, 225)
+region = Rect2(0, 0, 339, 420)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ja1hb"]
 atlas = ExtResource("1_362ab")
-region = Rect2(362, 225, 181, 225)
+region = Rect2(339, 0, 339, 420)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rre0v"]
 atlas = ExtResource("1_362ab")
-region = Rect2(543, 225, 181, 225)
+region = Rect2(678, 0, 339, 420)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b0ed0"]
 atlas = ExtResource("1_362ab")
-region = Rect2(543, 450, 181, 225)
+region = Rect2(0, 420, 339, 420)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qoyq7"]
 atlas = ExtResource("1_362ab")
-region = Rect2(362, 450, 181, 225)
+region = Rect2(339, 420, 339, 420)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mrj24"]
 atlas = ExtResource("1_362ab")
-region = Rect2(181, 450, 181, 225)
+region = Rect2(678, 420, 339, 420)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wx7wb"]
 atlas = ExtResource("1_362ab")
-region = Rect2(0, 450, 181, 225)
+region = Rect2(0, 840, 339, 420)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tqwn2"]
 atlas = ExtResource("1_362ab")
-region = Rect2(0, 675, 181, 225)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3ihxg"]
-atlas = ExtResource("1_362ab")
-region = Rect2(181, 675, 181, 225)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o0n6m"]
-atlas = ExtResource("1_362ab")
-region = Rect2(362, 675, 181, 225)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j8v43"]
-atlas = ExtResource("1_362ab")
-region = Rect2(543, 675, 181, 225)
+region = Rect2(339, 840, 339, 420)
 
 [resource]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_362ab")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8h8hq")
 }, {
@@ -79,15 +60,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_tqwn2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3ihxg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_o0n6m")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j8v43")
 }],
 "loop": true,
 "name": &"default",
