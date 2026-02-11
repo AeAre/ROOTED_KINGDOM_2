@@ -13,7 +13,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qaj2h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sd7k4"]
-bg_color = Color(0.6, 0.6, 0, 0.4)
+bg_color = Color(0.6, 0.6, 0, 0.44705883)
 
 [node name="Stage Slot" type="Control"]
 custom_minimum_size = Vector2(225, 200)
@@ -68,7 +68,7 @@ mouse_filter = 2
 mouse_behavior_recursive = 2
 expand_mode = 1
 
-[node name="Availability" type="Label" parent="Interface"]
+[node name="Label" type="Label" parent="Interface"]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5

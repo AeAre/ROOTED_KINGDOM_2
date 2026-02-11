@@ -79,13 +79,14 @@ Stage = ExtResource("6_2s5pc")
 Stage_number = 1
 Stage_img = ExtResource("8_elif7")
 Scene_type = "Story"
-availablity = true
+availability = true
 
 [node name="Stage 2" parent="Stage Manager/ScrollContainer/HBoxContainer" instance=ExtResource("5_vui1m")]
 layout_mode = 2
 Stage_number = 2
 Scene_type = "Battle"
-availablity = true
+Objective = "Defeat one goblin."
+availability = true
 
 [node name="Stage 3" parent="Stage Manager/ScrollContainer/HBoxContainer" instance=ExtResource("5_vui1m")]
 layout_mode = 2
@@ -93,7 +94,7 @@ Stage = ExtResource("9_ulxka")
 Stage_number = 3
 Stage_img = ExtResource("10_vui1m")
 Scene_type = "Story"
-availablity = true
+availability = true
 
 [node name="Stage 4" parent="Stage Manager/ScrollContainer/HBoxContainer" instance=ExtResource("5_vui1m")]
 layout_mode = 2
