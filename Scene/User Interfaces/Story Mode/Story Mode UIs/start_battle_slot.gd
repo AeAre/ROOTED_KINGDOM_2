@@ -15,8 +15,8 @@ func _ready() -> void:
 	$Image.texture = image
 	if mode == 0:
 		CURRENT_STAGE_LEVEL.text = "Current Stage " + " - " + Global.stages_unlocked.back()
-	elif mode == 1:		
-		CURRENT_STAGE_LEVEL.text = "Current Tower Floor Level:" + str(Global.current_tower_floor)
+	elif mode == 1:	
+		CURRENT_STAGE_LEVEL.text = "Current Tower Floor Level: " + str(Global.current_tower_floor)
 	else:
 		print("mode is null")
 	

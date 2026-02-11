@@ -323,7 +323,10 @@ func load_game():
 	floors_cleared = config.get_value("Progression", "floors_cleared", [])
 	
 	# Story Mode
-	stages_unlocked = config.get_value("Progression", "finished_stage_scale", [])
+	if stages_unlocked != []:
+		stages_unlocked = config.get_value("Progression", "finished_stage_scale", [])
+	else:
+		stages_unlocked = ["1-1"]
 	
 	current_bg_name = config.get_value("settings", "bg_name", current_bg_name)
 	
