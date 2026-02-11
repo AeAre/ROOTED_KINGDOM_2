@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxapqj8cw8mw3"
-path="res://.godot/imported/Beatrix animation.png-e48cdcc53d7fa06d8cbad2e101b6cbe8.ctex"
+uid="uid://7p8k185uf3ji"
+path="res://.godot/imported/arlene_left.png-15d50091d1a06263040d645f7a6df2fc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/User Interface/Beatrix animation.png"
-dest_files=["res://.godot/imported/Beatrix animation.png-e48cdcc53d7fa06d8cbad2e101b6cbe8.ctex"]
+source_file="res://Asset/Characters/arlene_left.png"
+dest_files=["res://.godot/imported/arlene_left.png-15d50091d1a06263040d645f7a6df2fc.ctex"]
 
 [params]
 

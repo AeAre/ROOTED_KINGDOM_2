@@ -9,7 +9,7 @@
 [ext_resource type="Resource" uid="uid://cib8qbfhl2fg1" path="res://Resources/Charlotte.tres" id="5_i5161"]
 [ext_resource type="Resource" uid="uid://bgu42lalfpfe1" path="res://Resources/Jullian.tres" id="6_6eweq"]
 [ext_resource type="Resource" uid="uid://d1f60p8trj2rh" path="res://Resources/Sean.tres" id="7_up8j7"]
-[ext_resource type="Texture2D" uid="uid://dnxuvdehf47bo" path="res://Asset/User Interface/tower_mod_background_v2.webp" id="8_pbrkd"]
+[ext_resource type="Texture2D" uid="uid://6kmgs5s1swcl" path="res://Asset/User Interface/tower_mod_background_v2.jpg" id="8_pbrkd"]
 [ext_resource type="Texture2D" uid="uid://l45mprnx01t8" path="res://Asset/User Interface/pause.png" id="9_yy5vg"]
 
 [node name="CharacterUpgradeUi" type="Control"]
@@ -27,9 +27,14 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -92.0
+offset_top = -59.0
+offset_right = 101.0
+offset_bottom = 77.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("8_pbrkd")
+expand_mode = 2
 
 [node name="SelectionScroll" type="ScrollContainer" parent="."]
 custom_minimum_size = Vector2(0, 150)

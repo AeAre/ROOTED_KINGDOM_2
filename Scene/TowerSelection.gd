@@ -79,8 +79,7 @@ func _on_choose_characters_pressed():
 	# CHANGE 4: Extra safety check
 	if selected_floor == 0:
 		return 
-	print("Select a character")
-	
+
 	Global.from_tower_mode = true
 	get_tree().change_scene_to_file("res://Scene/User Interfaces/CharacterScenes/CharacterSelection.tscn")
 

@@ -26,19 +26,18 @@ func _ready():
 	update_currency_ui()
 	
 	# Only show the confirm button if we came from Tower Mode
-	if Global.from_tower_mode or Global.from_tower_mode:
-		confirm_button.visible = true
+	confirm_button.visible = Global.from_tower_mode
 	
 	$ConfirmButton.pressed.connect(_on_confirm_battle_pressed)
 	if unlock_btn:
 		unlock_btn.pressed.connect(_on_unlock_hero_pressed)
 		unlock_btn.hide()
 	
-	if Global.from_tower_mode == false and Global.from_story_mode == false:
+	if Global.from_tower_mode == false:
 		var team_panel = $TeamPanel
 		var scroll = $ScrollContainer
 		scroll.position.y = 150 
-		scroll.size.y = 850
+		scroll.size.y = 850 
 		
 		team_panel.hide()
 		
@@ -124,10 +123,7 @@ func _on_unlock_hero_pressed():
 func _on_confirm_battle_pressed():
 	if Global.selected_team.size() > 0:
 		# 1. Set the target destination
-		if Global.from_tower_mode:
-			Global.loading_target_scene = "res://Scene/battlefield.tscn"
-		elif Global.from_story_mode:
-			Global.loading_target_scene = "res://Scene/User Interfaces/Story Mode/Battle Folders/Components/Scenes Involved/Story_mode_battle.tscn"
+		Global.loading_target_scene = "res://Scene/battlefield.tscn"
 		
 		# 2. Go to the loading scene
 		get_tree().change_scene_to_file("res://Scene/User Interfaces/LoadingScene.tscn")

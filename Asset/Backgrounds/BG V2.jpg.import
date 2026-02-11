@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxapqj8cw8mw3"
-path="res://.godot/imported/Beatrix animation.png-e48cdcc53d7fa06d8cbad2e101b6cbe8.ctex"
+uid="uid://dn2qmfcsek3p6"
+path="res://.godot/imported/BG V2.jpg-c5adb97f185ac8d4fafa1d1ab0adc838.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/User Interface/Beatrix animation.png"
-dest_files=["res://.godot/imported/Beatrix animation.png-e48cdcc53d7fa06d8cbad2e101b6cbe8.ctex"]
+source_file="res://Asset/Backgrounds/BG V2.jpg"
+dest_files=["res://.godot/imported/BG V2.jpg-c5adb97f185ac8d4fafa1d1ab0adc838.ctex"]
 
 [params]
 
