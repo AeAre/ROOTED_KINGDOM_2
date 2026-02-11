@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dkgrs28nbmk1"]
+[gd_scene load_steps=6 format=3 uid="uid://dkgrs28nbmk1"]
 
 [ext_resource type="Script" uid="uid://cduxa7diuci6y" path="res://Scene/User Interfaces/Story Mode/Dialogue Folders/Dialog System/Components/User Interface/Scripts/dialogue_interface.gd" id="1_3as14"]
 [ext_resource type="FontFile" uid="uid://dtdw2k1jvjn37" path="res://Asset/Fonts/times.ttf" id="2_hm1al"]
@@ -8,16 +8,23 @@ content_margin_left = 34.0
 content_margin_top = 34.0
 content_margin_right = 34.0
 content_margin_bottom = 34.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
+bg_color = Color(0.5764706, 0.28235295, 0.05882353, 0.49803922)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hm1al"]
+content_margin_left = 17.0
+content_margin_top = 5.0
+content_margin_right = 17.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 0.5568628)
+
 [sub_resource type="LabelSettings" id="LabelSettings_56hp3"]
 font = ExtResource("2_hm1al")
-font_size = 24
+font_size = 30
 
 [node name="Dialogue Interface" type="Control"]
 layout_mode = 3
@@ -31,20 +38,34 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3as14")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 17
+theme_override_constants/margin_top = 17
+theme_override_constants/margin_right = 17
+theme_override_constants/margin_bottom = 17
+
+[node name="Control" type="Control" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Dialogue Panel Container" type="PanelContainer" parent="MarginContainer/Control"]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -213.0
-offset_right = 3.0
+offset_top = -198.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_3as14")
 
-[node name="Dialogue" type="RichTextLabel" parent="PanelContainer"]
+[node name="Dialogue" type="RichTextLabel" parent="MarginContainer/Control/Dialogue Panel Container"]
 layout_mode = 2
 size_flags_stretch_ratio = 8.88
 theme_override_fonts/normal_font = ExtResource("2_hm1al")
@@ -52,17 +73,18 @@ theme_override_font_sizes/normal_font_size = 24
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 scroll_active = false
 
-[node name="PanelContainer2" type="PanelContainer" parent="."]
+[node name="Speaker PanelContainer" type="PanelContainer" parent="MarginContainer/Control"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = -1.0
-offset_top = -276.0
-offset_right = 388.0
-offset_bottom = -229.0
+offset_top = -250.555
+offset_right = 174.0
+offset_bottom = -212.555
 grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hm1al")
 
-[node name="Speakername" type="Label" parent="PanelContainer2"]
+[node name="Speakername" type="Label" parent="MarginContainer/Control/Speaker PanelContainer"]
 layout_mode = 2
+text = "Speaker Name"
 label_settings = SubResource("LabelSettings_56hp3")

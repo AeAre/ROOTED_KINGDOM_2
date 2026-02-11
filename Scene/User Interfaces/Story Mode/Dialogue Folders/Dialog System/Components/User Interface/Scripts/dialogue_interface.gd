@@ -1,9 +1,9 @@
 extends Control
 
-@onready var Dialogue_ui = $PanelContainer/Dialogue
-@onready var Dialogue_speaker = $PanelContainer2/Speakername
-@onready var dialogue_panel = $PanelContainer
-@onready var speaker_panel = $PanelContainer2
+@onready var Dialogue_ui = $"MarginContainer/Control/Dialogue Panel Container/Dialogue"
+@onready var Dialogue_speaker =$"MarginContainer/Control/Speaker PanelContainer/Speakername"
+@onready var dialogue_panel = $"MarginContainer/Control/Dialogue Panel Container"
+@onready var speaker_panel = $"MarginContainer/Control/Speaker PanelContainer"
 
 var animate_text:= true
 var animation_speed:= 30
