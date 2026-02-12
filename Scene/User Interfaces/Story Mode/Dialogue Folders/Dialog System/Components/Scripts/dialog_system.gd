@@ -2,8 +2,8 @@ extends Node2D
 
 @onready var ui_ctrl = $"User Interface"
 @onready var d_interface = $"Dialog Manager/Dialogue Interface"
-@onready var bg_anim = $"Dialog Manager/Background/Background Animation"
-@onready var d_bg = $"Dialog Manager/Background"
+@onready var d_bg = $"Dialog Manager/Dialogue Background"
+@onready var dialogue_flow_component = $"Dialogue Story Flow Component"
 # @onready var Character_Manager = $CharacterManger
 # @onready var character_1 = $"Dialog Manager/Character Manager/Character"
 
@@ -80,11 +80,12 @@ func play_dialogue():
 				Dialogue_lines_arr_value = Dialogue_lines_arr[Dialogue_index]
 				
 				#if dialogue_lines_arr_value_index <= Dialogue_lines_arr.size() - 1:
-				main_play_reaction(Dialogue_index)
-				main_play_collage(Dialogue_index)
+				dialogue_flow_component.main_play_reaction(Dialogue_index)
+				dialogue_flow_component.main_play_collage(Dialogue_index)
 				d_interface.animate_text = true
 				d_interface.Dialogue_ui.visible_ratio = 0.0
-				d_interface.Dialogue_speaker.text = Dialogue_array_name
+				# d_interface.Dialogue_speaker.text = Dialogue_array_name
+				d_interface.set_speaker_name(Dialogue_array_name)
 				d_interface.Dialogue_ui.text = Dialogue_lines_arr_value.replace("{{Name}}", Global.player_name)
 				# print(Dialogue_lines_arr_value)
 				Dialogue_index += 1
@@ -112,34 +113,10 @@ func play_dialogue():
 # func _process(delta: float) -> void:
 	# pass
 
-func main_play_reaction(_line_num: int): # play_reaction() main
-	# play_reaction(_line_num, $"Character Manager/Character Sprite")
-	pass # Add some play_reaction() which is from below
-
-func play_reaction(_num: int): # This is basically Sprite Manager
-	if _num == 0: 
-		pass # remove this when adding a _character.react()
-	else:
-		pass#_character.react("")
-
 func main_hide(value: bool):	
 	$"Dialog Manager/Dialogue Interface".visible = value
 	$"User Interface".visible = value
-	
-func main_play_collage(_index: int): # changes Background in a collage-like pattern
-	# play_collage(_index, "res://icon.svg")
-	pass # Add some play_collage() which is from below
-	
-func play_collage(_num: int, _bg: String):
-	if _bg != "":
-		d_bg.texture = load(_bg)
-		if _num == 0:
-			# bg_anim.play("Fade In")
-			pass
-	else:
-		_bg = ""
-		print("Image Unavaiable")
-	
+
 func finish_chapter():
 	Global.bring_to_current_chapter_ui()
 	Global.set_stage_unlocked(StoryMode.next_stage())

@@ -38,8 +38,12 @@ func _process(delta):
 	loading_bar.value = min(time_ratio, data_ratio) * 100
 
 	# --- DYNAMIC TEXT BASED ON DESTINATION ---
-	if next_scene_path.contains("battlefield") or  next_scene_path.contains("Story_Mode_battle"):
+	if next_scene_path.contains("battlefield") or  next_scene_path.contains("Story_mode_battle"):
 		_update_battle_text()
+	elif next_scene_path.contains("Chapter_"):
+		_update_story_mode_loading_text()
+	elif next_scene_path.contains("Stage_Scene_1-1"):
+		_play_first_chapter()
 	elif Global.player_name == "":
 		_update_new_player_text()
 	else:
@@ -66,6 +70,12 @@ func _update_new_player_text():
 		status_label.text = "Initializing Data..."
 	else:
 		status_label.text = "Preparing Character Registration..."
+		
+func _update_story_mode_loading_text():
+	if time_elapsed < 1.5:
+		status_label.text = "Stage " + str(Global._CURRENTLY_PLAYING_CHAPTER) + " - " + str(Global._current_playing_on_stage) +  " Complete..."
+	else:
+		status_label.text = "Redirecting to Chapter " + str(Global._CURRENTLY_PLAYING_CHAPTER) + "..."
 
 func _update_returning_player_text():
 	if time_elapsed < 1.2:
@@ -81,3 +91,9 @@ func complete_loading():
 	var packed_scene = ResourceLoader.load_threaded_get(next_scene_path)
 	if packed_scene:
 		get_tree().change_scene_to_packed(packed_scene)
+
+func _play_first_chapter():
+	if time_elapsed < 1.5:
+		status_label.text = "Playing " + str(Global._CURRENTLY_PLAYING_CHAPTER) + " - " + str(Global._current_playing_on_stage) +  "..."
+	else:
+		status_label.text = "Loading Stage 1-1..."

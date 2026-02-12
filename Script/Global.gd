@@ -459,8 +459,10 @@ func reset_current_playing_on_stage():
 		
 func bring_to_current_chapter_ui():
 	if Global._CURRENTLY_PLAYING_CHAPTER == 1:
-		get_tree().change_scene_to_file("res://Scene/User Interfaces/Story Mode/Chapter Folder/Chapters/Scene/Chapter 1/Chapter files/Chapter_1.tscn")
-
+		# get_tree().change_scene_to_file("res://Scene/User Interfaces/Story Mode/Chapter Folder/Chapters/Scene/Chapter 1/Chapter files/Chapter_1.tscn")
+		loading_target_scene = "res://Scene/User Interfaces/Story Mode/Chapter Folder/Chapters/Scene/Chapter 1/Chapter files/Chapter_1.tscn"
+	get_tree().change_scene_to_file("res://Scene/User Interfaces/LoadingScene.tscn")
+	
 func set_stage_unlocked(value: String):
 	if not stages_unlocked.has(value):
 		stages_unlocked.append(value)

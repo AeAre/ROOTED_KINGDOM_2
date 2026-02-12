@@ -1,62 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://chstbtn3u8ded"]
+[gd_scene load_steps=21 format=3 uid="uid://chstbtn3u8ded"]
 
 [ext_resource type="Script" uid="uid://n8pyg1g6u05c" path="res://Scene/User Interfaces/Story Mode/Dialogue Folders/Dialog System/Components/Scripts/dialog_system.gd" id="1_g2arh"]
+[ext_resource type="Script" uid="uid://dcabefuwhlrv2" path="res://Scene/User Interfaces/Story Mode/Dialogue Folders/Dialogue Stages/Story Stages/Chapter 1/Dialogue Flow Components/stage_1-5_flow.gd" id="2_0bwek"]
 [ext_resource type="PackedScene" uid="uid://dkgrs28nbmk1" path="res://Scene/User Interfaces/Story Mode/Dialogue Folders/Dialog System/Components/User Interface/Scenes/dialogue_interface.tscn" id="2_k1x3f"]
+[ext_resource type="PackedScene" uid="uid://d3pbv32a7qqmq" path="res://Scene/User Interfaces/Story Mode/Dialogue Folders/Dialog System/Components/User Interface/Scenes/dialogue_background.tscn" id="2_lr55t"]
 [ext_resource type="Texture2D" uid="uid://cdfpkjhi1gi77" path="res://Asset/User Interface/button_ui.png" id="3_jwa4o"]
-
-[sub_resource type="Animation" id="Animation_g2arh"]
-resource_name = "Fade In"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.43333334),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_d3gyx"]
-resource_name = "Fade Out"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_xauy0"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_x68ul"]
-_data = {
-&"Fade In": SubResource("Animation_g2arh"),
-&"Fade Out": SubResource("Animation_d3gyx"),
-&"RESET": SubResource("Animation_xauy0")
-}
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k1x3f"]
 
@@ -92,21 +40,17 @@ _data = {
 script = ExtResource("1_g2arh")
 JSON_file = "res://Scene/User Interfaces/Story Mode/Dialogue Folders/Dialogue Stages/Story Stages/Chapter 1/JSON/Stage_1-5.json"
 
+[node name="Dialogue Story Flow Component" type="Node" parent="."]
+script = ExtResource("2_0bwek")
+
 [node name="Dialog Manager" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1151.0
 offset_bottom = 648.0
 
-[node name="Background" type="TextureRect" parent="Dialog Manager"]
-layout_mode = 0
-offset_right = 1158.0
-offset_bottom = 646.0
-
-[node name="Background Animation" type="AnimationPlayer" parent="Dialog Manager/Background"]
-libraries = {
-&"": SubResource("AnimationLibrary_x68ul")
-}
+[node name="Dialogue Background" parent="Dialog Manager" instance=ExtResource("2_lr55t")]
+layout_mode = 1
 
 [node name="Character Manager" type="Control" parent="Dialog Manager"]
 anchors_preset = 0
