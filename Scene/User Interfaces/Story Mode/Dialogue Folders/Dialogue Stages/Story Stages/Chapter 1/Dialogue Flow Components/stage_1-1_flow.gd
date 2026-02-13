@@ -14,9 +14,13 @@ func main_play_collage(_index: int): # changes Background in a collage-like patt
 func _play_collage(_num: int):
 	if _d_bg.check_if_background_isnot_empty():
 		if _num == 0:
-			_d_bg.set_dialogue_background("Nothingness")
-			# bg_anim.play("Fade In")
-			pass
+			_d_bg.set_dialogue_background(Global.background_options.Nothingness)
+		elif _num == 7:
+			_d_bg.set_bg_animation(Global.bg_anim_options.Fade_In)
+			_d_bg.set_dialogue_background_as_cutscene(1) # Cutscene 1
+		elif _num == 14:
+			_d_bg.set_dialogue_background_as_cutscene(2) # Cutscene 2
+			_d_bg.set_bg_animation(Global.bg_anim_options.Fade_In)
 	else:
 		_d_bg.background_node.texture = null
 		print("Image Unavaiable")
@@ -24,6 +28,9 @@ func _play_collage(_num: int):
 func main_play_reaction(_line_num: int): # play_reaction() main
 	# play_reaction(_line_num, $"Character Manager/Character Sprite")
 	pass # Add some play_reaction() which is from below
+
+func set_character_to_darken(_value: String):
+	pass
 
 func play_reaction(_num: int): # This is basically Sprite Manager
 	if _num == 0: 
