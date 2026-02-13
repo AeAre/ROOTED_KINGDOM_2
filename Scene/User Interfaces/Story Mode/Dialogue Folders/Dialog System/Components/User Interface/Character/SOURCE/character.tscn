@@ -181,8 +181,8 @@ grow_vertical = 2
 script = ExtResource("1_vlpk7")
 
 [node name="Reactions" type="AnimatedSprite2D" parent="."]
-position = Vector2(258.18106, 550)
-scale = Vector2(0.8031255, 0.6273063)
+position = Vector2(222.00002, 498.59375)
+scale = Vector2(0.6715874, 0.53371775)
 sprite_frames = ExtResource("2_vy74j")
 animation = &"happy"
 
