@@ -129,6 +129,8 @@ func load_hero_cards(hero: CharacterData):
 		card_hbox.add_child(card_node)
 		card_node.setup(card)
 		
+		card_node.is_playable = false
+		
 		var btn = card_node.get_node("Visuals/VBoxContainer/PlayButton")
 		btn.text = "Select"
 		

@@ -1,15 +1,23 @@
 extends MarginContainer
 
+static var currently_inspecting_card: MarginContainer = null
+
 var card_data: CardData 
 @onready var visuals = $Visuals
-
-# --- UPDATED NODES ---
 @onready var card_image_node = $Visuals/VBoxContainer/CardImage
 @onready var play_button = $Visuals/VBoxContainer/PlayButton
-# Note: We now reference the label inside the VBoxContainer
 @onready var desc_label = $Visuals/VBoxContainer/CardImage/MarginContainer/DescriptionLabel
 
+var is_playable: bool = true
 var is_in_hand: bool = true
+var is_inspecting: bool = false
+var original_z_index: int = 0
+var spacer_node: Control 
+var original_parent_index: int = 0
+
+const HOVER_SCALE = Vector2(1.1, 1.1)
+const INSPECT_SCALE = Vector2(2.0, 2.0)
+const HOVER_PULL_UP = -30.0
 
 func _ready():
 	visuals.pivot_offset = visuals.size / 2
@@ -26,27 +34,94 @@ func setup(data: CardData):
 	
 	play_button.text = "Mana cost: " + str(data.mana_cost)
 	
-	# --- NEW LOGIC: Set text immediately ---
 	if desc_label:
 		desc_label.text = data.description
 
-# --- REMOVED: set_description_visible() is no longer needed ---
+func _gui_input(event):
+	if not is_playable or not is_in_hand: return
+	
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.double_click:
+			if is_inspecting:
+				stop_inspecting()
+			elif currently_inspecting_card == null:
+				start_inspecting()
 
 func _on_mouse_entered():
-	if not is_in_hand: return
+	if not is_playable or is_inspecting or not is_in_hand: return
+	if currently_inspecting_card != null: return
 	
-	z_index = 10 
+	z_index = 10
 	var tween = create_tween().set_parallel(true)
-	tween.tween_property(visuals, "scale", Vector2(1.15, 1.15), 0.1)
-	tween.tween_property(visuals, "position:y", -20.0, 0.1)
+	tween.tween_property(visuals, "scale", HOVER_SCALE, 0.1)
+	tween.tween_property(visuals, "position:y", HOVER_PULL_UP, 0.1)
 
 func _on_mouse_exited():
-	if not is_in_hand: return
+	if not is_playable or is_inspecting or not is_in_hand: return
 	
 	z_index = 0
 	var tween = create_tween().set_parallel(true)
-	tween.tween_property(visuals, "scale", Vector2(1.0, 1.0), 0.1)
+	tween.tween_property(visuals, "scale", Vector2.ONE, 0.1)
 	tween.tween_property(visuals, "position:y", 0.0, 0.1)
+
+func start_inspecting():
+	if is_inspecting or currently_inspecting_card != null: return
+	
+	is_inspecting = true
+	currently_inspecting_card = self
+	
+	original_z_index = z_index
+	z_index = 100 
+	pivot_offset = size / 2 
+	play_button.disabled = true
+	
+	spacer_node = Control.new()
+	spacer_node.custom_minimum_size = size
+	spacer_node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	var parent = get_parent()
+	original_parent_index = get_index()
+	parent.add_child(spacer_node)
+	parent.move_child(spacer_node, original_parent_index)
+	
+	var start_pos = global_position
+	top_level = true 
+	global_position = start_pos
+	
+	var screen_center = get_viewport_rect().size / 2
+	var target_pos = screen_center - (size * INSPECT_SCALE / 2)
+	
+	var tween = create_tween().set_parallel(true).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "global_position", target_pos, 0.25)
+	tween.tween_property(self, "scale", INSPECT_SCALE, 0.25)
+
+func stop_inspecting():
+	var target_return_pos = spacer_node.global_position
+	
+	var tween = create_tween().set_parallel(true).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "global_position", target_return_pos, 0.2)
+	tween.tween_property(self, "scale", Vector2.ONE, 0.2)
+	
+	tween.finished.connect(_on_stop_inspecting_finished)
+
+func _on_stop_inspecting_finished():
+	top_level = false
+	if is_instance_valid(spacer_node):
+		spacer_node.queue_free()
+		
+	get_parent().move_child(self, original_parent_index)
+	
+	is_inspecting = false
+	currently_inspecting_card = null
+	
+	z_index = original_z_index
+	play_button.disabled = false
+	visuals.position = Vector2.ZERO
+	
+	if get_global_rect().has_point(get_global_mouse_position()):
+		_on_mouse_entered()
+	else:
+		_on_mouse_exited()
 
 func animate_play():
 	var tween = create_tween()

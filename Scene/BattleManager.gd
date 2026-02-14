@@ -285,7 +285,7 @@ func return_card_to_hand(data: CardData, card_node: Node):
 		
 	btn.pressed.connect(_on_card_played.bind(data, card_node))
 	
-	btn.text = "Play (" + str(data.mana_cost) + ")"
+	btn.text = "Mana Cost:" + str(data.mana_cost)
 	
 	update_mana_ui()
 		
