@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://bf2bciwkcq40g"]
 
 [ext_resource type="Script" uid="uid://olc2cw5uohq6" path="res://Script/CardData.gd" id="1_6g3k0"]
-[ext_resource type="Texture2D" uid="uid://xary1i123amy" path="res://Asset/Common cards/Parry.jpg" id="1_e2mba"]
+[ext_resource type="Texture2D" uid="uid://dljstvlthcuec" path="res://Asset/Common cards/Parry.webp" id="1_tpsoy"]
 [ext_resource type="AudioStream" uid="uid://di44xdx04rajl" path="res://Asset/Sound effects/parry.mp3" id="3_tpsoy"]
 
 [resource]
 script = ExtResource("1_6g3k0")
 card_name = "Parry"
-card_image = ExtResource("1_e2mba")
+card_image = ExtResource("1_tpsoy")
 description = "gain 10 shield and deals 10 damage to all enemies"
 damage = 10
 shield = 10

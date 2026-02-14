@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://dhh82yst46iew"]
 
-[ext_resource type="Texture2D" uid="uid://c1h3ejyydx3m6" path="res://Asset/Common cards/Ice barrage.jpg" id="1_23vd8"]
+[ext_resource type="Texture2D" uid="uid://bymstx0vlywpa" path="res://Asset/Common cards/Ice_Barrage.webp" id="1_o5lfv"]
 [ext_resource type="Script" uid="uid://olc2cw5uohq6" path="res://Script/CardData.gd" id="1_qym0v"]
 [ext_resource type="AudioStream" uid="uid://m2ojc58jrf7s" path="res://Asset/Sound effects/icebarrage.mp3" id="3_o5lfv"]
 
 [resource]
 script = ExtResource("1_qym0v")
 card_name = "Ice barrage"
-card_image = ExtResource("1_23vd8")
+card_image = ExtResource("1_o5lfv")
 description = "Deals 5 damage and stuns all enemies on the field for 1 round"
 damage = 8
 mana_gain = 1

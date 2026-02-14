@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://c1n53h5gfnv83"]
 
-[ext_resource type="Texture2D" uid="uid://cv1dj0hbdda2n" path="res://Asset/Characters/Beatrix/Beatrix 4 cards/shield.jpg" id="1_mkp88"]
+[ext_resource type="Texture2D" uid="uid://b1nyytfaosr8g" path="res://Asset/Common cards/Sacred_Barrier.webp" id="1_yn7dl"]
 [ext_resource type="Script" uid="uid://olc2cw5uohq6" path="res://Script/CardData.gd" id="2_yn7dl"]
 [ext_resource type="AudioStream" uid="uid://d2gkalxlrrv20" path="res://Asset/Sound effects/sacred_barrier.mp3" id="3_yn7dl"]
 
 [resource]
 script = ExtResource("2_yn7dl")
 card_name = "Sacred Barrier"
-card_image = ExtResource("1_mkp88")
+card_image = ExtResource("1_yn7dl")
 description = "Give 17 shield to all heroes on the field"
 shield = 17
 mana_cost = 2

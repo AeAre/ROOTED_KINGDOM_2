@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://bioo256netuj3"]
 
+[ext_resource type="Texture2D" uid="uid://cfolhvmo1gnb6" path="res://Asset/Common cards/Ice_Freeze.webp" id="1_cok2d"]
 [ext_resource type="Script" uid="uid://olc2cw5uohq6" path="res://Script/CardData.gd" id="1_kx0o4"]
-[ext_resource type="Texture2D" uid="uid://bjrebf88ghgxs" path="res://Asset/Common cards/Ice_freeze.webp" id="1_se0oj"]
 [ext_resource type="AudioStream" uid="uid://cnh6lc8ea50jv" path="res://Asset/Sound effects/slash.mp3" id="3_cok2d"]
 
 [resource]
 script = ExtResource("1_kx0o4")
 card_name = "Ice Freeze"
-card_image = ExtResource("1_se0oj")
+card_image = ExtResource("1_cok2d")
 description = "Freeze all enemies for 1 turn"
 damage = 3
 stuns_enemy = true

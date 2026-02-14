@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4vnvi3fhxebj"
-path="res://.godot/imported/Magic Blast.jpg-62f7f61d57abe9ebcba9121e4d5ccaea.ctex"
+uid="uid://bffhlgdy6xiut"
+path="res://.godot/imported/Pierce.webp-ff94cd52cb3f8b03d7d3fe9a5f7ed2d9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Common cards/Magic Blast.jpg"
-dest_files=["res://.godot/imported/Magic Blast.jpg-62f7f61d57abe9ebcba9121e4d5ccaea.ctex"]
+source_file="res://Asset/Common cards/Pierce.webp"
+dest_files=["res://.godot/imported/Pierce.webp-ff94cd52cb3f8b03d7d3fe9a5f7ed2d9.ctex"]
 
 [params]
 

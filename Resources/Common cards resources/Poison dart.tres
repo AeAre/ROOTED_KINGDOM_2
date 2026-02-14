@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://bq43e1owpaudj"]
 
 [ext_resource type="Script" uid="uid://olc2cw5uohq6" path="res://Script/CardData.gd" id="1_frn3b"]
-[ext_resource type="Texture2D" uid="uid://bsdx2ibxxkcpk" path="res://Asset/Common cards/Poison dart.jpg" id="1_hr2mt"]
+[ext_resource type="Texture2D" uid="uid://cuvpn6gyyo3j0" path="res://Asset/Common cards/Poison_Dart.webp" id="1_md57h"]
 [ext_resource type="AudioStream" uid="uid://7reiatlsghyr" path="res://Asset/Sound effects/poisondart.mp3" id="3_md57h"]
 
 [resource]
 script = ExtResource("1_frn3b")
 card_name = "Poison dart"
-card_image = ExtResource("1_hr2mt")
+card_image = ExtResource("1_md57h")
 description = "deals 25 damage to 1 enemy and stun it for 1 turn"
 damage = 25
 stuns_enemy = true

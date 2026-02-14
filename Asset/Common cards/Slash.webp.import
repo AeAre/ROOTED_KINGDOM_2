@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ph375fxpmy7h"
-path="res://.godot/imported/Warm Touch.jpg-4f78ab59fb043386f3a66c557cf35a3b.ctex"
+uid="uid://b1ehuwxki08m1"
+path="res://.godot/imported/Slash.webp-ec3a7dbf18e4ded84c92ab06e63927f3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Common cards/Warm Touch.jpg"
-dest_files=["res://.godot/imported/Warm Touch.jpg-4f78ab59fb043386f3a66c557cf35a3b.ctex"]
+source_file="res://Asset/Common cards/Slash.webp"
+dest_files=["res://.godot/imported/Slash.webp-ec3a7dbf18e4ded84c92ab06e63927f3.ctex"]
 
 [params]
 

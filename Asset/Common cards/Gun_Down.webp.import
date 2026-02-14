@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1h3ejyydx3m6"
-path="res://.godot/imported/Ice barrage.jpg-248492f3e0df429cef9b93dfcccf0bf0.ctex"
+uid="uid://b2bdgge63vpi5"
+path="res://.godot/imported/Gun_Down.webp-f38027fee7154f80383ea40ba7596a62.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Common cards/Ice barrage.jpg"
-dest_files=["res://.godot/imported/Ice barrage.jpg-248492f3e0df429cef9b93dfcccf0bf0.ctex"]
+source_file="res://Asset/Common cards/Gun_Down.webp"
+dest_files=["res://.godot/imported/Gun_Down.webp-f38027fee7154f80383ea40ba7596a62.ctex"]
 
 [params]
 

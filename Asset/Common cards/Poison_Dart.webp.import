@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8kctbihtfwpf"
-path="res://.godot/imported/Blazeheart.webp-2759e51ff53015ce6ca0fe5a2701c054.ctex"
+uid="uid://cuvpn6gyyo3j0"
+path="res://.godot/imported/Poison_Dart.webp-f3fee4876d09ebfb4a7bc2ddedb4f970.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Common cards/Blazeheart.webp"
-dest_files=["res://.godot/imported/Blazeheart.webp-2759e51ff53015ce6ca0fe5a2701c054.ctex"]
+source_file="res://Asset/Common cards/Poison_Dart.webp"
+dest_files=["res://.godot/imported/Poison_Dart.webp-f3fee4876d09ebfb4a7bc2ddedb4f970.ctex"]
 
 [params]
 

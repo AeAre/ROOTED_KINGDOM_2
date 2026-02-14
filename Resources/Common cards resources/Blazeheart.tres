@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://nrljup30y5kh"]
 
 [ext_resource type="Script" uid="uid://olc2cw5uohq6" path="res://Script/CardData.gd" id="1_hcvod"]
-[ext_resource type="Texture2D" uid="uid://b1dbsymdqhrxv" path="res://Asset/Common cards/Blazeheart.webp" id="1_hhpro"]
+[ext_resource type="Texture2D" uid="uid://c8kctbihtfwpf" path="res://Asset/Common cards/Blazeheart.webp" id="1_hhpro"]
 [ext_resource type="AudioStream" uid="uid://0qp7nqibf6xu" path="res://Asset/Sound effects/stun.mp3" id="3_cfun6"]
 
 [resource]

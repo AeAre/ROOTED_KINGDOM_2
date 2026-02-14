@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkrvy164wsj1l"
-path="res://.godot/imported/Slash.jpg-0c2ed3ad39828c105ed392fe31186c38.ctex"
+uid="uid://cl0mxsr4tjxtv"
+path="res://.godot/imported/Fire_Ball.webp-eee702365e0089d5776a73e3487ec0d1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Common cards/Slash.jpg"
-dest_files=["res://.godot/imported/Slash.jpg-0c2ed3ad39828c105ed392fe31186c38.ctex"]
+source_file="res://Asset/Common cards/Fire_Ball.webp"
+dest_files=["res://.godot/imported/Fire_Ball.webp-eee702365e0089d5776a73e3487ec0d1.ctex"]
 
 [params]
 

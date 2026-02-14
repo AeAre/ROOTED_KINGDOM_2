@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2hdnss25usou"
-path="res://.godot/imported/stun.jpg-8bb62c563d074c6e6f0fcac6cf38caf2.ctex"
+uid="uid://b1nyytfaosr8g"
+path="res://.godot/imported/Sacred_Barrier.webp-36683b8c15451d617f2f7d24b7b3566c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Common cards/stun.jpg"
-dest_files=["res://.godot/imported/stun.jpg-8bb62c563d074c6e6f0fcac6cf38caf2.ctex"]
+source_file="res://Asset/Common cards/Sacred_Barrier.webp"
+dest_files=["res://.godot/imported/Sacred_Barrier.webp-36683b8c15451d617f2f7d24b7b3566c.ctex"]
 
 [params]
 

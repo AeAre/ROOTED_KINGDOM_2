@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsdx2ibxxkcpk"
-path="res://.godot/imported/Poison dart.jpg-c1ca1c3c343c1de79bfaa497fc59b6cb.ctex"
+uid="uid://rfwikqdmiwnh"
+path="res://.godot/imported/Endless_Bloom_Meadow.webp-4b309f59b759a78c09a0d2f159fbc261.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Common cards/Poison dart.jpg"
-dest_files=["res://.godot/imported/Poison dart.jpg-c1ca1c3c343c1de79bfaa497fc59b6cb.ctex"]
+source_file="res://Asset/Common cards/Endless_Bloom_Meadow.webp"
+dest_files=["res://.godot/imported/Endless_Bloom_Meadow.webp-4b309f59b759a78c09a0d2f159fbc261.ctex"]
 
 [params]
 

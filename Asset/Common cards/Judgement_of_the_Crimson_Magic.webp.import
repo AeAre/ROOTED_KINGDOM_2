@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mgnjjnxw4g76"
-path="res://.godot/imported/shield.jpg-72865ff88b0e1f25c45cd7386ed6f22b.ctex"
+uid="uid://cvn0nuq2bw0u1"
+path="res://.godot/imported/Judgement_of_the_Crimson_Magic.webp-be9f1e01f102ef26efbec2d9825a2140.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Common cards/shield.jpg"
-dest_files=["res://.godot/imported/shield.jpg-72865ff88b0e1f25c45cd7386ed6f22b.ctex"]
+source_file="res://Asset/Common cards/Judgement_of_the_Crimson_Magic.webp"
+dest_files=["res://.godot/imported/Judgement_of_the_Crimson_Magic.webp-be9f1e01f102ef26efbec2d9825a2140.ctex"]
 
 [params]
 

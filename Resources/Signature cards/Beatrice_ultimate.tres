@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://bm7cgrmasembw"]
 
-[ext_resource type="Texture2D" uid="uid://y6xke5sg8tx1" path="res://Asset/Characters/Beatrix/Beatrix 4 cards/Beatrix card 1.jpg" id="1_e1or4"]
+[ext_resource type="Texture2D" uid="uid://rfwikqdmiwnh" path="res://Asset/Common cards/Endless_Bloom_Meadow.webp" id="1_eay75"]
 [ext_resource type="Script" uid="uid://olc2cw5uohq6" path="res://Script/CardData.gd" id="2_eay75"]
 [ext_resource type="AudioStream" uid="uid://bkuhkf3hcijt6" path="res://Asset/Sound effects/Bloomintheendlessmeadow.mp3" id="3_eay75"]
 
 [resource]
 script = ExtResource("2_eay75")
 card_name = "Bloom endless meadow"
-card_image = ExtResource("1_e1or4")
+card_image = ExtResource("1_eay75")
 description = "deals 66 damage to all enemies and has a 44% chance of dealing critical damage"
 damage = 66
 mana_cost = 7

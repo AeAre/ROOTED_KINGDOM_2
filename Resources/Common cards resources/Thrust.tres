@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://bpx0gk4fwgevj"]
 
-[ext_resource type="Texture2D" uid="uid://dv6jyu2onlfgu" path="res://Asset/Common cards/Thrust.jpg" id="1_7keqb"]
 [ext_resource type="Script" uid="uid://olc2cw5uohq6" path="res://Script/CardData.gd" id="1_cl7x7"]
+[ext_resource type="Texture2D" uid="uid://cf2og82cmcjt3" path="res://Asset/Common cards/Thrust.webp" id="1_g8jic"]
 [ext_resource type="AudioStream" uid="uid://qj1hg2jl4g4p" path="res://Asset/Sound effects/thrust.mp3" id="3_g8jic"]
 
 [resource]
 script = ExtResource("1_cl7x7")
 card_name = "Thrust"
-card_image = ExtResource("1_7keqb")
+card_image = ExtResource("1_g8jic")
 description = "Deals 15 damage to single enemy"
 damage = 15
 mana_cost = 1

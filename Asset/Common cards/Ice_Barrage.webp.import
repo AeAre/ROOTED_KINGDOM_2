@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dv6jyu2onlfgu"
-path="res://.godot/imported/Thrust.jpg-bfc437cd26879a94d7f16ede2d659e00.ctex"
+uid="uid://bymstx0vlywpa"
+path="res://.godot/imported/Ice_Barrage.webp-0b26caaaaa9809d835737f88d1d03709.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Common cards/Thrust.jpg"
-dest_files=["res://.godot/imported/Thrust.jpg-bfc437cd26879a94d7f16ede2d659e00.ctex"]
+source_file="res://Asset/Common cards/Ice_Barrage.webp"
+dest_files=["res://.godot/imported/Ice_Barrage.webp-0b26caaaaa9809d835737f88d1d03709.ctex"]
 
 [params]
 

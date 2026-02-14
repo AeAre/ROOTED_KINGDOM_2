@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8kctbihtfwpf"
-path="res://.godot/imported/Blazeheart.webp-2759e51ff53015ce6ca0fe5a2701c054.ctex"
+uid="uid://cf2og82cmcjt3"
+path="res://.godot/imported/Thrust.webp-269e743731cf300932f9f67c29a53624.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Common cards/Blazeheart.webp"
-dest_files=["res://.godot/imported/Blazeheart.webp-2759e51ff53015ce6ca0fe5a2701c054.ctex"]
+source_file="res://Asset/Common cards/Thrust.webp"
+dest_files=["res://.godot/imported/Thrust.webp-269e743731cf300932f9f67c29a53624.ctex"]
 
 [params]
 

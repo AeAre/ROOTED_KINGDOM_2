@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://71ifm4u8c2xh"]
 
-[ext_resource type="Texture2D" uid="uid://7gb6tfj8w6vm" path="res://Asset/Characters/Charlotte/Charlotte 4 cards/charlotte2.jpg" id="1_7753u"]
+[ext_resource type="Texture2D" uid="uid://cvn0nuq2bw0u1" path="res://Asset/Common cards/Judgement_of_the_Crimson_Magic.webp" id="1_hswhc"]
 [ext_resource type="Script" uid="uid://olc2cw5uohq6" path="res://Script/CardData.gd" id="2_hswhc"]
 [ext_resource type="AudioStream" uid="uid://bojmjug7278x0" path="res://Asset/Sound effects/judgementofthecrimsonmagic.mp3" id="3_hswhc"]
 
 [resource]
 script = ExtResource("2_hswhc")
 card_name = "Judgement Crimson"
-card_image = ExtResource("1_7753u")
+card_image = ExtResource("1_hswhc")
 description = "Gain 8 mana, 15 shield and  15 heal to all allies"
 shield = 15
 heal_amount = 15

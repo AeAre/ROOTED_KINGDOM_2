@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://c0dac4le7uft2"]
 
 [ext_resource type="Script" uid="uid://olc2cw5uohq6" path="res://Script/CardData.gd" id="1_2b8co"]
-[ext_resource type="Texture2D" uid="uid://bfc8yimv2kb3j" path="res://Asset/Characters/Julian SIgnature.jpg" id="1_ixv3g"]
+[ext_resource type="Texture2D" uid="uid://ygua5a2pubux" path="res://Asset/Common cards/The_Luminous_Warriors_Smash.webp" id="1_53ukj"]
 [ext_resource type="AudioStream" uid="uid://c57qyvc3ubhwh" path="res://Asset/Sound effects/theluminouswarriorsmash.mp3" id="3_53ukj"]
 
 [resource]
 script = ExtResource("1_2b8co")
 card_name = "The Luminious warrior"
-card_image = ExtResource("1_ixv3g")
+card_image = ExtResource("1_53ukj")
 description = "deals 55 damage to single enemy and stunning them for 1 turn with 45% chance of dealing critical damage"
 damage = 55
 mana_cost = 7

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xary1i123amy"
-path="res://.godot/imported/Parry.jpg-55b9a417dc8d02a712647a8909dc6efa.ctex"
+uid="uid://cuufsscs6ckrm"
+path="res://.godot/imported/The_Sharpshooter_of_Death.webp-8ed9ad9a466190fa6bac0784f875d108.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Common cards/Parry.jpg"
-dest_files=["res://.godot/imported/Parry.jpg-55b9a417dc8d02a712647a8909dc6efa.ctex"]
+source_file="res://Asset/Common cards/The_Sharpshooter_of_Death.webp"
+dest_files=["res://.godot/imported/The_Sharpshooter_of_Death.webp-8ed9ad9a466190fa6bac0784f875d108.ctex"]
 
 [params]
 

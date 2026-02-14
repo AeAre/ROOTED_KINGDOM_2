@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sfw3kygjf8ch"
-path="res://.godot/imported/Pierce.jpg-496c6c25275dfeabfb73ee5cb9ca860a.ctex"
+uid="uid://h0k84rc1m5ma"
+path="res://.godot/imported/The_Glaciation_of_the_Plains.webp-245705da0329c007b967110e31167e12.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Common cards/Pierce.jpg"
-dest_files=["res://.godot/imported/Pierce.jpg-496c6c25275dfeabfb73ee5cb9ca860a.ctex"]
+source_file="res://Asset/Common cards/The_Glaciation_of_the_Plains.webp"
+dest_files=["res://.godot/imported/The_Glaciation_of_the_Plains.webp-245705da0329c007b967110e31167e12.ctex"]
 
 [params]
 

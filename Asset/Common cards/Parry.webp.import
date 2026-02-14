@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8kctbihtfwpf"
-path="res://.godot/imported/Blazeheart.webp-2759e51ff53015ce6ca0fe5a2701c054.ctex"
+uid="uid://dljstvlthcuec"
+path="res://.godot/imported/Parry.webp-57cbdf5e7ce1bf1d0824bb6457c21ede.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/Common cards/Blazeheart.webp"
-dest_files=["res://.godot/imported/Blazeheart.webp-2759e51ff53015ce6ca0fe5a2701c054.ctex"]
+source_file="res://Asset/Common cards/Parry.webp"
+dest_files=["res://.godot/imported/Parry.webp-57cbdf5e7ce1bf1d0824bb6457c21ede.ctex"]
 
 [params]
 

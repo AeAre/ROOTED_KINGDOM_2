@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://7ojtheqef82v"]
 
-[ext_resource type="Texture2D" uid="uid://ci6xuefdsumbm" path="res://Asset/Characters/Arlene/Arlene signature.jpg" id="1_ejm6m"]
+[ext_resource type="Texture2D" uid="uid://h0k84rc1m5ma" path="res://Asset/Common cards/The_Glaciation_of_the_Plains.webp" id="1_kvsx3"]
 [ext_resource type="Script" uid="uid://olc2cw5uohq6" path="res://Script/CardData.gd" id="1_n4al4"]
 [ext_resource type="AudioStream" uid="uid://ctg4mmn5lvsyh" path="res://Asset/Sound effects/theglaciationofpains.mp3" id="3_kvsx3"]
 
 [resource]
 script = ExtResource("1_n4al4")
 card_name = "Glaciation of Plains"
-card_image = ExtResource("1_ejm6m")
+card_image = ExtResource("1_kvsx3")
 description = "Deals 50 damage to all enemies with a critical chance of 60% and also all allies gain 10 shields "
 damage = 60
 shield = 10

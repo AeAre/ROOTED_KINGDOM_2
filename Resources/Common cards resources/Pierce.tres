@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=4 format=3 uid="uid://ce2o1btwte4i6"]
 
-[ext_resource type="Texture2D" uid="uid://sfw3kygjf8ch" path="res://Asset/Common cards/Pierce.jpg" id="1_4my0g"]
+[ext_resource type="Texture2D" uid="uid://bffhlgdy6xiut" path="res://Asset/Common cards/Pierce.webp" id="1_pu6pm"]
 [ext_resource type="Script" uid="uid://olc2cw5uohq6" path="res://Script/CardData.gd" id="1_q2jd0"]
 [ext_resource type="AudioStream" uid="uid://hl5ucawjf5ip" path="res://Asset/Sound effects/pierce.mp3" id="3_pu6pm"]
 
 [resource]
 script = ExtResource("1_q2jd0")
 card_name = "Pierce"
-card_image = ExtResource("1_4my0g")
+card_image = ExtResource("1_pu6pm")
 description = "deals 14 damage to two enemies"
 damage = 14
 mana_cost = 1
